@@ -1,0 +1,128 @@
+.burger__navigation-button_type_closed {
+  background-image: url('../../images/Close.svg');
+  background-color: initial;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  height: 22px;
+  padding: 0;
+  width: 22px;
+  border: none;
+  position: center;
+  display: flex;
+  align-self: flex-end;
+  margin: 17px 18px 0 0;
+}
+
+
+.burger__navigation-button_type_opened {
+  background-image: url('../../images/Open.svg');
+  background-color: initial;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  height: 30px;
+  padding: 0;
+  width: 40px;
+  border: none;
+  position: center;
+}
+
+.burger__menu {
+  visibility: hidden;
+  display: flex;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 0;
+  transition: 0.5s;
+  background-color: rgba(0, 0, 0, .3);
+  z-index: 50;
+}
+
+.burger__menu_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.burger__navigation-container {
+  width: 100%;
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+  background-color: #202020;
+}
+
+
+.burger__navigation-container-link {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.burger__navigation-link {
+  text-decoration: none;
+  color: #FFF;
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 24px;
+}
+
+/* .header__navigation-link:hover, .header__navigation-link:active, .header__navigation-link:focus {
+  border-bottom: 2px solid #FFF;
+} */
+
+.burger__navigation-container-acc {
+  display: flex;
+  justify-content: center;
+  margin-top: 444px;
+}
+
+
+.burger__acc-logo {
+  flex-shrink: 0;
+  border-radius: 6px;
+  background-color: #313131;
+  padding: 10px;
+  margin-left: 13px;
+}
+
+.burger__navigation-link-acc {
+  display: flex;
+  align-items: center;
+  color: #FFF;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 768px) {
+
+  .burger__navigation-container {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 520px;
+  }
+
+  .burger__navigation-button_type_closed {
+    margin: 25px 25px 0 0;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .burger__navigation-button_type_opened {
+    display: none;
+  }
+}

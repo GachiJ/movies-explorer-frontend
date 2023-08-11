@@ -1,0 +1,157 @@
+.about-me {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  color: white;
+}
+
+.about-me__container {
+  max-width: 292px;
+}
+
+.about-me__title {
+  border-bottom: 1px solid #DADADA;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.72px;
+  color: white;
+  padding-bottom: 28px;
+  max-width: 292px;
+  margin: 70px 0 0;
+}
+
+.about-me__photo {
+  width: 292px;
+  height: 352px;
+  flex-shrink: 0;
+  background-size: cover;
+  margin: 60px auto 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.about-me__name {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -1.2px;
+  margin: 40px 0 0;
+}
+
+.about-me__age {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 20px 0;
+}
+
+.about-me__text {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 16px;
+  margin: 0 0 40px
+}
+
+.about-me__link {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+@media screen and (min-width: 768px) {
+  .about-me__title {
+    font-size: 22px;
+    letter-spacing: -0.88px;
+    padding-bottom: 23px;
+    max-width: 668px;
+    width: 100%;
+    margin-top: 90px;
+  }
+
+  .about-me__container {
+    max-width: 668px;
+  }
+
+  .about-me__photo {
+    width: 255px;
+    height: 307px;
+    grid-area: photo;
+    margin: 0;
+  }
+
+  .about-me__name {
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -1.6px;
+    grid-area: name;
+    margin-top: 0;
+  }
+
+  .about-me__age {
+    font-size: 12px;
+    line-height: 18px;
+    grid-area: age;
+    margin: 0;
+  }
+
+  .about-me__text {
+    font-size: 12px;
+    line-height: 18px;
+    grid-area: text;
+  }
+
+  .about-me__link {
+    display: flex;
+    align-self: flex-end;
+    grid-area: link;
+  }
+
+  .about-me__info-container {
+    margin-top: 66px;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas:
+      "name photo"
+      "age photo"
+      "text photo"
+      "link photo";
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .about-me__container {
+    max-width: 1140px;
+  }
+
+  .about-me__title {
+    max-width: 1140px;
+    width: 100%;
+    margin-top: 110px;
+  }
+
+  .about-me__photo {
+    width: 270px;
+    height: 327px;
+  }
+
+  .about-me__name {
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -2px;
+  }
+
+  .about-me__age {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .about-me__text {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
