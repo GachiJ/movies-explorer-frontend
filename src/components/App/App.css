@@ -11,6 +11,6 @@
 .page {
   background-color: #202020;
   min-height: 100vh;
-  min-width: 320px;
   position: relative;
+  margin: 0 auto;
 }

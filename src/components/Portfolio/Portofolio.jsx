@@ -10,37 +10,37 @@ export default function Portfolio() {
           <li className='portfolio__item'>
             <a
               className='portfolio__link'
-              href='#'
+              href='https://github.com/GachiJ/first-project'
               title='Проект - How to learn'
               target='_blank'
               rel='noreferrer'
             >
               Статичный сайт
-              <img src={Arrow} alt="" className="porfolio__link-icon" />
+              <div className="porfolio__link-icon">↗</div>
             </a>
           </li>
           <li className='portfolio__item'>
             <a
               className='portfolio__link'
-              href='#'
+              href='https://github.com/GachiJ/how-to-learn'
               title='Проект - Russian travel'
               target='_blank'
               rel='noreferrer'
             >
               Адаптивный сайт
-              <img src={Arrow} alt="" className="porfolio__link-icon" />
+              <div className="porfolio__link-icon">↗</div>
             </a>
           </li>
           <li className='portfolio__item'>
             <a
               className='portfolio__link'
-              href='#'
+              href=' https://gachij.github.io/russian-travel/'
               title='Проект - Mesto'
               target='_blank'
               rel='noreferrer'
             >
               Одностраничное приложение
-              <img src={Arrow} alt="" className="porfolio__link-icon" />
+              <div className="porfolio__link-icon">↗</div>
             </a>
           </li>
         </ul>

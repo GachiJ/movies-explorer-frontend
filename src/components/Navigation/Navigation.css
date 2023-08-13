@@ -13,6 +13,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 0 auto;
   }
   
   .navigation__link {
@@ -38,6 +39,7 @@
     width: 38px;
     height: 38px;
     flex-shrink: 0;
+    margin-right: 426px;
   }
   
   .navigation__container-link {

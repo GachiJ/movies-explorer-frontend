@@ -65,7 +65,7 @@ export default function Register({ isLoggedIn, onRegisterUser }) {
           <span className='auth__error'></span>
           <button type="submit" className="auth__button">Зарегистрироваться</button>
           <div className="auth__signin">
-            <Link to="/sign-in" className="auth__link">
+            <Link to="/signin" className="auth__link">
               Уже зарегистрированы? <span className='auth__link-signin'>Войти</span>
             </Link>
           </div>

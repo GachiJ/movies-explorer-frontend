@@ -7,7 +7,7 @@ import Logo from '../../images/logo.svg'
 export default function BurgerMenu({ isOpen, onMenuOpen }) {
   return (
     <>
-    <Link to='/' className="navigation__link-sign-up"> <img src={Logo} alt="Логотип" className="header__logo" /></Link>
+    <Link to='/'> <img src={Logo} alt="Логотип" className="burger__logo" /></Link>
       <div className={`burger__menu ${isOpen ? 'burger__menu_opened' : ''}`}>
         <div className='burger__navigation-container'>
           <button className="burger__navigation-button_type_closed"

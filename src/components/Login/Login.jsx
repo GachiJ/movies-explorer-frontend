@@ -63,10 +63,10 @@ export default function Login({ isLoggedIn, onRegisterUser }) {
             onChange={handlePasswordChange}
           />
           <span className='auth__error'></span>
-          <button type="submit" className="auth__button">Зарегистрироваться</button>
+          <button type="submit" className="auth__button">Войти</button>
           <div className="auth__signin">
-            <Link to="/sign-in" className="auth__link">
-              Уже зарегистрированы? <span className='auth__link-signin'>Войти</span>
+            <Link to="/signup" className="auth__link">
+              Ещё не зарегистрированы? <span className='auth__link-signin'>Регистрация</span>
             </Link>
           </div>
         </form>

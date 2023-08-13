@@ -125,4 +125,8 @@
   .burger__navigation-button_type_opened {
     display: none;
   }
+
+  .burger__logo {
+    display: none;
+  }
 }

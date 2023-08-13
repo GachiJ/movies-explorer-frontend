@@ -35,8 +35,8 @@ function App() {
       <div className="root">
         <div className="page">
           <Header
-           isOpen={isMenuOpen}
-           onMenuOpen={handleMenuOpen}
+            isOpen={isMenuOpen}
+            onMenuOpen={handleMenuOpen}
           />
 
           <Routes>
@@ -83,8 +83,13 @@ function App() {
             />
             <Route path='*' element={<Navigate to='/404' replace />} />
           </Routes>
-          {/* 
-          <Footer /> */}
+
+          <Routes>
+            <Route path='/' element={<Footer />} />
+            <Route path='/movies' element={<Footer />} />
+            <Route path='/saved-movies' element={<Footer />} />
+          </Routes>
+
         </div>
       </div>
     </>

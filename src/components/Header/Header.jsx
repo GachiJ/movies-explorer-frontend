@@ -1,12 +1,11 @@
 import '../Header/Header.css'
 import { Link, Route, Routes } from "react-router-dom";
 import Logo from '../../images/logo.svg'
-import LogoAcc from '../../images/icon__Acc.png'
-import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import Navigation from '../Navigation/Navigation';
 
 
 export default function Header({ isOpen, onMenuOpen }) {
+
   return (
     <Routes>
       <Route path='/' element={
@@ -22,6 +21,28 @@ export default function Header({ isOpen, onMenuOpen }) {
       } />
 
       <Route path='/movies' element={
+        <header className="header">
+          <div className="header__container">
+           <Navigation
+              isOpen={isOpen}
+              onMenuOpen={onMenuOpen}
+            />
+          </div>
+        </header>
+      } />
+      
+      <Route path='/saved-movies' element={
+        <header className="header">
+          <div className="header__container">
+           <Navigation
+              isOpen={isOpen}
+              onMenuOpen={onMenuOpen}
+            />
+          </div>
+        </header>
+      } />
+
+      <Route path='/profile' element={
         <header className="header">
           <div className="header__container">
            <Navigation

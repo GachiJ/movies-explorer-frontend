@@ -11,7 +11,6 @@ export default function SavedMovies({pageLocation}) {
       <MoviesCardList
         pageLocation={pageLocation}
       />
-      <Footer />
     </>
   );
 };
