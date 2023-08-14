@@ -40,6 +40,8 @@ function App() {
           />
 
           <Routes>
+
+            <Route path='/' element={<Main />} />
             {/*  <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}> */}
             <Route
               path='/movies'

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../NotFound/NotFound.css';
 
 export default function NotFound() {
@@ -7,9 +8,9 @@ export default function NotFound() {
       <span className="not-found__error-number">404</span>
       <span className="not-found__error-name">Страница не найдена</span>
     </div>
-    <button className="not-found__button">
+    <Link  to={-1} className="not-found__button">
       Назад
-    </button>
+    </Link>
   </div>
   );
 };

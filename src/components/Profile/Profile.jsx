@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../Profile/Profile.css'
 /* import { useContext, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext' */
@@ -45,12 +46,12 @@ export default function Profile() {
         >
           Редактировать
         </button>
-        <button
+        <Link to={'/'}
           type='button'
           className='profile__button-exit'
         >
           Выйти из аккаунта
-        </button>
+        </Link>
       </div>
     </div>
   );

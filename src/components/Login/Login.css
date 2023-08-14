@@ -2,7 +2,7 @@
   display: flex;
   text-align: center;
   flex-direction: column;
-  padding: 56px 0 80px;
+  padding: 56px 0;
 }
 
 .auth__title {

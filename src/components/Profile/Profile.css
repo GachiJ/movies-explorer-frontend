@@ -81,6 +81,7 @@
   background-color: initial;
   border: none;
   padding: 0;
+  text-decoration: none;
 }
 
 @media screen and (min-width: 768px) {
@@ -103,14 +104,22 @@
   .profile__button-exit {
     font-size: 13px;
   }
+
+  .profile__button-exit:hover {
+    opacity: .7;
+  }
+  
+  .profile__button-edit:hover {
+    opacity: .7;
+  }
 }
 
 @media screen and (min-width: 1280px) {
   .profile__title {
-    margin: 236px auto 125px;
+    margin: 74px auto 125px;
   }
 
   .profile__buttons-container {
-    margin: 220px auto 70px;
+    margin: 200px auto 70px;
   }
 }

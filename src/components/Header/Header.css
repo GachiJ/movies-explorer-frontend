@@ -56,10 +56,18 @@
     font-size: 12px;
   }
 
+  .header__link-sign-up:hover {
+    opacity: .7;
+  }
+
   .header__link-sign-in {
     font-size: 12px;
     width: 76px;
     height: 32px;
+  }
+
+  .header__link-sign-in:hover {
+    opacity: .7;
   }
 
   .header__link-container {

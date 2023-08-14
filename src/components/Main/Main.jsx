@@ -6,7 +6,7 @@ import Portfolio from '../Portfolio/Portofolio';
 
 import '../Main/Main.css';
 
-function Main() {
+export default function Main() {
   return (
     <main className='main'>
       <Promo />
@@ -17,5 +17,3 @@ function Main() {
     </main>
   );
 };
-
-export default Main;

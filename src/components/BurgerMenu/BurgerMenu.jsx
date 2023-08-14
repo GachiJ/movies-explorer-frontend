@@ -1,6 +1,6 @@
 import '../BurgerMenu/BurgerMenu.css'
 import { Link, Route, Routes } from "react-router-dom";
-import LogoAcc from '../../images/icon__Acc.png'
+import LogoAcc from '../../images/icon__Acc.svg'
 import Logo from '../../images/logo.svg'
 
 

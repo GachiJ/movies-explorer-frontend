@@ -86,6 +86,10 @@
     letter-spacing: -1.12px;
   }
 
+  .portfolio__link:hover {
+    opacity: .7;
+  }
+
   .porfolio__link-icon {
     width: 27px;
     height: 60px;

@@ -110,6 +110,10 @@
     grid-area: link;
   }
 
+  .about-me__link:hover {
+    opacity: .7;
+  }
+
   .about-me__info-container {
     margin-top: 66px;
     display: grid;

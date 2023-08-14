@@ -1,5 +1,4 @@
 import '../Portfolio/Portfolio.css'
-import Arrow from '../../images/arrow.svg'
 
 export default function Portfolio() {
   return (

@@ -56,6 +56,10 @@
     max-width: 634px;
     padding: 16px 0 16px 20px;
   }
+
+  .search__button:hover {
+   opacity: .7;
+  }
 }
 
 @media screen and (min-width: 1280px) {

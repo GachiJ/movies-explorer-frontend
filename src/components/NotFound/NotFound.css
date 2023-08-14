@@ -43,6 +43,7 @@
   border: none;
   background-color: initial;
   margin-top: 284px;
+  text-decoration: none;
 }
 
 @media screen and (min-width: 768px) {
@@ -56,5 +57,9 @@
 
   .not-found__button {
     font-size: 14px;
+  }
+
+  .not-found__button:hover {
+    opacity: .7;
   }
 }
