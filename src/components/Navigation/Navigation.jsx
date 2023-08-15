@@ -5,9 +5,9 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import Logo from '../../images/logo.svg'
 
 
-export default function Navigation({ isOpen, onMenuOpen }) {
+export default function Navigation({ isOpen, onClose, onMenuOpen }) {
   return (
-    <>
+    <section className="navigation">
       <div className='navigation__container'>
         <Link to='/'><img src={Logo} alt="Логотип" className="navigation__logo" /></Link>
         <nav className="navigation__container-link">
@@ -18,10 +18,13 @@ export default function Navigation({ isOpen, onMenuOpen }) {
           </div>
         </nav>
       </div>
+      <button className='navigation-button_type_opened'
+      onClick={onMenuOpen}
+      ></button>
       <BurgerMenu
         isOpen={isOpen}
-        onMenuOpen={onMenuOpen}
+        onClose={onClose}
       />
-    </>
+    </section>
   );
 };

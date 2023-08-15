@@ -26,7 +26,11 @@ function App() {
   const pageLocation = location === '/movies';
 
   function handleMenuOpen() {
-    setIsMenuOpen(!isMenuOpen)
+    setIsMenuOpen(true)
+  }
+
+  function closeAllPopups() {
+    setIsMenuOpen(false)
   }
 
 
@@ -37,6 +41,7 @@ function App() {
           <Header
             isOpen={isMenuOpen}
             onMenuOpen={handleMenuOpen}
+            onClose={closeAllPopups}
           />
 
           <Routes>

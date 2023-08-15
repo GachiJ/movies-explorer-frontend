@@ -7,13 +7,13 @@ export default function Profile() {
   /*   const currentUser = useContext(CurrentUserContext); */
   return (
     <div className="profile">
-      <h2 className="profile__title">Привет, Виталий!</h2>
-      <form
-        id='submit'
-        className='profile__form'
-        name='profile'
-      >
-        <div className='profile__container'>
+      <div className='profile__container'>
+        <h2 className="profile__title">Привет, Виталий!</h2>
+        <form
+          id='submit'
+          className='profile__form'
+          name='profile'
+        >
           <div className='profile__container-input'>
             <span className='profile__label'>Имя</span>
             <input
@@ -36,8 +36,8 @@ export default function Profile() {
             />
           </div>
           <span className='profile__input-error profile__input-error_email'></span>
-        </div>
-      </form>
+        </form>
+      </div>
       <div className='profile__buttons-container'>
         <button
           form='submit'

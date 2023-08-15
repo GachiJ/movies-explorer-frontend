@@ -4,14 +4,14 @@ import Logo from '../../images/logo.svg'
 import Navigation from '../Navigation/Navigation';
 
 
-export default function Header({ isOpen, onMenuOpen }) {
+export default function Header({ isOpen, onClose, onMenuOpen }) {
 
   return (
     <Routes>
       <Route path='/' element={
         <header className="header">
           <div className="header__container">
-            <Link to='/' href="" className="header__link-sign-up"> <img src={Logo} alt="Логотип" className="header__logo" /></Link>
+            <Link to='/'> <img src={Logo} alt="Логотип" className="header__logo" /></Link>
             <nav className="header__link-container">
               <Link to='/signup' href="" className="header__link-sign-up"> Регистрация</Link>
               <Link to='/signin' className="header__link-sign-in"> Войти</Link>
@@ -23,20 +23,22 @@ export default function Header({ isOpen, onMenuOpen }) {
       <Route path='/movies' element={
         <header className="header">
           <div className="header__container">
-           <Navigation
+            <Navigation
               isOpen={isOpen}
+              onClose={onClose}
               onMenuOpen={onMenuOpen}
             />
           </div>
         </header>
       } />
-      
+
       <Route path='/saved-movies' element={
         <header className="header">
           <div className="header__container">
-           <Navigation
+            <Navigation
               isOpen={isOpen}
               onMenuOpen={onMenuOpen}
+              onClose={onClose}
             />
           </div>
         </header>
@@ -45,9 +47,10 @@ export default function Header({ isOpen, onMenuOpen }) {
       <Route path='/profile' element={
         <header className="header">
           <div className="header__container">
-           <Navigation
+            <Navigation
               isOpen={isOpen}
               onMenuOpen={onMenuOpen}
+              onClose={onClose}
             />
           </div>
         </header>
