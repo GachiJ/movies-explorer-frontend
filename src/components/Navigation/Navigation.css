@@ -13,7 +13,7 @@
   right: 14px;
 }
 
-.navigation-button_type_opened {
+.navigation-button-opened {
   background-image: url('../../images/Open.svg');
   background-color: initial;
   background-position: 50%;
@@ -38,8 +38,11 @@
     display: none;
   }
 
-  .navigation-button_type_opened {
-    margin-left: 650px;
+  .navigation-button-opened {
+    margin-left: 620px;
+    width: 44px;
+    height: 44px;
+    background-position: 100%;
   }
 }
 
@@ -51,7 +54,7 @@
     margin: 0 auto;
   }
 
-  .navigation-button_type_opened {
+  .navigation-button-opened {
     display: none;
   }
 
@@ -86,7 +89,7 @@
     width: 38px;
     height: 38px;
     flex-shrink: 0;
-    margin: 0px 405px 0 70px;
+    margin: 0px 425px 0 70px;
   }
 
   .navigation__logo:hover {
@@ -98,12 +101,11 @@
     flex-direction: row;
     align-items: center;
     gap: 16px;
-    max-width: 735px;
     width: 100%;
   }
 
   .navigation__container-acc {
-    margin: 0px 0px 0 405px;
+    margin: 0px 0px 0 350px;
   }
 
   .navigation__acc-logo {

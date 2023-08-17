@@ -49,7 +49,7 @@
   margin: 20px 0;
 }
 
-.porfolio__link-icon {
+.portfolio__icon {
   width: 18px;
   height: 28px;
   display: flex;
@@ -90,7 +90,7 @@
     opacity: .7;
   }
 
-  .porfolio__link-icon {
+  .portfolio__icon {
     width: 27px;
     height: 60px;
   }
@@ -110,7 +110,7 @@
     letter-spacing: -1.2px;
   }
 
-  .porfolio__link-icon {
+  .portfolio__icon {
     width: 29px;
     height: 60px;
   }

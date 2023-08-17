@@ -18,7 +18,7 @@ export default function Navigation({ isOpen, onClose, onMenuOpen }) {
           </div>
         </nav>
       </div>
-      <button className='navigation-button_type_opened'
+      <button className='navigation-button-opened'
       onClick={onMenuOpen}
       ></button>
       <BurgerMenu

@@ -6,11 +6,11 @@ import Logo from '../../images/logo.svg'
 
 export default function BurgerMenu({ isOpen, onClose }) {
   return (
-    <>
+    <section className="burger">
       <Link className="burger__logo" to='/'> <img src={Logo} alt="Логотип" className="burger__logo" /></Link>
       <div className={`burger__menu ${isOpen ? 'burger__menu_opened' : ''}`}>
         <div className='burger__navigation-container'>
-          <button className="burger__navigation-button_type_closed"
+          <button className="burger__button-closed"
             type="button"
             onClick={onClose}></button>
           <nav className="burger__navigation-container-link">
@@ -23,6 +23,6 @@ export default function BurgerMenu({ isOpen, onClose }) {
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 };

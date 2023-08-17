@@ -23,7 +23,7 @@ export default function MoviesCard({ movie, pageLocation, isSaved }) {
       return (
         <button
           type='button'
-          className='movie__button_type_to-save button-hover'
+          className='movie__button-save button-hover'
        >Сохранить</button>
       );
     }
@@ -31,7 +31,7 @@ export default function MoviesCard({ movie, pageLocation, isSaved }) {
       return (
         <button
           type='button'
-          className='movie__button_type_saved button-hover'
+          className='movie__button-saved button-hover'
         />
       );
     }
@@ -39,7 +39,7 @@ export default function MoviesCard({ movie, pageLocation, isSaved }) {
       return (
         <button
           type='button'
-          className='movie__button_type_delete button-hover'
+          className='movie__button-delete button-hover'
         />
       )
     }

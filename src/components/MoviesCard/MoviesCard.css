@@ -35,7 +35,7 @@
   line-height: 10px
 }
 
-.movie__button_type_to-save {
+.movie__button-save {
   border-radius: 30px;
   background: #313131;
   border: 0;
@@ -52,7 +52,7 @@
   padding: 0;
 }
 
-.movie__button_type_saved {
+.movie__button-saved {
   background-image: url('../../images/Ok.svg');
   width: 21px;
   height: 21px;
@@ -65,7 +65,7 @@
   padding: 0;
 }
 
-.movie__button_type_delete {
+.movie__button-delete {
   background-image: url('../../images/delete.svg');
   width: 21px;
   height: 21px;
