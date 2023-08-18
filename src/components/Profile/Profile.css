@@ -3,8 +3,8 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100vh - 190px);
-  padding-top: 74px;
+  min-height: calc(100vh - 190px);
+  padding: 70px 0 40px;
 }
 
 
@@ -87,7 +87,7 @@
 
   .profile {
     padding-top: 236px;
-    height: calc(100vh - 580px);
+    min-height: calc(100vh - 580px);
   }
 
   .profile__title {

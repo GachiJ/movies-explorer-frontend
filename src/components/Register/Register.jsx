@@ -37,7 +37,7 @@ export default function Register({ isLoggedIn, onRegisterUser }) {
             <Link to='/' className='auth__logo-link'>
               <img src={Logo} alt='Лого' className='auth__logo' />
             </Link>
-            <h1 className='auth__title'>Рады видеть!</h1>
+            <h1 className='auth__title'>Добро пожаловать!</h1>
           </div>
         </div>
         <form className="auth__form" onSubmit={handleSubmit}>
