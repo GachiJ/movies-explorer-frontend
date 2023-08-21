@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
-import { React } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import '../Profile/Profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
@@ -29,7 +28,7 @@ export default function Profile({ handleSignOut, onUpdateUser }) {
     });
   }
 
-  React.useEffect(() => {
+ useEffect(() => {
     setName(currentUser.name);
     setEmail(currentUser.about);
   }, [currentUser]);

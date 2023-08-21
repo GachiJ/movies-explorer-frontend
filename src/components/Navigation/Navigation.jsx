@@ -1,5 +1,5 @@
 import '../Navigation/Navigation.css'
-import { Link, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LogoAcc from '../../images/icon__Acc.svg'
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import Logo from '../../images/logo.svg'

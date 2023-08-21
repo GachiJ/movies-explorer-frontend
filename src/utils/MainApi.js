@@ -18,8 +18,8 @@ class Api {
   registerUser({ name, email, password }) {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
-      headers: this._headers,
       credentials: 'include',
+      headers: this._headers,
       body: JSON.stringify({
         name,
         email,
@@ -32,8 +32,8 @@ class Api {
   loginUser({ email, password }) {
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
-      headers: this._headers,
       credentials: 'include',
+      headers: this._headers,
       body: JSON.stringify({ email, password }),
     }).then(res => this._checkResponse(res));
   }
@@ -41,8 +41,8 @@ class Api {
   // запрос данных пользователя
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
       credentials: 'include',
+      headers: this._headers,
     }).then(res => this._checkResponse(res));
   }
 
@@ -50,8 +50,8 @@ class Api {
   updateUser({ name, email }) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
       credentials: 'include',
+      headers: this._headers,
       body: JSON.stringify({ name, email }),
     }).then(res => this._checkResponse(res));
   }
@@ -78,8 +78,8 @@ class Api {
   // запрос фильмов
   getSavedMovies() {
     return fetch(`${this._baseUrl}/movies`, {
-      headers: this._headers,
       credentials: 'include',
+      headers: this._headers,
     }).then(res => this._checkResponse(res));
   }
 
@@ -87,8 +87,8 @@ class Api {
   addNewMovie({ data }) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',
-      headers: this._headers,
       credentials: 'include',
+      headers: this._headers,
       body: JSON.stringify({
         country: data.country,
         director: data.director,
@@ -109,8 +109,8 @@ class Api {
   deleteMovie({ data }) {
     return fetch(`${this._baseUrl}/movies/${data}`, {
       method: 'DELETE',
-      headers: this._headers,
       credentials: 'include',
+      headers: this._headers,
     }).then(res => this._checkResponse(res));
   }
 }

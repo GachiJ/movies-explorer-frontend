@@ -1,7 +1,7 @@
 import '../MoviesCardList/MoviesCardList.css'
 /* import { movies } from '../../utils/movies'; */
 import MoviesCard from '../MoviesCard/MoviesCard';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
 
