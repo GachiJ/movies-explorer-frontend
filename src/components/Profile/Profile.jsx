@@ -1,10 +1,39 @@
 import { Link } from 'react-router-dom';
-import '../Profile/Profile.css'
-/* import { useContext, useEffect } from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext' */
+import { useContext, useState } from 'react';
+import { React } from 'react';
+import '../Profile/Profile.css';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-export default function Profile() {
+export default function Profile({ handleSignOut, onUpdateUser }) {
   /*   const currentUser = useContext(CurrentUserContext); */
+
+  const currentUser = useContext(CurrentUserContext);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+
+  function handleChangeName(e) {
+    setName(e.target.value);
+  }
+
+  function handleChangeEmail(e) {
+    setEmail(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    onUpdateUser({
+      name,
+      email,
+    });
+  }
+
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setEmail(currentUser.about);
+  }, [currentUser]);
+
   return (
     <div className="profile">
       <div className='profile__container'>
@@ -13,6 +42,7 @@ export default function Profile() {
           id='submit'
           className='profile__form'
           name='profile'
+          onSubmit={handleSubmit}
         >
           <div className='profile__container-input'>
             <span className='profile__label'>Имя</span>
@@ -23,6 +53,8 @@ export default function Profile() {
               required
               minLength='2'
               maxLength='30'
+              value={name || ""}
+              onChange={handleChangeName}
             />
           </div>
           <span className='profile__input-error profile__input-error_name'></span>
@@ -33,6 +65,8 @@ export default function Profile() {
               name='email'
               type='email'
               required
+              value={email || ""}
+              onChange={handleChangeEmail}
             />
           </div>
           <span className='profile__input-error profile__input-error_email'></span>
@@ -46,7 +80,8 @@ export default function Profile() {
         >
           Редактировать
         </button>
-        <Link to={'/'}
+        <Link
+          onClick={handleSignOut}
           type='button'
           className='profile__button-exit'
         >
