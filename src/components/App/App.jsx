@@ -30,19 +30,29 @@ function App() {
 
   const pageLocation = location === '/movies';
 
+  /*  useEffect(() => {
+     tokenCheck();
+     if (isLoggedIn) {
+       Promise.all([mainApi.getUserInfo(), moviesApi.getMovies()])
+         .then(([userData, moviesData]) => {
+           setMovies(moviesData)
+           setCurrentUser(userData)
+           navigate('/');
+         })
+         .catch((err) => console.log(err))
+     }
+ 
+   }, [isLoggedIn]) */
   useEffect(() => {
-    tokenCheck();
-    if (isLoggedIn) {
-      Promise.all([mainApi.getUserInfo(), moviesApi.getMovies()])
-        .then(([userData, moviesData]) => {
-          setMovies(moviesData)
-          setCurrentUser(userData)
-          navigate('/');
-        })
-        .catch((err) => console.log(err))
-    }
+    Promise.all([mainApi.getUserInfo(), moviesApi.getMovies()])
+      .then(([userData, moviesData]) => {
+        setMovies(moviesData)
+        setCurrentUser(userData)
+        navigate('/');
+      })
+      .catch((err) => console.log(err))
+  })
 
-  }, [isLoggedIn])
 
 
   function handleLoginUser({ email, password }) {
