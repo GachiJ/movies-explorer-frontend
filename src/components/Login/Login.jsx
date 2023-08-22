@@ -3,17 +3,12 @@ import React, { useState } from "react";
 import { Link, Route } from "react-router-dom";
 import Logo from '../../images/logo.svg'
 
-export default function Login({ isLoggedIn, onRegisterUser }) {
+export default function Login({ isLoggedIn, onLoginUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
 
   if (isLoggedIn) {
     return <Route to="/" />;
-  }
-
-  function handleNameChange(e) {
-    setName(e.target.value)
   }
 
   function handleEmailChange(e) {
@@ -26,7 +21,7 @@ export default function Login({ isLoggedIn, onRegisterUser }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    onRegisterUser({ name, email, password })
+    onLoginUser({ email, password })
   }
 
   return (

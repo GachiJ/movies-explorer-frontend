@@ -30,29 +30,19 @@ function App() {
 
   const pageLocation = location === '/movies';
 
-  /*  useEffect(() => {
-     tokenCheck();
-     if (isLoggedIn) {
-       Promise.all([mainApi.getUserInfo(), moviesApi.getMovies()])
-         .then(([userData, moviesData]) => {
-           setMovies(moviesData)
-           setCurrentUser(userData)
-           navigate('/');
-         })
-         .catch((err) => console.log(err))
-     }
- 
-   }, [isLoggedIn]) */
   useEffect(() => {
-    Promise.all([mainApi.getUserInfo(), moviesApi.getMovies()])
-      .then(([userData, moviesData]) => {
-        setMovies(moviesData)
-        setCurrentUser(userData)
-        navigate('/');
-      })
-      .catch((err) => console.log(err))
-  })
+    tokenCheck();
+    if (isLoggedIn) {
+      Promise.all([mainApi.getUserInfo(), moviesApi.getMovies()])
+        .then(([userData, moviesData]) => {
+          setMovies(moviesData)
+          setCurrentUser(userData)
+          navigate('/');
+        })
+        .catch((err) => console.log(err))
+    }
 
+  }, [isLoggedIn])
 
 
   function handleLoginUser({ email, password }) {
@@ -89,9 +79,9 @@ function App() {
       .finally(() => setIsLoader(false));
   }
 
-  function handleRegisterUser({ email, password }) {
+  function handleRegisterUser({ name, email, password }) {
     setIsLoader(true);
-    mainApi.registerUser({ email, password })
+    mainApi.registerUser({ name, email, password })
       .then(() => {
         navigate('/signin')
       })
