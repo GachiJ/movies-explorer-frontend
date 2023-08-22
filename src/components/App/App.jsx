@@ -50,6 +50,7 @@ function App() {
     mainApi.loginUser({ email, password })
       .then(() => {
         setIsLoggedIn(true);
+        navigate('/');
       })
       .catch((err) => {
         console.log(err);
@@ -152,8 +153,8 @@ function App() {
             />
             <Route path="/signup" element={<Register onRegisterUser={handleRegisterUser} />} />
             <Route path="/signin" element={<Login onLoginUser={handleLoginUser} />} />
-     {/*        <Route path="/" element={isLoggedIn ? <Navigate to="/" /> : <Navigate to="/signin" />} />
-            <Route path="*" element={!isLoggedIn ? <Navigate to="/signup" /> : <Navigate to="/signin" />} /> */}
+            <Route path="/" element={isLoggedIn ? <Navigate to="/" /> : <Navigate to="/signin" />} />
+            <Route path="*" element={!isLoggedIn ? <Navigate to="/signup" /> : <Navigate to="/signin" />} />
             <Route
               path='/404'
               element={<NotFound />}
