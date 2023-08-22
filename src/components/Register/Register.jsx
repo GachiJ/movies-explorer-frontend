@@ -1,16 +1,13 @@
 import '../Register/Register.css'
 import { useState } from "react";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Logo from '../../images/logo.svg'
 
-export default function Register({ isLoggedIn, onRegisterUser }) {
+export default function Register({ onRegisterUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
-  if (isLoggedIn) {
-    return <Route to="/" />;
-  }
 
   function handleNameChange(e) {
     setName(e.target.value)

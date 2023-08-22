@@ -1,15 +1,11 @@
 import '../Login/Login.css'
 import React, { useState } from "react";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Logo from '../../images/logo.svg'
 
-export default function Login({ isLoggedIn, onLoginUser }) {
+export default function Login({  onLoginUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  if (isLoggedIn) {
-    return <Route to="/" />;
-  }
 
   function handleEmailChange(e) {
     setEmail(e.target.value)
