@@ -1,7 +1,8 @@
 import '../MoviesCardList/MoviesCardList.css'
 /* import { movies } from '../../utils/movies'; */
 import MoviesCard from '../MoviesCard/MoviesCard';
-import { useEffect, useState, useLocation } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
   const { pathname } = useLocation();
