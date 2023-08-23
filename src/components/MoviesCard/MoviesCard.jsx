@@ -47,7 +47,7 @@ export default function MoviesCard({ movie, pageLocation, isSaved }) {
   return (
     <article className='movie'>
       <img
-        src={isSaved ? movie.image : `https://api.nomoreparties.co/${movie.image.url}`}
+        src={movie.image.url}
         alt={movie.name}
         className='movie__image'
       />
