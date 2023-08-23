@@ -146,7 +146,7 @@ function App() {
               path='/profile'
               element={
                 <Profile
-                  onClick={handleSignOut}
+                  onSignOut={handleSignOut}
                   onUpdateUser={handleUpdateUser}
                   isLoader={isLoader}
                 />

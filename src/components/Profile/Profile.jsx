@@ -3,9 +3,7 @@ import { useContext, useState, useEffect } from 'react';
 import '../Profile/Profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-export default function Profile({ handleSignOut, onUpdateUser }) {
-  /*   const currentUser = useContext(CurrentUserContext); */
-
+export default function Profile({ onSignOut, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -62,7 +60,7 @@ export default function Profile({ handleSignOut, onUpdateUser }) {
             <input
               className='profile__input'
               name='email'
-              type='email'
+              type='text'
               required
               value={email || ""}
               onChange={handleChangeEmail}
@@ -79,7 +77,7 @@ export default function Profile({ handleSignOut, onUpdateUser }) {
             </button>
             <Link
              to="/"
-              onClick={handleSignOut}
+              onClick={onSignOut}
               type='button'
               className='profile__button-exit'
             >
