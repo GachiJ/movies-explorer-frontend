@@ -152,7 +152,7 @@ function App() {
                 <Movies pageLocation={pageLocation}
                   movies={movies}
                   savedMoviesList={savedMoviesList}
-                  handleCardLike={handleCardLike}
+                  onCardSave={handleCardLike}
                   onCardDelete={handleCardDelete}
                   isSaved={isSaved}
                 />

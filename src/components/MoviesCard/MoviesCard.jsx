@@ -1,21 +1,17 @@
 import '../MoviesCard/MoviesCard.css'
 
 
-export default function MoviesCard({ movie, pageLocation, isSaved, handleLikeClick, onCardDelete, savedMoviesList }) {
+export default function MoviesCard({ movie, pageLocation, isSaved, onCardSave, onCardDelete }) {
   /*  const currentLocation = useLocation();
  
    const handleBookmarkClick = () => onBookmark(movie);
    const handleDeleteClick = () => onDelete(movie); */
-  function onCardClick() {
-    if (isSaved) {
-      onCardDelete(savedMoviesList.filter((m) => m.movieId === movie.id)[0]);
-    } else {
-      handleLikeClick({movie});
-    }
+  function onSave() {
+    onCardSave({ movie })
   }
 
   function onDelete() {
-    onCardDelete(movie);
+    onCardDelete({ movie });
   }
 
   const convertMinutesToHours = (minutes) => {
@@ -32,7 +28,7 @@ export default function MoviesCard({ movie, pageLocation, isSaved, handleLikeCli
     if (pageLocation && !isSaved) {
       return (
         <button
-          onClick={onCardClick}
+          onClick={onSave}
           type='button'
           className='movie__button-save'
         >Сохранить</button>
