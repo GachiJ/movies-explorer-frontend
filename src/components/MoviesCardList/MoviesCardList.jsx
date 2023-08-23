@@ -66,7 +66,7 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
           ))}
         </ul>) : (
         <ul className="movies-card-list__section">
-          { savedMoviesList.slice(0, cardsToShow).map((movie) => (
+          { movies.slice(0, cardsToShow).map((movie) => (
             <MoviesCard
               key={movie.id || movie._id}
               movie={movie}

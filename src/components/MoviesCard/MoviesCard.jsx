@@ -10,12 +10,12 @@ export default function MoviesCard({ movie, pageLocation, isSaved, handleLikeCli
     if (isSaved) {
       onCardDelete(savedMoviesList.filter((m) => m.movieId === movie.id)[0]);
     } else {
-      handleLikeClick({ movie });
+      handleLikeClick({movie});
     }
   }
 
   function onDelete() {
-    onCardDelete({ movie });
+    onCardDelete(movie);
   }
 
   const convertMinutesToHours = (minutes) => {
