@@ -8,7 +8,7 @@ export default function MoviesCard({ movie, pageLocation, isSaved, onCardSave, o
    const handleDeleteClick = () => onDelete(movie); */
   function onSave() {
     onCardSave(movie)
-    console.log(movie)
+    console.log(movie.country)
   }
 
   function onDelete() {
