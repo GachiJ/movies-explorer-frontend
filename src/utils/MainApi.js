@@ -108,7 +108,7 @@ class Api {
         image: 'https://api.nomoreparties.co' + movie.image.url,
         trailerLink: movie.trailerLink,
         thumbnail: 'https://api.nomoreparties.co' + movie.image.formats.thumbnail.url,
-        movieId: movie.id,
+        movieId: movie.movieId,
         nameRU: movie.nameRU,
         nameEN: movie.nameEN,
       }),
