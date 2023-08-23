@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-between;
   min-height: calc(100vh - 190px);
   padding: 70px 0 40px;
 }
@@ -56,6 +55,10 @@
 
 .profile__form {
   width: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: calc(100vh - 300px);
 }
 
 .profile__button-edit {
@@ -96,6 +99,7 @@
 
   .profile__form {
     width: 410px;
+    min-height: calc(100vh - 700px);
   }
 
   .profile__button-edit {

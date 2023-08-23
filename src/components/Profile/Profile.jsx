@@ -28,14 +28,13 @@ export default function Profile({ handleSignOut, onUpdateUser }) {
     });
   }
 
- useEffect(() => {
+  useEffect(() => {
     setName(currentUser.name);
-    setEmail(currentUser.about);
+    setEmail(currentUser.email);
   }, [currentUser]);
 
   return (
     <div className="profile">
-      <div className='profile__container'>
         <h2 className="profile__title">Привет, Виталий!</h2>
         <form
           id='submit'
@@ -43,6 +42,7 @@ export default function Profile({ handleSignOut, onUpdateUser }) {
           name='profile'
           onSubmit={handleSubmit}
         >
+          <div className='profile__container'>
           <div className='profile__container-input'>
             <span className='profile__label'>Имя</span>
             <input
@@ -69,24 +69,25 @@ export default function Profile({ handleSignOut, onUpdateUser }) {
             />
           </div>
           <span className='profile__input-error profile__input-error_email'></span>
+          </div>
+          <div className='profile__buttons-container'>
+            <button
+              form='submit'
+              type='submit'
+              className='profile__button-edit'
+            >
+              Редактировать
+            </button>
+            <Link
+             to="/"
+              onClick={handleSignOut}
+              type='button'
+              className='profile__button-exit'
+            >
+              Выйти из аккаунта
+            </Link>
+          </div>
         </form>
       </div>
-      <div className='profile__buttons-container'>
-        <button
-          form='submit'
-          type='submit'
-          className='profile__button-edit'
-        >
-          Редактировать
-        </button>
-        <Link
-          onClick={handleSignOut}
-          type='button'
-          className='profile__button-exit'
-        >
-          Выйти из аккаунта
-        </Link>
-      </div>
-    </div>
   );
 };
