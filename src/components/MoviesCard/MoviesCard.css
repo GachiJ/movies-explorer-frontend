@@ -21,7 +21,7 @@
   margin: 0;
 }
 
-.movie__description:hover .movie__button-save {
+.movie:hover .movie__button-save {
     visibility: visible
 }
 
