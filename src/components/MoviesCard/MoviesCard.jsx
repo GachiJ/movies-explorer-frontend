@@ -47,7 +47,7 @@ export default function MoviesCard({ movie, pageLocation, isSaved }) {
   return (
     <article className='movie'>
       <img
-        src={movie.image.url}
+        src={movie.image}
         alt={movie.name}
         className='movie__image'
       />
