@@ -5,7 +5,67 @@ import { useEffect, useState } from 'react';
 
 export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
 
-  const [shownMovies, setShownMovies] = useState(0);
+    const [cardsToShow, setCardsToShow] = useState(4); // Начальное количество карточек
+  
+    useEffect(() => {
+      const handleResize = () => {
+        let newCardsToShow;
+  
+        if (window.innerWidth >= 1280) {
+          newCardsToShow = 4;
+        } else if (window.innerWidth >= 768) {
+          newCardsToShow = 4;
+        } else {
+          newCardsToShow = 1;
+        }
+  
+        setCardsToShow(newCardsToShow);
+      };
+  
+      const throttledResize = () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(handleResize, 250); // Откладываем вызов на 250 мс
+      };
+  
+      let resizeTimer;
+      window.addEventListener("resize", throttledResize);
+      handleResize(); // Инициализация значения при первой загрузке
+  
+      return () => {
+        window.removeEventListener("resize", throttledResize);
+      };
+    }, []);
+  
+    const loadMoreCards = () => {
+      setCardsToShow(prevCards => prevCards + 2);
+    };
+  
+    return (
+      <section className="movies-card-list">
+        <ul className="movies-card-list__section">
+          {movies.slice(0, cardsToShow).map((movie) => (
+            <MoviesCard
+              key={movie.id || movie._id}
+              movie={movie}
+              pageLocation={pageLocation}
+              /* saved={getSavedMovieCard(savedMovies, movie)} */
+              isSaved={movie.isSaved}
+            />
+          ))}
+        </ul>
+        {cardsToShow < movies.length ? (
+          <button
+            className="movies-card-list__load-more"
+            onClick={loadMoreCards}
+          >
+            Ещё
+          </button>
+        ) : null}
+      </section>
+    );
+  };
+
+  /* const [shownMovies, setShownMovies] = useState(0);
 
   function shownCount() {
     const display = window.innerWidth;
@@ -34,13 +94,13 @@ export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
     else if (display < 1023) {
       setShownMovies(shownMovies + 2);
     }
-  }
+  } */
 
   /*   function getSavedMovieCard(savedMovies, movie) {
       return savedMovies.find((savedMovie) => savedMovie.movieId === movie.id);
     } */
 
-  return (
+ /*  return (
     <section className="movies-card-list">
       <ul className="movies-card-list__section">
         {movies.map((movie) => (
@@ -48,7 +108,7 @@ export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
             key={movie.id || movie._id}
             movie={movie}
             pageLocation={pageLocation}
-            /* saved={getSavedMovieCard(savedMovies, movie)} */
+             saved={getSavedMovieCard(savedMovies, movie)} 
             isSaved={movie.isSaved}
           />))}
       </ul>
@@ -60,5 +120,4 @@ export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
         Ещё
       </button>) : ('')}
     </section>
-  );
-};
+  ); */
