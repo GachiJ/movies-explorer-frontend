@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
 
-/*   const [shownMovies, setShownMovies] = useState(0);
+  const [shownMovies, setShownMovies] = useState(0);
 
   function shownCount() {
     const display = window.innerWidth;
@@ -37,11 +37,11 @@ export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
     else if (display < 1023) {
       setShownMovies(shownMovies + 2);
     }
-  } */
+  }
 
-/*   function getSavedMovieCard(savedMovies, movie) {
-    return savedMovies.find((savedMovie) => savedMovie.movieId === movie.id);
-  } */
+  /*   function getSavedMovieCard(savedMovies, movie) {
+      return savedMovies.find((savedMovie) => savedMovie.movieId === movie.id);
+    } */
 
   return (
     <section className="movies-card-list">
@@ -57,7 +57,7 @@ export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
       </ul>
       <button
         className="movies-card-list__load-more"
-        /* onClick={showMore} */
+        onClick={showMore}
       >
         Ещё
       </button>
