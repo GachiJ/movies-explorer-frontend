@@ -67,7 +67,6 @@ class Api {
   }
 
   checkToken() {
-
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       credentials: 'include',
