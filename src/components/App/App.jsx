@@ -71,7 +71,7 @@ function App() {
     mainApi.logout()
       .then(() => {
         setIsLoggedIn(false);
-        navigate('/signin');
+        navigate('/');
       })
       .catch((err) => console.log(err))
   }
