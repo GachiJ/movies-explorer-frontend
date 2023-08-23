@@ -31,9 +31,6 @@ export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
     } else if (display > 1023) {
       setShownMovies(shownMovies + 3);
     }
-    // else if (display > 800) {
-    //   setShownMovies(shownMovies + 2);
-    // }
     else if (display < 1023) {
       setShownMovies(shownMovies + 2);
     }
@@ -55,12 +52,13 @@ export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
             isSaved={movie.isSaved}
           />))}
       </ul>
+      {movies.length > shownMovies ? (
       <button
         className="movies-card-list__load-more"
         onClick={showMore}
       >
         Ещё
-      </button>
+      </button>) : ('')}
     </section>
   );
 };
