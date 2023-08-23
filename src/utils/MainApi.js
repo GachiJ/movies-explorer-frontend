@@ -128,6 +128,7 @@ class Api {
 const mainApi = new Api({
   // создаём экземляр класса работающего с API сервера
   baseUrl: 'https://api.diplomback.nomoredomains.xyz',
+  credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
   },

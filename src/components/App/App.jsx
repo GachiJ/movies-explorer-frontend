@@ -68,14 +68,12 @@ function App() {
   }
 
   function handleSignOut() {
-    setIsLoader(true);
     mainApi.logout()
       .then(() => {
         setIsLoggedIn(false);
         navigate('/signin');
       })
       .catch((err) => console.log(err))
-      .finally(() => setIsLoader(false));
   }
 
   function handleRegisterUser({ name, email, password }) {

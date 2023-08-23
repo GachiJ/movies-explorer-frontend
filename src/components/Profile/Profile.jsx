@@ -76,9 +76,8 @@ export default function Profile({ onSignOut, onUpdateUser }) {
               Редактировать
             </button>
             <Link
-             to="/"
+              to="/"
               onClick={onSignOut}
-              type='button'
               className='profile__button-exit'
             >
               Выйти из аккаунта
