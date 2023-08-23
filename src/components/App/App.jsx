@@ -92,11 +92,11 @@ function App() {
       .finally(() => setIsLoader(false));
   }
 
-  function handleUpdateUser(userInfo) {
+  function handleUpdateUser({ name, email }) {
     setIsLoader(true);
-    mainApi.updateUser(userInfo)
-      .then((userData) => {
-        setCurrentUser(userData)
+    mainApi.updateUser({ name, email })
+      .then(({ name, email }) => {
+        setCurrentUser({ name, email })
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoader(false));

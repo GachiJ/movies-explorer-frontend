@@ -72,7 +72,6 @@ export default function Profile({ handleSignOut, onUpdateUser }) {
           </div>
           <div className='profile__buttons-container'>
             <button
-              form='submit'
               type='submit'
               className='profile__button-edit'
             >
