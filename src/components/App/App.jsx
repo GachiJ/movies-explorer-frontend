@@ -120,6 +120,7 @@ function App() {
             isOpen={isMenuOpen}
             onMenuOpen={handleMenuOpen}
             onClose={closeAllPopups}
+            isLoggedIn={isLoggedIn}
           />
 
           <Routes>

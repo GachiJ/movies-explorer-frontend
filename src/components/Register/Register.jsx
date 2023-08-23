@@ -4,9 +4,9 @@ import { Link, Route } from "react-router-dom";
 import Logo from '../../images/logo.svg'
 
 export default function Register({ isLoggedIn, onRegisterUser }) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
 
   if (isLoggedIn) {
     return <Route to="/" />;

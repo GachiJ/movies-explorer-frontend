@@ -20,13 +20,23 @@ class Api {
       method: 'POST',
       credentials: 'include',
       headers: this._headers,
+      body: JSON.stringify({ name, email, password })
+    })
+      .then(res => this._checkResponse(res))
+  }
+
+/*   registerUser({ name, email, password }) {
+    return fetch(`${this._baseUrl}/signup`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: this._headers,
       body: JSON.stringify({
         name,
         email,
         password,
       }),
     }).then(res => this._checkResponse(res));
-  }
+  } */
 
   // вход
   loginUser({ email, password }) {

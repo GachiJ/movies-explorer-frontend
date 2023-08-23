@@ -4,11 +4,21 @@ import Logo from '../../images/logo.svg'
 import Navigation from '../Navigation/Navigation';
 
 
-export default function Header({ isOpen, onClose, onMenuOpen }) {
+export default function Header({ isLoggedIn, isOpen, onClose, onMenuOpen }) {
 
   return (
     <Routes>
-      <Route path='/' element={
+      <Route path='/' element={isLoggedIn ? (
+        <header className="header">
+          <div className="header__container">
+            <Navigation
+              isOpen={isOpen}
+              onClose={onClose}
+              onMenuOpen={onMenuOpen}
+            />
+          </div>
+        </header>
+      ) : (
         <header className="header">
           <div className="header__container">
             <Link to='/'> <img src={Logo} alt="Логотип" className="header__logo" /></Link>
@@ -17,7 +27,7 @@ export default function Header({ isOpen, onClose, onMenuOpen }) {
               <Link to='/signin' className="header__link-sign-in"> Войти</Link>
             </nav>
           </div>
-        </header>
+        </header>)
       } />
 
       <Route path='/movies' element={
