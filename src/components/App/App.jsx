@@ -59,14 +59,12 @@ function App() {
   }
 
   function tokenCheck() {
-    setIsLoader(true);
     mainApi.checkToken()
       .then(() => {
         setIsLoggedIn(true);
         navigate('/');
       })
       .catch((err) => console.log(err))
-      .finally(() => setIsLoader(false));
   }
 
   function handleSignOut() {
@@ -74,7 +72,7 @@ function App() {
     mainApi.logout()
       .then(() => {
         setIsLoggedIn(false);
-        navigate('/');
+        navigate('/signin');
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoader(false));
