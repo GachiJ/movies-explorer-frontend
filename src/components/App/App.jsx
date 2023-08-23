@@ -100,7 +100,7 @@ function App() {
   }
 
   function handleCardLike(movie) {
-    mainApi.addNewMovie({ movie })
+    mainApi.addNewMovie(movie)
       .then((newMovie) => {
         setSavedMoviesList([newMovie, ...savedMoviesList]);
         setIsSaved(true);
