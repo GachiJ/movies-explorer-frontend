@@ -4,7 +4,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
+export default function MoviesCardList({ pageLocation, movies, savedMoviesList, handleCardLike, onCardDelete }) {
   const { pathname } = useLocation();
 
   const [cardsToShow, setCardsToShow] = useState(0);
@@ -59,11 +59,14 @@ export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
               pageLocation={pageLocation}
               /* saved={getSavedMovieCard(savedMovies, movie)} */
               isSaved={movie.isSaved}
+              handleCardLike={handleCardLike}
+              savedMoviesList={savedMoviesList}
+              onCardDelete={onCardDelete}
             />
           ))}
         </ul>) : (
         <ul className="movies-card-list__section">
-          {movies.slice(0, cardsToShow).map((movie) => (
+          { savedMoviesList.slice(0, cardsToShow).map((movie) => (
             <MoviesCard
               key={movie.id || movie._id}
               movie={movie}

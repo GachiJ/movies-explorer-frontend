@@ -1,11 +1,22 @@
 import '../MoviesCard/MoviesCard.css'
 
 
-export default function MoviesCard({ movie, pageLocation, isSaved }) {
- /*  const currentLocation = useLocation();
+export default function MoviesCard({ movie, pageLocation, isSaved, handleLikeClick, onCardDelete, savedMoviesList }) {
+  /*  const currentLocation = useLocation();
+ 
+   const handleBookmarkClick = () => onBookmark(movie);
+   const handleDeleteClick = () => onDelete(movie); */
+  function onCardClick() {
+    if (isSaved) {
+      onCardDelete(savedMoviesList.filter((m) => m.movieId === movie.id)[0]);
+    } else {
+      handleLikeClick({ movie });
+    }
+  }
 
-  const handleBookmarkClick = () => onBookmark(movie);
-  const handleDeleteClick = () => onDelete(movie); */
+  function onDelete() {
+    onCardDelete({ movie });
+  }
 
   const convertMinutesToHours = (minutes) => {
     if (isNaN(minutes) || minutes < 0) {
@@ -21,24 +32,26 @@ export default function MoviesCard({ movie, pageLocation, isSaved }) {
     if (pageLocation && !isSaved) {
       return (
         <button
+          onClick={onCardClick}
           type='button'
-          className='movie__button-save button-hover'
-       >Сохранить</button>
+          className='movie__button-save'
+        >Сохранить</button>
       );
     }
     if (pageLocation && isSaved) {
       return (
         <button
           type='button'
-          className='movie__button-saved button-hover'
+          className='movie__button-saved'
         />
       );
     }
     if (!pageLocation && isSaved) {
       return (
         <button
+          onClick={onDelete}
           type='button'
-          className='movie__button-delete button-hover'
+          className='movie__button-delete'
         />
       )
     }

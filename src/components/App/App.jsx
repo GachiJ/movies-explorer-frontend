@@ -24,7 +24,7 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
-  /* const [savedMoviesList, setSavedMoviesList] = useState([]); */
+  const [savedMoviesList, setSavedMoviesList] = useState([]);
   const navigate = useNavigate();
   const location = useLocation().pathname;
 
@@ -98,6 +98,26 @@ function App() {
       .finally(() => setIsLoader(false));
   }
 
+  function handleCardLike({ data }) {
+    mainApi.addNewMovie({ data })
+      .then((newMovie) => {
+        setSavedMoviesList([newMovie, ...savedMoviesList]);
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+  }
+
+  function handleCardDelete({ data }) {
+    mainApi.deleteMovie({ data })
+      .then(() => {
+        setSavedMoviesList((state) => state.filter((item) => item._id !== data._id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
 
   function handleMenuOpen() {
     setIsMenuOpen(true)
@@ -128,6 +148,9 @@ function App() {
               element={
                 <Movies pageLocation={pageLocation}
                   movies={movies}
+                  savedMoviesList={savedMoviesList}
+                  handleCardLike={handleCardLike}
+                  onCardDelete={handleCardDelete}
                 />
               }
             />
