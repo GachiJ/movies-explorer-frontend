@@ -12,11 +12,11 @@ export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
         let newCardsToShow;
   
         if (window.innerWidth >= 1280) {
-          newCardsToShow = 4;
+          newCardsToShow = 12;
         } else if (window.innerWidth >= 768) {
-          newCardsToShow = 4;
+          newCardsToShow = 8;
         } else {
-          newCardsToShow = 1;
+          newCardsToShow = 5;
         }
   
         setCardsToShow(newCardsToShow);
@@ -37,7 +37,13 @@ export default function MoviesCardList({ pageLocation, movies, savedMovies }) {
     }, []);
   
     const loadMoreCards = () => {
-      setCardsToShow(prevCards => prevCards + 2);
+      if (window.innerWidth >= 1280) {
+        setCardsToShow(prevCards => prevCards + 12);
+      } else if (window.innerWidth >= 768) {
+        setCardsToShow(prevCards => prevCards + 8);
+      } else {
+        setCardsToShow(prevCards => prevCards + 5);
+      }
     };
   
     return (
