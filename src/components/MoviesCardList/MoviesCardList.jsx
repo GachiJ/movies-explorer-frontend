@@ -48,6 +48,12 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
     }
   };
 
+  function getSavedMovieCard(arr, movie) {
+    return arr.find((item) => {
+      return item.movieId === (movie.id || movie.movieId);
+    });
+  }
+
   return (
     <section className="movies-card-list">
       {pathname === '/movies' ? (
@@ -57,21 +63,19 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
               key={movie.id || movie._id}
               movie={movie}
               pageLocation={pageLocation}
-              /* saved={getSavedMovieCard(savedMovies, movie)} */
               isSaved={isSaved}
               onCardSave={onCardSave}
-              savedMoviesList={savedMoviesList}
               onCardDelete={onCardDelete}
             />
           ))}
-        </ul>) : (
+        </ul>) : pathname === '/saved-movies' (
         <ul className="movies-card-list__section">
           { movies.slice(0, cardsToShow).map((movie) => (
             <MoviesCard
               key={movie.id || movie._id}
               movie={movie}
               pageLocation={pageLocation}
-              /* saved={getSavedMovieCard(savedMovies, movie)} */
+              saved={getSavedMovieCard(savedMoviesList, movie)}
               isSaved={movie.isSaved}
             />
           ))}
