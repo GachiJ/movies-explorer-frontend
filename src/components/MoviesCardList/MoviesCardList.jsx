@@ -51,7 +51,7 @@ export default function MoviesCardList({ movies, savedMoviesList, onCardSave, on
 
   function getSavedMovieCard(arr, movie) {
     return arr.find((item) => {
-      return item.movieId === (movie.id || movie._id);
+      return item.movie.id === (movie.movieId);
     });
   }
 
