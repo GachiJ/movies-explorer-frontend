@@ -66,7 +66,6 @@ export default function MoviesCardList({ movies, savedMoviesList, onCardSave, on
               saved={getSavedMovieCard(savedMoviesList, movie)}
               isSaved={isSaved}
               onCardSave={onCardSave}
-              onCardDelete={onCardDelete}
             />
           ))}
         </ul>) : (
@@ -75,7 +74,7 @@ export default function MoviesCardList({ movies, savedMoviesList, onCardSave, on
             <MoviesCard
               key={isSaved ? movie.id : movie.movieId}
               movie={movie}
-
+              onCardDelete={onCardDelete}
               saved={getSavedMovieCard(savedMoviesList, movie)}
               isSaved={isSaved}
             />
