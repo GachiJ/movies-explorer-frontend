@@ -110,7 +110,7 @@ function App() {
   }
 
   function handleCardDelete(movie) {
-    mainApi.deleteMovie(movie)
+    mainApi.deleteMovie(movie.movieId)
       .then(() => {
         setSavedMoviesList((state) => state.filter((item) => item.movieId !== movie.movieId));
         setIsSaved(false);
@@ -160,8 +160,6 @@ function App() {
               path='/saved-movies'
               element={
                 <SavedMovies
-
-                 
                   movies={movies}
                   savedMoviesList={savedMoviesList}
                   onCardSave={handleCardLike}
