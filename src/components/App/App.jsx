@@ -162,6 +162,13 @@ function App() {
               path='/saved-movies'
               element={
                 <SavedMovies
+
+                pageLocation={pageLocation}
+                  movies={movies}
+                  savedMoviesList={savedMoviesList}
+                  onCardSave={handleCardLike}
+                  onCardDelete={handleCardDelete}
+                  isSaved={isSaved}
                 />
               }
             />
