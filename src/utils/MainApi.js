@@ -116,7 +116,7 @@ class Api {
   }
 
   // удаление фильма из сохранённых
-  deleteMovie({ data }) {
+  deleteMovie(data) {
     return fetch(`${this._baseUrl}/movies/${data}`, {
       method: 'DELETE',
       credentials: 'include',

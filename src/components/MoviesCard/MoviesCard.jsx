@@ -1,7 +1,7 @@
 import '../MoviesCard/MoviesCard.css'
 
 
-export default function MoviesCard({ movie, pageLocation, isSaved, onCardSave, onCardDelete }) {
+export default function MoviesCard({ movie, pageLocation, isSaved, onCardSave, onCardDelete, saved }) {
   /*  const currentLocation = useLocation();
  
    const handleBookmarkClick = () => onBookmark(movie);
@@ -34,7 +34,7 @@ export default function MoviesCard({ movie, pageLocation, isSaved, onCardSave, o
         >Сохранить</button>
       );
     }
-    if (pageLocation && isSaved) {
+    if (pageLocation && isSaved && saved) {
       return (
         <button
           type='button'
@@ -42,7 +42,7 @@ export default function MoviesCard({ movie, pageLocation, isSaved, onCardSave, o
         />
       );
     }
-    if (!pageLocation && isSaved) {
+    if (!pageLocation && isSaved && saved) {
       return (
         <button
           onClick={onDelete}

@@ -51,7 +51,7 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
 
   function getSavedMovieCard(arr, movie) {
     return arr.find((item) => {
-      return item.movieId === (movie.id || movie.movieId);
+      return item.movieId === (movie.movieId || movie.movieId);
     });
   }
 
