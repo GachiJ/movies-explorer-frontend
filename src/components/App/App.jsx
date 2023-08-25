@@ -111,10 +111,10 @@ function App() {
       });
   }
 
-  function handleCardDelete({ data }) {
-    mainApi.deleteMovie({ data })
+  function handleCardDelete(movie) {
+    mainApi.deleteMovie(movie.movieId)
       .then(() => {
-        setSavedMoviesList((state) => state.filter((item) => item._id !== data._id));
+        setSavedMoviesList((state) => state.filter((item) => item.movieId !== movie.movieId));
         setIsSaved(false);
       })
       .catch((err) => {
