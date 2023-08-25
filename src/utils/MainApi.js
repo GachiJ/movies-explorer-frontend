@@ -94,7 +94,7 @@ class Api {
   }
 
   // сохранение фильма
-  addNewMovie(movie) {
+  addNewMovie({movie}) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',
       credentials: 'include',
