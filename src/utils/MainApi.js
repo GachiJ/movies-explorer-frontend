@@ -87,6 +87,7 @@ class Api {
   // запрос фильмов
   getSavedMovies() {
     return fetch(`${this._baseUrl}/movies`, {
+      method: 'GET',
       credentials: 'include',
       headers: this._headers,
     }).then(res => this._checkResponse(res));
