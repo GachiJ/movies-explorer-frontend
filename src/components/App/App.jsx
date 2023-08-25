@@ -154,7 +154,6 @@ function App() {
                   movies={movies}
                   savedMoviesList={savedMoviesList}
                   onCardSave={handleCardLike}
-                  onCardDelete={handleCardDelete}
                   isSaved={isSaved}
                 />
               }
