@@ -110,9 +110,9 @@ function App() {
   }
 
   function handleCardDelete(movie) {
-    mainApi.deleteMovie(movie.movieId)
+    mainApi.deleteMovie(movie._id)
       .then(() => {
-        setSavedMoviesList((state) => state.filter((item) => item.movieId !== movie.movieId));
+        setSavedMoviesList((state) => state.filter((item) => item.movieId !== movie._id));
         setIsSaved(false);
       })
       .catch((err) => {
