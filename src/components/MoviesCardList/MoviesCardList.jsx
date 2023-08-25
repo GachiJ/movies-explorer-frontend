@@ -9,6 +9,7 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
 
   const [cardsToShow, setCardsToShow] = useState(0);
 
+
   useEffect(() => {
     const handleResize = () => {
       let newCardsToShow;

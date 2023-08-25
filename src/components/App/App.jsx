@@ -45,6 +45,14 @@ function App() {
 
   }, [isLoggedIn])
 
+  useEffect(() => {
+    Promise.all(mainApi.getSavedMovies())
+      .then((moviesData) => {
+        setSavedMoviesList(moviesData);
+      })
+      .catch((err) => console.log(err))
+  })
+
 
   function handleLoginUser({ email, password }) {
     setIsLoader(true);
