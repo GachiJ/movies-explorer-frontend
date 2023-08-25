@@ -25,7 +25,7 @@ export default function MoviesCard({ movie, pageLocation, isSaved, onCardSave, o
     return `${hours}ч ${remainingMinutes}м`;
   }
   const buttonType = () => {
-    if (pageLocation && !isSaved) {
+    if (pageLocation && !saved) {
       return (
         <button
           onClick={onSave}
@@ -34,7 +34,7 @@ export default function MoviesCard({ movie, pageLocation, isSaved, onCardSave, o
         >Сохранить</button>
       );
     }
-    if (pageLocation && isSaved) {
+    if (pageLocation && saved) {
       return (
         <button
           type='button'
@@ -42,7 +42,7 @@ export default function MoviesCard({ movie, pageLocation, isSaved, onCardSave, o
         />
       );
     }
-    if (!pageLocation && isSaved) {
+    if (!pageLocation && saved) {
       return (
         <button
           onClick={onDelete}
