@@ -56,8 +56,7 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
   }
 
   return (
-    <section className="movies-card-list">
-      {pathname === '/movies' ? (
+     <section className="movies-card-list">
         <ul className="movies-card-list__section">
           {movies.slice(0, cardsToShow).map((movie) => (
             <MoviesCard
@@ -70,21 +69,7 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
               onCardDelete={onCardDelete}
             />
           ))}
-        </ul>) : (
-        <ul className="movies-card-list__section">
-          {savedMoviesList.map((movie) => (
-            <MoviesCard
-              key={movie.id || movie._id}
-              movie={movie}
-              pageLocation={pageLocation}
-              saved={getSavedMovieCard(savedMoviesList, movie)}
-              isSaved={isSaved}
-              onCardSave={onCardSave}
-              onCardDelete={onCardDelete}
-            />
-          ))}
         </ul>
-      )}
       {cardsToShow < movies.length ? (
         <button
           className="movies-card-list__load-more"
@@ -93,7 +78,7 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
           Ещё
         </button>
       ) : null}
-    </section>
+    </section> 
   );
 };
 
