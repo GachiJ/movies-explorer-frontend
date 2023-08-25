@@ -7,9 +7,9 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
  
    const handleBookmarkClick = () => onBookmark(movie);
    const handleDeleteClick = () => onDelete(movie); */
-   const location = useLocation().pathname;
+  const location = useLocation().pathname;
 
-   const pageLocation = location === '/movies';
+  const pageLocation = location === '/movies';
 
   function onSave() {
     onCardSave(movie)
@@ -47,15 +47,6 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
         />
       );
     }
-    if (!pageLocation && isSaved && saved) {
-      return (
-        <button
-          onClick={onDelete}
-          type='button'
-          className='movie__button-delete'
-        />
-      )
-    }
   };
 
   return (
@@ -70,7 +61,17 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
           <h2 className='movie__name'>{movie.nameRU}</h2>
           <span className='movie__duration'>{convertMinutesToHours(movie.duration)}</span>
         </div>
-        {buttonType()}
+        {isSaved ? (
+          <button
+            onClick={onDelete}
+            type='button'
+            className='movie__button-delete'
+          />
+        ) : (
+          buttonType()
+        )}
+
+
       </div>
     </article>
   )
