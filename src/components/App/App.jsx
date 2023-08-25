@@ -99,9 +99,10 @@ function App() {
       .finally(() => setIsLoader(false));
   }
 
-  function handleCardLike({movie}) {
-    mainApi.addNewMovie({movie})
-      .then((newMovie) => {
+  function handleCardLike(movie) {
+    mainApi.addNewMovie(movie)
+      .then((data) => {
+        const newMovie = data;
         setSavedMoviesList([newMovie, ...savedMoviesList]);
         setIsSaved(true);
       })

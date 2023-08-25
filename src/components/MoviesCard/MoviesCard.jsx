@@ -7,11 +7,11 @@ export default function MoviesCard({ movie, pageLocation, isSaved, onCardSave, o
    const handleBookmarkClick = () => onBookmark(movie);
    const handleDeleteClick = () => onDelete(movie); */
   function onSave() {
-    onCardSave({ movie })
+    onCardSave(movie)
   }
 
   function onDelete() {
-    onCardDelete({ movie });
+    onCardDelete(movie);
   }
 
   const convertMinutesToHours = (minutes) => {
