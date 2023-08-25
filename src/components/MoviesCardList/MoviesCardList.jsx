@@ -79,6 +79,8 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
               pageLocation={pageLocation}
               saved={getSavedMovieCard(savedMoviesList, movie)}
               isSaved={isSaved}
+              onCardSave={onCardSave}
+              onCardDelete={onCardDelete}
             />
           ))}
         </ul>
