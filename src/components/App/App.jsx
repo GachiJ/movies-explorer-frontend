@@ -163,7 +163,7 @@ function App() {
               element={
                 <SavedMovies
 
-                pageLocation={pageLocation}
+                  pageLocation={pageLocation}
                   movies={movies}
                   savedMoviesList={savedMoviesList}
                   onCardSave={handleCardLike}
