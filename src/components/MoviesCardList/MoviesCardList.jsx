@@ -63,6 +63,7 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
               key={movie.id || movie._id}
               movie={movie}
               pageLocation={pageLocation}
+              saved={getSavedMovieCard(savedMoviesList, movie)}
               isSaved={isSaved}
               onCardSave={onCardSave}
               onCardDelete={onCardDelete}
@@ -70,13 +71,13 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
           ))}
         </ul>) : pathname === '/saved-movies' (
         <ul className="movies-card-list__section">
-          { savedMoviesList.slice(0, cardsToShow).map((movie) => (
+          { savedMoviesList.map((movie) => (
             <MoviesCard
               key={movie.id || movie._id}
               movie={movie}
               pageLocation={pageLocation}
               saved={getSavedMovieCard(savedMoviesList, movie)}
-              isSaved={movie.isSaved}
+              isSaved={isSaved}
             />
           ))}
         </ul>
