@@ -34,7 +34,7 @@ export default function MoviesCard({ movie, pageLocation, isSaved, onCardSave, o
         >Сохранить</button>
       );
     }
-    if (pageLocation && isSaved && saved) {
+    if (pageLocation && isSaved) {
       return (
         <button
           type='button'
@@ -42,7 +42,7 @@ export default function MoviesCard({ movie, pageLocation, isSaved, onCardSave, o
         />
       );
     }
-    if (!pageLocation && isSaved && saved) {
+    if (!pageLocation && isSaved) {
       return (
         <button
           onClick={onDelete}

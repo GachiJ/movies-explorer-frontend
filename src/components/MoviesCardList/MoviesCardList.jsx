@@ -78,7 +78,7 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
               movie={movie}
               pageLocation={pageLocation}
               saved={getSavedMovieCard(savedMoviesList, movie)}
-              isSaved={true}
+              isSaved={isSaved}
             />
           ))}
         </ul>
