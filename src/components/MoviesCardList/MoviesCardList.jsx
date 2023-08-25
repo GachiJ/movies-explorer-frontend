@@ -51,7 +51,7 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
 
   function getSavedMovieCard(arr, movie) {
     return arr.find((item) => {
-      return item.movieId === (movie.movieId || movie.movieId);
+      return item.movieId === (movie.id || movie._id);
     });
   }
 
@@ -61,7 +61,7 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
         <ul className="movies-card-list__section">
           {movies.slice(0, cardsToShow).map((movie) => (
             <MoviesCard
-              key={isSaved ? movie.id : movie._id}
+              key={isSaved ? movie.id : movie.movieId}
               movie={movie}
               pageLocation={pageLocation}
               saved={getSavedMovieCard(savedMoviesList, movie)}
@@ -74,7 +74,7 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
         <ul className="movies-card-list__section">
           {savedMoviesList.map((movie) => (
             <MoviesCard
-              key={movie.id || movie._id}
+              key={isSaved ? movie.id : movie.movieId}
               movie={movie}
               pageLocation={pageLocation}
               saved={getSavedMovieCard(savedMoviesList, movie)}
