@@ -14,7 +14,7 @@ export default function Movies({ pageLocation, movies, savedMoviesList, onCardSa
         savedMoviesList={savedMoviesList}
         onCardSave={onCardSave}
         onCardDelete={onCardDelete}
-        isSaved={isSaved}
+        isSaved={false}
       />
     </main>
   );

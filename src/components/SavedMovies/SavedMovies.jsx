@@ -13,7 +13,7 @@ export default function SavedMovies({ pageLocation, movies, savedMoviesList, onC
           savedMoviesList={savedMoviesList}
           onCardSave={onCardSave}
           onCardDelete={onCardDelete}
-          isSaved={isSaved}
+          isSaved={true}
       />
     </main>
   );
