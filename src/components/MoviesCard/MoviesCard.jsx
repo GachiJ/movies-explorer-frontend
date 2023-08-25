@@ -1,11 +1,16 @@
+import { useLocation } from 'react-router-dom';
 import '../MoviesCard/MoviesCard.css'
 
 
-export default function MoviesCard({ movie, pageLocation, isSaved, onCardSave, onCardDelete, saved }) {
+export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, saved }) {
   /*  const currentLocation = useLocation();
  
    const handleBookmarkClick = () => onBookmark(movie);
    const handleDeleteClick = () => onDelete(movie); */
+   const location = useLocation().pathname;
+
+   const pageLocation = location === '/movies';
+
   function onSave() {
     onCardSave(movie)
   }

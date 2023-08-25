@@ -27,9 +27,7 @@ function App() {
   const [savedMoviesList, setSavedMoviesList] = useState([]);
   const [isSaved, setIsSaved] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation().pathname;
 
-  const pageLocation = location === '/movies';
 
   useEffect(() => {
     tokenCheck();
@@ -150,7 +148,7 @@ function App() {
             <Route
               path='/movies'
               element={
-                <Movies pageLocation={pageLocation}
+                <Movies 
                   movies={movies}
                   savedMoviesList={savedMoviesList}
                   onCardSave={handleCardLike}
@@ -163,7 +161,7 @@ function App() {
               element={
                 <SavedMovies
 
-                  pageLocation={pageLocation}
+                 
                   movies={movies}
                   savedMoviesList={savedMoviesList}
                   onCardSave={handleCardLike}

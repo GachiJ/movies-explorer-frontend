@@ -3,13 +3,12 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../Movies/Movies.css';
 
-export default function Movies({ pageLocation, movies, savedMoviesList, onCardSave, onCardDelete, isSaved }) {
+export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   return (
     <main className="main">
       <SearchForm />
       {/*   <Preloader /> */}
       <MoviesCardList
-        pageLocation={pageLocation}
         movies={movies}
         savedMoviesList={savedMoviesList}
         onCardSave={onCardSave}
