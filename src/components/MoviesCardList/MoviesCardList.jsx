@@ -56,7 +56,7 @@ export default function MoviesCardList({ pageLocation, movies, savedMoviesList, 
 
   return (
     <section className="movies-card-list">
-      {pathname === '/saved-movies' ? (
+      {pathname === '/movies' ? (
         <ul className="movies-card-list__section">
           {movies.slice(0, cardsToShow).map((movie) => (
             <MoviesCard
