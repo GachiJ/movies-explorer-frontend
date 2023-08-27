@@ -100,14 +100,13 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete })
           <span className='movie__duration'>{convertMinutesToHours(movie.duration)}</span>
         </div>
         <button
-          className={`${
-            location.pathname === "/movies"
-              ? `movie__button-save ${isSaved ? "movie__button_active" : ""}`
-              : "movie__button-delete"
-          }`}
           type="button"
           onClick={handleMovieClick}
-        />
+          className={`${location.pathname === "/movies"
+            ? `movie__button-save ${isSaved ? "movie__button_active" : ""}`
+            : "movie__button-delete"
+            }`}
+        >{isSaved ? null : 'Сохранить'}</button>
       </div>
     </article>
   );
