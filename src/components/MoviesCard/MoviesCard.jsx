@@ -44,7 +44,7 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
             <button
               onClick={onSave}
               type="button"
-              className={`movie__button-save ${isSaved ? 'movie__button-save_active' : ''}`}
+              className={`movie__button-save ${!isSaved ? 'movie__button-save_active' : ''}`}
             >
               {isSaved ? null : 'Сохранить'}
             </button>
