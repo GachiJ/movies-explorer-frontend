@@ -202,6 +202,12 @@
   margin: 0 auto 14px;
 }
 
+.auth__button_disabled {
+  background-color: #F8F8F8;
+  color: rgba(194, 194, 194, 1);
+  cursor: default;
+}
+
 .auth__signin {
   text-align: center;
 }
@@ -222,6 +228,18 @@
   font-size: 10px;
   font-weight: 400;
   margin-top: 6px;
+}
+
+.auth__error-message {
+  color: #EE3465;
+  font-size: 10px;
+  font-weight: 400;
+  margin-top: 6px;
+  visibility: hidden;
+}
+
+.auth__error-message_visible {
+  visibility: visible;
 }
 
 @media screen and (min-width: 768px) {
