@@ -63,7 +63,7 @@ export default function MoviesCardList({ movies, savedMoviesList, onCardSave, on
         <ul className="movies-card-list__section">
           {movies.slice(0, cardsToShow).map((movie) => (
             <MoviesCard
-              key={isSaved ? movie.id : movie.movieId}
+              key={isSaved ? movie._id : movie.movieId}
               movie={movie}
               saved={getSavedMovieCard(savedMoviesList, movie)}
               isSaved={false}
@@ -72,9 +72,9 @@ export default function MoviesCardList({ movies, savedMoviesList, onCardSave, on
           ))}
         </ul>) : (
         <ul className="movies-card-list__section">
-          {savedMoviesList.map((movie) => (
+          {savedMoviesList.slice(0, cardsToShow).map((movie) => (
             <MoviesCard
-              key={isSaved ? movie.id : movie.movieId}
+              key={isSaved ? movie._id : movie.movieId}
               movie={movie}
               onCardDelete={onCardDelete}
               saved={getSavedMovieCard(savedMoviesList, movie)}
