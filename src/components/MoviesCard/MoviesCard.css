@@ -55,12 +55,10 @@
   width: 72px;
   height: 21px;
   padding: 0;
-  background-image: none; /* Убираем фоновое изображение */
 }
 
 .movie__button-save_active {
   background-image: url('../../images/Ok.svg');
-  background-color: transparent; /* Опционально: убираем цвет фона, если он был */
   width: 21px;
   height: 21px;
   flex-shrink: 0;

@@ -25,6 +25,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [savedMoviesList, setSavedMoviesList] = useState([]);
+  const [isSaved, setIsSaved] = useState(false);
   const navigate = useNavigate();
 
 
@@ -102,6 +103,7 @@ function App() {
       .then((data) => {
         const newMovie = data;
         setSavedMoviesList([newMovie, ...savedMoviesList]);
+        setIsSaved(true);
       })
       .catch((err) => {
         console.log(err)
@@ -112,6 +114,7 @@ function App() {
     mainApi.deleteMovie(movie._id)
       .then(() => {
         setSavedMoviesList((state) => state.filter((item) => item._id !== movie._id));
+        setIsSaved(false);
       })
       .catch((err) => {
         console.log(err);
@@ -150,6 +153,7 @@ function App() {
                   movies={movies}
                   savedMoviesList={savedMoviesList}
                   onCardSave={handleCardLike}
+                  isSaved={isSaved}
                 />
               }
             />
@@ -161,6 +165,7 @@ function App() {
                   savedMoviesList={savedMoviesList}
                   onCardSave={handleCardLike}
                   onCardDelete={handleCardDelete}
+                  isSaved={isSaved}
                 />
               }
             />
