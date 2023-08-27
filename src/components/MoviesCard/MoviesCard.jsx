@@ -26,26 +26,6 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
 
     return `${hours}ч ${remainingMinutes}м`;
   }
-  
-  const buttonType = () => {
-    if (pageLocation && !isSaved && !saved) {
-      return (
-        <button
-          onClick={onSave}
-          type='button'
-          className='movie__button-save'
-        >Сохранить</button>
-      );
-    }
-    if (pageLocation && isSaved && saved) {
-      return (
-        <button
-          type='button'
-          className='movie__button-saved'
-        />
-      );
-    }
-  };
 
   return (
     <article className='movie'>
@@ -59,21 +39,34 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
           <h2 className='movie__name'>{movie.nameRU}</h2>
           <span className='movie__duration'>{convertMinutesToHours(movie.duration)}</span>
         </div>
-        {isSaved ? (
+        {isSaved && (
           <button
             onClick={onDelete}
             type='button'
             className='movie__button-delete'
           />
-        ) : (
-          buttonType()
         )}
 
+        {pageLocation && !isSaved && (
+          <button
+            onClick={onSave}
+            type='button'
+            className='movie__button-save'
+          >
+            Сохранить
+          </button>
+        )}
 
+        {pageLocation && isSaved && (
+          <button
+            type='button'
+            className='movie__button-saved'
+          />
+        )}
       </div>
     </article>
   )
-} 
+}
 
 /* import { useLocation } from 'react-router-dom';
 import '../MoviesCard/MoviesCard.css';
