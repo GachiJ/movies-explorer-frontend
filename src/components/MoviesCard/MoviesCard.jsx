@@ -1,8 +1,16 @@
 import { useLocation } from 'react-router-dom';
 import '../MoviesCard/MoviesCard.css'
+import { useEffect } from 'react';
 
 
 export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, saved }) {
+
+/*   useEffect(() => {
+    if (isSaved) {
+      const result = isSaved.some((item) => (movie._id) === item.movieId)
+      setIs(result);
+    }
+  }, [isSaved]) */
 
   const location = useLocation().pathname;
 
