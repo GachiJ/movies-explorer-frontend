@@ -2,7 +2,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../SavedMovies/SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 
-export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCardDelete}) {
+export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCardDelete, isSaved}) {
   return (
     <main className="main">
       <SearchForm />
@@ -12,7 +12,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
           savedMoviesList={savedMoviesList}
           onCardSave={onCardSave}
           onCardDelete={onCardDelete}
-          isSaved={true}
+          isSaved={isSaved}
       />
     </main>
   );
