@@ -32,10 +32,11 @@ function App() {
   useEffect(() => {
     tokenCheck();
     if (isLoggedIn) {
-      Promise.all([mainApi.getUserInfo(), moviesApi.getMovies()])
-        .then(([userData, moviesData]) => {
+      Promise.all([mainApi.getUserInfo(), moviesApi.getMovies(), mainApi.getSavedMovies()])
+        .then(([userData, moviesData, moviesSavedData]) => {
           setMovies(moviesData)
           setCurrentUser(userData)
+          setSavedMoviesList(moviesSavedData)
           navigate('/');
         })
         .catch((err) => console.log(err))
@@ -112,7 +113,7 @@ function App() {
   function handleCardDelete(movie) {
     mainApi.deleteMovie(movie._id)
       .then(() => {
-        setSavedMoviesList((state) => state.filter((item) => item.movieId !== movie._id));
+        setSavedMoviesList((state) => state.filter((item) => item._id !== movie._id));
         setIsSaved(false);
       })
       .catch((err) => {
