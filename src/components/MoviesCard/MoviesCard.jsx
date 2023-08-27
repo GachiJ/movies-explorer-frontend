@@ -39,20 +39,22 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
           <h2 className='movie__name'>{movie.nameRU}</h2>
           <span className='movie__duration'>{convertMinutesToHours(movie.duration)}</span>
         </div>
-        {!pageLocation && isSaved && (
+        {!pageLocation && isSaved ? (
           <button
             onClick={onDelete}
             type='button'
             className='movie__button-delete'
           />
-        )}
+        ) : (
         <button
           onClick={onSave}
           type='button'
-          className={`movie__button-save ${isSaved && pageLocation ? 'movie__button-save_active' : ''}`}
+          className={`movie__button-save ${isSaved ? 'movie__button-save_active' : ''}`}
         >
           {isSaved ? null : 'Сохранить'}
         </button>
+        )}
+
 
       </div>
     </article >
