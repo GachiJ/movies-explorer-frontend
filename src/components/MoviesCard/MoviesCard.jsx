@@ -65,7 +65,7 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
 import { useLocation } from 'react-router-dom';
 import '../MoviesCard/MoviesCard.css';
 
-export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, saved }) {
+export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, saved, savedMoviesList }) {
   const location = useLocation();
 
   const convertMinutesToHours = (minutes) => {
@@ -79,13 +79,21 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
     return `${hours}ч ${remainingMinutes}м`;
   };
 
-  const handleMovieClick = () => {
-    if (isSaved) {
-      onCardDelete(movie);
+
+  function onCardClick() {
+    if (saved) {
+      onCardDelete(savedMoviesList.filter((m) => m.movieId === movie.id)[0]);
     } else {
       onCardSave(movie);
     }
-  };
+  }
+
+  function onDelete() {
+    onCardDelete(movie);
+  }
+
+  const cardSaveButtonClassName = `${saved ? 'movie__button-save movie__button-save_active' : 'movie__button-save'
+    }`;
 
   return (
     <article className='movie'>
@@ -99,14 +107,11 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
           <h2 className='movie__name'>{movie.nameRU}</h2>
           <span className='movie__duration'>{convertMinutesToHours(movie.duration)}</span>
         </div>
-        <button
-          type="button"
-          onClick={handleMovieClick}
-          className={`${location.pathname === "/movies"
-            ? `movie__button-save ${saved ? "movie__button_active" : ""}`
-            : "movie__button-delete"
-            }`}
-        >{isSaved ? null : 'Сохранить'}</button>
+        {isSaved ? (
+          <button type="button" className="movie__button-delete" onClick={onDelete}></button>
+        ) : (
+          <button type="button" className={cardSaveButtonClassName} onClick={onCardClick}></button>
+        )}
       </div>
     </article>
   );
