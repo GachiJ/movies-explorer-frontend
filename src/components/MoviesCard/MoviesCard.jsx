@@ -1,4 +1,75 @@
 import { useLocation } from 'react-router-dom';
+import '../MoviesCard/MoviesCard.css'
+
+
+export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, saved }) {
+
+  const location = useLocation().pathname;
+
+  const pageLocation = location === '/movies';
+
+  function onSave() {
+    onCardSave(movie)
+  }
+
+  function onDelete() {
+    onCardDelete(movie);
+  }
+
+  const convertMinutesToHours = (minutes) => {
+    if (isNaN(minutes) || minutes < 0) {
+      return 'Некорректное значение';
+    }
+
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    return `${hours}ч ${remainingMinutes}м`;
+  }
+  
+
+  return (
+    <article className='movie'>
+      <img
+        src={isSaved ? movie.image : `https://api.nomoreparties.co/${movie.image.url}`}
+        alt={movie.name}
+        className='movie__image'
+      />
+      <div className='movie__description'>
+        <div className='movie__container'>
+          <h2 className='movie__name'>{movie.nameRU}</h2>
+          <span className='movie__duration'>{convertMinutesToHours(movie.duration)}</span>
+        </div>
+        {pageLocation && (
+            <button
+              type="button"
+              className={`movie__button-${
+                saved ? 'saved' : 'save'
+              }`}
+              onClick={saved ? onDelete : onSave}
+              aria-label={`${
+                saved ? 'Удалить фильм из сохранённых' : 'Сохранить фильм'
+              }`}
+              title={`${
+                saved ? 'Удалить фильм из сохранённых' : 'Сохранить фильм'
+              }`}
+            ></button>
+          )}
+          {!pageLocation === '/saved-movies' && (
+            <button
+              type="button"
+              className="movie__button-delete"
+              onClick={onDelete}
+              aria-label="Удалить фильм из сохранённых"
+              title="Удалить фильм из сохранённых"
+            ></button>
+          )}
+      </div>
+    </article>
+  )
+} 
+
+/* import { useLocation } from 'react-router-dom';
 import '../MoviesCard/MoviesCard.css';
 
 export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, saved }) {
@@ -64,7 +135,7 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
       </div>
     </article>
   );
-}
+} */
 
 
 /* import { useLocation } from 'react-router-dom';
