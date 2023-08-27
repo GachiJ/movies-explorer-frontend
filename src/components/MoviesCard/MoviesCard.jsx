@@ -110,7 +110,7 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
         {isSaved ? (
           <button type="button" className="movie__button-delete" onClick={onDelete}></button>
         ) : (
-          <button type="button" className={cardSaveButtonClassName} onClick={onCardClick}>{isSaved ? null : 'Сохранить'}</button>
+          <button type="button" className={cardSaveButtonClassName} onClick={onCardClick}>{saved ? null : 'Сохранить'}</button>
         )}
       </div>
     </article>
