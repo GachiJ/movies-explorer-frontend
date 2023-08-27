@@ -1,8 +1,8 @@
-import { useLocation } from 'react-router-dom';
+/* import { useLocation } from 'react-router-dom';
 import '../MoviesCard/MoviesCard.css'
 
 
-export default function MoviesCard({ movie, onCardSave, onCardDelete, saved }) {
+export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, saved }) {
 
   const location = useLocation().pathname;
 
@@ -30,7 +30,7 @@ export default function MoviesCard({ movie, onCardSave, onCardDelete, saved }) {
   return (
     <article className='movie'>
       <img
-        src={saved ? movie.image : `https://api.nomoreparties.co/${movie.image.url}`}
+        src={isSaved ? movie.image : `https://api.nomoreparties.co/${movie.image.url}`}
         alt={movie.name}
         className='movie__image'
       />
@@ -44,12 +44,12 @@ export default function MoviesCard({ movie, onCardSave, onCardDelete, saved }) {
             <button
               onClick={onSave}
               type="button"
-              className={`movie__button-save ${saved ? 'movie__button-save_active' : ''}`}
+              className={`movie__button-save ${isSaved ? 'movie__button-save_active' : ''}`}
             >
-              {saved ? null : 'Сохранить'}
+              {isSaved ? null : 'Сохранить'}
             </button>
           )}
-          {!pageLocation && saved && (
+          {!pageLocation && isSaved && (
             <button
               onClick={onDelete}
               type="button"
@@ -60,14 +60,13 @@ export default function MoviesCard({ movie, onCardSave, onCardDelete, saved }) {
       </div>
     </article >
   )
-}
+} */
 
-/* import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import '../MoviesCard/MoviesCard.css';
 
-export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, saved }) {
-  const location = useLocation().pathname;
-  const pageLocation = location === '/movies';
+export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete }) {
+  const location = useLocation();
 
   const convertMinutesToHours = (minutes) => {
     if (isNaN(minutes) || minutes < 0) {
@@ -80,35 +79,11 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
     return `${hours}ч ${remainingMinutes}м`;
   };
 
-  const handleSaveClick = () => {
+  const handleMovieClick = () => {
     if (isSaved) {
       onCardDelete(movie);
     } else {
       onCardSave(movie);
-    }
-  };
-
-  const renderButton = () => {
-    if (pageLocation) {
-      if (isSaved) {
-        return (
-          <button
-            onClick={handleSaveClick}
-            type='button'
-            className='movie__button-delete'
-          />
-        );
-      } else {
-        return (
-          <button
-            onClick={handleSaveClick}
-            type='button'
-            className={`movie__button-save ${isSaved ? 'movie__button-saved' : ''}`}
-          >
-            {isSaved ? '' : 'Сохранить'}
-          </button>
-        );
-      }
     }
   };
 
@@ -124,8 +99,16 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
           <h2 className='movie__name'>{movie.nameRU}</h2>
           <span className='movie__duration'>{convertMinutesToHours(movie.duration)}</span>
         </div>
-        {renderButton()}
+        <button
+          className={`${
+            location.pathname === "/movies"
+              ? `movie__button-save ${isSaved ? "movie__button_active" : ""}`
+              : "movie__button-delete"
+          }`}
+          type="button"
+          onClick={handleMovieClick}
+        />
       </div>
     </article>
   );
-} */
+}
