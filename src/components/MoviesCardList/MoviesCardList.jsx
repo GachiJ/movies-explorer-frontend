@@ -55,6 +55,8 @@ export default function MoviesCardList({ movies, savedMoviesList, onCardSave, on
     });
   }
 
+  
+
   return (
     <section className="movies-card-list">
       {pathname === '/movies' ? (

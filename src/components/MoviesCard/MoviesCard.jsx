@@ -1,16 +1,8 @@
 import { useLocation } from 'react-router-dom';
 import '../MoviesCard/MoviesCard.css'
-import { useEffect } from 'react';
 
 
 export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, saved }) {
-
-/*   useEffect(() => {
-    if (isSaved) {
-      const result = isSaved.some((item) => (movie._id) === item.movieId)
-      setIs(result);
-    }
-  }, [isSaved]) */
 
   const location = useLocation().pathname;
 
@@ -47,7 +39,7 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
           <h2 className='movie__name'>{movie.nameRU}</h2>
           <span className='movie__duration'>{convertMinutesToHours(movie.duration)}</span>
         </div>
-        {isSaved && (
+        {!pageLocation && isSaved && (
           <button
             onClick={onDelete}
             type='button'

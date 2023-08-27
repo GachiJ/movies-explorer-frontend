@@ -1,33 +1,39 @@
 import '../Register/Register.css'
-import { useState } from "react";
 import { Link, Route } from "react-router-dom";
 import Logo from '../../images/logo.svg'
+import Validation from '../../utils/Validation';
 
 export default function Register({ isLoggedIn, onRegisterUser }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { enteredValues, errors, handleChange, isFormValid } = Validation();
+
+  /*   const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState(""); */
 
   if (isLoggedIn) {
     return <Route to="/" />;
   }
 
 
-  function handleNameChange(e) {
-    setName(e.target.value)
-  }
-
-  function handleEmailChange(e) {
-    setEmail(e.target.value)
-  }
-
-  function handlePasswordChange(e) {
-    setPassword(e.target.value)
-  }
+  /*   function handleNameChange(e) {
+      setName(e.target.value)
+    }
+  
+    function handleEmailChange(e) {
+      setEmail(e.target.value)
+    }
+  
+    function handlePasswordChange(e) {
+      setPassword(e.target.value)
+    } */
 
   function handleSubmit(e) {
     e.preventDefault()
-    onRegisterUser({ name, email, password })
+    onRegisterUser({
+      name: enteredValues.name,
+      email: enteredValues.email,
+      password: enteredValues.password,
+    })
   }
 
   return (
@@ -41,30 +47,32 @@ export default function Register({ isLoggedIn, onRegisterUser }) {
             <h1 className='auth__title'>Добро пожаловать!</h1>
           </div>
         </div>
-        <form className="auth__form" onSubmit={handleSubmit}>
+        <form className="auth__form" onSubmit={handleSubmit} isDisabled={!isFormValid}>
           <div className="auth__input-container">
             <span className='auth__label'>Имя</span>
             <input className="auth__input"
               placeholder="Имя" type="text"
               name="name"
-              value={name || ''}
-              onChange={handleNameChange}
+              value={enteredValues.name || ''}
+              onChange={handleChange}
             />
+            <span className='auth__error'>{errors.name}</span>
             <span className='auth__label'>Email</span>
             <input className="auth__input"
               placeholder="Email" type="email"
               name="email"
-              value={email || ''}
-              onChange={handleEmailChange}
+              value={enteredValues.email || ''}
+              onChange={handleChange}
             />
+            <span className='auth__error'>{errors.email}</span>
             <span className='auth__label'>Пароль</span>
             <input className="auth__input"
               placeholder="Пароль" type="password"
               name="password"
-              value={password || ''}
-              onChange={handlePasswordChange}
+              value={enteredValues.password || ''}
+              onChange={handleChange}
             />
-            <span className='auth__error'></span>
+            <span className='auth__error'>{errors.password}</span>
           </div>
           <div className="auth__button-container">
             <button type="submit" className="auth__button">Зарегистрироваться</button>
