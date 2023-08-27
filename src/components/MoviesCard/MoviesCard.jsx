@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import '../MoviesCard/MoviesCard.css'
 
 
-export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, saved }) {
+export default function MoviesCard({ movie, onCardSave, onCardDelete, saved }) {
 
   const location = useLocation().pathname;
 
@@ -30,7 +30,7 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
   return (
     <article className='movie'>
       <img
-        src={isSaved ? movie.image : `https://api.nomoreparties.co/${movie.image.url}`}
+        src={saved ? movie.image : `https://api.nomoreparties.co/${movie.image.url}`}
         alt={movie.name}
         className='movie__image'
       />
@@ -44,12 +44,12 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
             <button
               onClick={onSave}
               type="button"
-              className={`movie__button-save ${isSaved ? 'movie__button-save_active' : ''}`}
+              className={`movie__button-save ${saved ? 'movie__button-save_active' : ''}`}
             >
-              {isSaved ? null : 'Сохранить'}
+              {saved ? null : 'Сохранить'}
             </button>
           )}
-          {!pageLocation && isSaved && (
+          {!pageLocation && saved && (
             <button
               onClick={onDelete}
               type="button"
