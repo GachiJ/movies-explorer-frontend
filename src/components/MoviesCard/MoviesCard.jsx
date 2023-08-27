@@ -47,24 +47,25 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
           />
         )}
 
-        {pageLocation && !isSaved && (
-          <button
-            onClick={onSave}
-            type='button'
-            className='movie__button-save'
-          >
-            Сохранить
-          </button>
+        {pageLocation && (
+          isSaved ? (
+            <button
+              type='button'
+              className='movie__button-saved'
+            />
+          ) : (
+            <button
+              onClick={onSave}
+              type='button'
+              className='movie__button-save'
+            >
+              Сохранить
+            </button>
+          )
         )}
 
-        {pageLocation && isSaved && (
-          <button
-            type='button'
-            className='movie__button-saved'
-          />
-        )}
       </div>
-    </article>
+    </article >
   )
 }
 
