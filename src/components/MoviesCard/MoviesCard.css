@@ -41,7 +41,6 @@
 }
 
 .movie__button-save {
-  visibility: hidden;
   border-radius: 30px;
   background: #313131;
   border: 0;
