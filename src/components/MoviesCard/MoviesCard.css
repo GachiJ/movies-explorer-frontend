@@ -58,7 +58,7 @@
   padding: 0;
 }
 
-.movie__button-saved {
+.movie__button-active {
   background-image: url('../../images/Ok.svg');
   width: 21px;
   height: 21px;
