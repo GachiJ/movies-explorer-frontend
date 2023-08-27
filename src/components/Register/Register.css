@@ -230,6 +230,7 @@
   margin-top: 6px;
   position: relative;
   text-align: start;
+  max-width: 260px;
 }
 
 .auth__error-message {
