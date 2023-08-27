@@ -27,6 +27,25 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
     return `${hours}ч ${remainingMinutes}м`;
   }
   
+  const buttonType = () => {
+    if (pageLocation && !isSaved && !saved) {
+      return (
+        <button
+          onClick={onSave}
+          type='button'
+          className='movie__button-save'
+        >Сохранить</button>
+      );
+    }
+    if (pageLocation && isSaved && saved) {
+      return (
+        <button
+          type='button'
+          className='movie__button-saved'
+        />
+      );
+    }
+  };
 
   return (
     <article className='movie'>
@@ -40,30 +59,17 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
           <h2 className='movie__name'>{movie.nameRU}</h2>
           <span className='movie__duration'>{convertMinutesToHours(movie.duration)}</span>
         </div>
-        {pageLocation && (
-            <button
-              type="button"
-              className={`movie__button-${
-                saved ? 'saved' : 'save'
-              }`}
-              onClick={saved ? onDelete : onSave}
-              aria-label={`${
-                saved ? 'Удалить фильм из сохранённых' : 'Сохранить фильм'
-              }`}
-              title={`${
-                saved ? 'Удалить фильм из сохранённых' : 'Сохранить фильм'
-              }`}
-            ></button>
-          )}
-          {!pageLocation === '/saved-movies' && (
-            <button
-              type="button"
-              className="movie__button-delete"
-              onClick={onDelete}
-              aria-label="Удалить фильм из сохранённых"
-              title="Удалить фильм из сохранённых"
-            ></button>
-          )}
+        {isSaved ? (
+          <button
+            onClick={onDelete}
+            type='button'
+            className='movie__button-delete'
+          />
+        ) : (
+          buttonType()
+        )}
+
+
       </div>
     </article>
   )
@@ -138,7 +144,7 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
 } */
 
 
-/* import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import '../MoviesCard/MoviesCard.css'
 
 
@@ -213,4 +219,4 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
       </div>
     </article>
   )
-} */
+} 
