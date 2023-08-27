@@ -65,7 +65,7 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
 import { useLocation } from 'react-router-dom';
 import '../MoviesCard/MoviesCard.css';
 
-export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete }) {
+export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, saved }) {
   const location = useLocation();
 
   const convertMinutesToHours = (minutes) => {
@@ -90,7 +90,7 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete })
   return (
     <article className='movie'>
       <img
-        src={isSaved ? movie.image : `https://api.nomoreparties.co/${movie.image.url}`}
+        src={saved ? movie.image : `https://api.nomoreparties.co/${movie.image.url}`}
         alt={movie.name}
         className='movie__image'
       />
@@ -103,7 +103,7 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete })
           type="button"
           onClick={handleMovieClick}
           className={`${location.pathname === "/movies"
-            ? `movie__button-save ${isSaved ? "movie__button_active" : ""}`
+            ? `movie__button-save ${saved ? "movie__button_active" : ""}`
             : "movie__button-delete"
             }`}
         >{isSaved ? null : 'Сохранить'}</button>
