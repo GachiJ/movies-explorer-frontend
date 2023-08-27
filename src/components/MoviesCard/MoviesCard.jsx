@@ -90,7 +90,7 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
   return (
     <article className='movie'>
       <img
-        src={saved ? movie.image : `https://api.nomoreparties.co/${movie.image.url}`}
+        src={isSaved ? movie.image : `https://api.nomoreparties.co/${movie.image.url}`}
         alt={movie.name}
         className='movie__image'
       />
