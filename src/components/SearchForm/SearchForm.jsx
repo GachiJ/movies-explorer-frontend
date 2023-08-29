@@ -3,12 +3,30 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../SearchForm/SearchForm.css'
 import { useLocation } from 'react-router-dom';
 
-export default function SearchForm({ onSearchMovies, movies, savedMoviesList }) {
+export default function SearchForm({ movies, savedMoviesList }) {
   const [query, setQuery] = useState('');
   const { pathname } = useLocation();
 
   function handleChangeSearch(e) {
     setQuery(e.target.value);
+  }
+
+  function filterMovies(e, movies, query) {
+    e.preventDefault();
+    const filteredMovies = movies.filter((movie) => {
+      const lowerCaseQuery = query.toLowerCase();
+      const nameRULowerCase = movie.nameRU.toLowerCase();
+      const nameENLowerCase = movie.nameEN.toLowerCase();
+  
+      return (
+        (nameRULowerCase.includes(lowerCaseQuery) ||
+         nameENLowerCase.includes(lowerCaseQuery)) &&
+        ( movie.duration <= 40)
+      );
+    });
+
+  
+    return filteredMovies;
   }
 
 
@@ -20,7 +38,7 @@ export default function SearchForm({ onSearchMovies, movies, savedMoviesList }) 
             noValidate
             className='search__form'
             name='search'
-            onSubmit={() => {onSearchMovies(movies, query);}}
+            onSubmit={(e) => {filterMovies(e, movies, query);}}
           >
             <input
               className='search__input'
@@ -45,7 +63,7 @@ export default function SearchForm({ onSearchMovies, movies, savedMoviesList }) 
             noValidate
             className='search__form'
             name='search'
-            onSubmit={() => {onSearchMovies(savedMoviesList, query);}}
+            onSubmit={(e) => {filterMovies(e, savedMoviesList, query);}}
           >
             <input
               className='search__input'
