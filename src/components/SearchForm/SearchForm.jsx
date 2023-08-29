@@ -1,28 +1,42 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../SearchForm/SearchForm.css'
+import { useLocation } from 'react-router-dom';
 
-
-export default function SearchForm({ searchrMovies }) {
+export default function SearchForm({ movies, savedMoviesList }) {
   const [query, setQuery] = useState('');
-
+  const { pathname } = useLocation();
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
   function handleChangeSearch(e) {
     setQuery(e.target.value);
   }
 
-  function handleFilter(e) {
+  function filterMovies(e) {
     e.preventDefault();
-    searchrMovies()
+    const moviesToFilter = pathname === '/movies' ? movies : savedMoviesList;
+    const filteredMovies = moviesToFilter.filter((movie) => {
+      const lowerCaseQuery = query.toLowerCase();
+      const nameRULowerCase = movie.nameRU.toLowerCase();
+      const nameENLowerCase = movie.nameEN.toLowerCase();
+
+      return (
+        (nameRULowerCase.includes(lowerCaseQuery) ||
+          nameENLowerCase.includes(lowerCaseQuery)) &&
+        (movie.duration <= 40)
+      );
+    });
+
+    setFilteredMovies(filteredMovies);
   }
 
-  /*   useEffect(() => {
-      if (pathname === '/movies') {
-        filterMovies();
-      } else {
-        filterMovies();
-      }
-    }, [pathname, query]); */
+  useEffect((e) => {
+    if (pathname === '/movies') {
+      filterMovies(e);
+    } else {
+      filterMovies(e);
+    }
+  }, [pathname, query]);
 
 
   return (
@@ -33,7 +47,7 @@ export default function SearchForm({ searchrMovies }) {
           noValidate
           className='search__form'
           name='search'
-          onSubmit={handleFilter}
+          onSubmit={(e) => filterMovies(e)}
         >
           <input
             className='search__input'
