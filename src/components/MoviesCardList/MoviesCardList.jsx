@@ -71,7 +71,7 @@ export default function MoviesCardList({ movies, savedMoviesList, onCardSave, on
           ))}
         </ul>) : (
         <ul className="movies-card-list__section">
-          {savedMoviesList.map((movie) => (
+          {savedMoviesList.slice(0, cardsToShow).map((movie) => (
             <MoviesCard
               key={isSaved ? movie._id : movie.id}
               movie={movie}
