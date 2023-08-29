@@ -12,7 +12,7 @@ export default function SearchForm({ movies, savedMoviesList }) {
     setQuery(e.target.value);
   }
 
-  function filterMovies(e, movies) {
+  function filterMovies(e) {
     e.preventDefault();
     const filteredMovies = movies.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
@@ -26,9 +26,9 @@ export default function SearchForm({ movies, savedMoviesList }) {
       );
     });
 
-
     setFilteredMovies(filteredMovies);
   }
+
 
   useEffect(() => {
     if (pathname === '/movies') {
@@ -46,7 +46,7 @@ export default function SearchForm({ movies, savedMoviesList }) {
           noValidate
           className='search__form'
           name='search'
-          onSubmit={(e) => filterMovies(e, pathname === '/movies' ? movies : savedMoviesList)}
+          onSubmit={filterMovies}
         >
           <input
             className='search__input'
