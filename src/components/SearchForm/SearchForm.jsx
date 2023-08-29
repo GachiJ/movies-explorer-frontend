@@ -12,8 +12,7 @@ export default function SearchForm({ movies, savedMoviesList }) {
     setQuery(e.target.value);
   }
 
-  function filterMovies(e) {
-    e.preventDefault();
+  function filterMovies() {
     const moviesToFilter = pathname === '/movies' ? movies : savedMoviesList;
     const filteredMovies = moviesToFilter.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
@@ -30,13 +29,13 @@ export default function SearchForm({ movies, savedMoviesList }) {
     setFilteredMovies(filteredMovies);
   }
 
-/*   useEffect(() => {
+  useEffect(() => {
     if (pathname === '/movies') {
-      filterMovies(movies);
+      filterMovies();
     } else {
-      filterMovies(savedMoviesList);
+      filterMovies();
     }
-  }, [pathname, query]); */
+  }, [pathname, query]);
 
 
   return (
@@ -47,7 +46,10 @@ export default function SearchForm({ movies, savedMoviesList }) {
           noValidate
           className='search__form'
           name='search'
-          onSubmit={(e) => filterMovies(e)}
+          onSubmit={(e) => {
+            e.preventDefault(); // Предотвращаем обновление страницы
+            filterMovies(); // Вызываем функцию без аргументов
+          }}
         >
           <input
             className='search__input'
