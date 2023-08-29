@@ -5,7 +5,8 @@ import '../Movies/Movies.css';
 
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
 
-  function filterMovies(movies, query) {
+  function filterMovies(e, movies, query) {
+    e.preventDefault();
     const filteredMovies = movies.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();

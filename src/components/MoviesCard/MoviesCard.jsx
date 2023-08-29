@@ -61,12 +61,9 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
     </article >
   )
 } */
-
-import { useLocation } from 'react-router-dom';
 import '../MoviesCard/MoviesCard.css';
 
 export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, saved, savedMoviesList }) {
-  const location = useLocation();
 
   const convertMinutesToHours = (minutes) => {
     if (isNaN(minutes) || minutes < 0) {
