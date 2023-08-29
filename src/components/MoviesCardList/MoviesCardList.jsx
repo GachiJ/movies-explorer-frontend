@@ -69,6 +69,14 @@ export default function MoviesCardList({ movies, savedMoviesList, onCardSave, on
               onCardSave={onCardSave}
             />
           ))}
+          {cardsToShow < movies.length ? (
+            <button
+              className="movies-card-list__load-more"
+              onClick={loadMoreCards}
+            >
+              Ещё
+            </button>
+          ) : null}
         </ul>) : (
         <ul className="movies-card-list__section">
           {savedMoviesList.slice(0, cardsToShow).map((movie) => (
@@ -83,14 +91,6 @@ export default function MoviesCardList({ movies, savedMoviesList, onCardSave, on
           ))}
         </ul>
       )}
-      {cardsToShow < movies.length || savedMoviesList.length ? (
-        <button
-          className="movies-card-list__load-more"
-          onClick={loadMoreCards}
-        >
-          Ещё
-        </button>
-      ) : null}
     </section>
   );
 };
