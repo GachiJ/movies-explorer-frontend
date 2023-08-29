@@ -40,58 +40,32 @@ export default function SearchForm({ movies, savedMoviesList }) {
 
   return (
     <section className='search'>
-      {pathname === '/movies' ? (
-        <div className='search__container'>
-          <form
-            noValidate
-            className='search__form'
+
+      <div className='search__container'>
+        <form
+          noValidate
+          className='search__form'
+          name='search'
+          onSubmit={(e) => filterMovies(e, pathname === '/movies' ? movies : savedMoviesList)}
+        >
+          <input
+            className='search__input'
             name='search'
-            onSubmit={filterMovies}
-          >
-            <input
-              className='search__input'
-              name='search'
-              type='text'
-              placeholder='Фильм'
-              autoComplete='off'
-              onChange={handleChangeSearch}
-              value={query || ''}
-              required
-            />
-            <button
-              className='search__button'
-              type='submit'
-            ></button>
-          </form>
-          <FilterCheckbox
+            type='text'
+            placeholder='Фильм'
+            autoComplete='off'
+            onChange={handleChangeSearch}
+            value={query || ''}
+            required
           />
-        </div>) : (
-        <div className='search__container'>
-          <form
-            noValidate
-            className='search__form'
-            name='search'
-            onSubmit={filterMovies}
-          >
-            <input
-              className='search__input'
-              name='search'
-              type='text'
-              placeholder='Фильм'
-              autoComplete='off'
-              onChange={handleChangeSearch}
-              value={query || ''}
-              required
-            />
-            <button
-              className='search__button'
-              type='submit'
-            ></button>
-          </form>
-          <FilterCheckbox
-          />
-        </div>
-      )}
+          <button
+            className='search__button'
+            type='submit'
+          ></button>
+        </form>
+        <FilterCheckbox
+        />
+      </div>
     </section>
   );
 };
