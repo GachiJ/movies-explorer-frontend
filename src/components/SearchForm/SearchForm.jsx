@@ -29,7 +29,6 @@ export default function SearchForm({ movies, savedMoviesList }) {
     setFilteredMovies(filteredMovies);
   }
 
-
   useEffect(() => {
     if (pathname === '/movies') {
       filterMovies(movies);
@@ -37,6 +36,7 @@ export default function SearchForm({ movies, savedMoviesList }) {
       filterMovies(savedMoviesList);
     }
   }, [pathname, query]);
+
 
   return (
     <section className='search'>
