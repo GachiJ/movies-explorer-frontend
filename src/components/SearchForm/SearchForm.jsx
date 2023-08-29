@@ -30,14 +30,6 @@ export default function SearchForm({ movies, savedMoviesList }) {
     setFilteredMovies(filteredMovies);
   }
 
-  useEffect((e) => {
-    if (pathname === '/movies') {
-      filterMovies(e);
-    } else {
-      filterMovies(e);
-    }
-  }, [pathname, query]);
-
 
   return (
     <section className='search'>
@@ -47,7 +39,7 @@ export default function SearchForm({ movies, savedMoviesList }) {
           noValidate
           className='search__form'
           name='search'
-          onSubmit={(e) => filterMovies(e)}
+          onSubmit={filterMovies}
         >
           <input
             className='search__input'
