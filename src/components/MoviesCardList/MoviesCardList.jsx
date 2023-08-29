@@ -83,7 +83,7 @@ export default function MoviesCardList({ movies, savedMoviesList, onCardSave, on
           ))}
         </ul>
       )}
-      {cardsToShow < movies.length ? (
+      {cardsToShow < movies.length || savedMoviesList.length ? (
         <button
           className="movies-card-list__load-more"
           onClick={loadMoreCards}
