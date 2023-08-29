@@ -30,13 +30,13 @@ export default function SearchForm({ movies, savedMoviesList }) {
     setFilteredMovies(filteredMovies);
   }
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (pathname === '/movies') {
       filterMovies(movies);
     } else {
       filterMovies(savedMoviesList);
     }
-  }, [pathname, query]);
+  }, [pathname, query]); */
 
 
   return (
