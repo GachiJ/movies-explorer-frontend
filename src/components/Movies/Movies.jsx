@@ -18,9 +18,9 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         movies={movies}
         onSearch={handleSearch}
       />
-      {/*   <Preloader /> */}
       <MoviesCardList
-        movies={filteredMovies.length > 0 ? filteredMovies : movies}
+        /* movies={filteredMovies.length > 0 ? filteredMovies : movies} */
+        movies={movies}
         savedMoviesList={savedMoviesList}
         onCardSave={onCardSave}
         onCardDelete={onCardDelete}

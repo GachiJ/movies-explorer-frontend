@@ -174,7 +174,7 @@ function App() {
                 />
               }
             />
-            <Route path="/signup" element={<Register onRegisterUser={handleRegisterUser} />} />
+            <Route path="/signup" element={<Register onRegisterUser={handleRegisterUser} isLoader={isLoader}/>} />
             <Route path="/signin" element={<Login onLoginUser={handleLoginUser} />} />
             <Route
               path='/404'

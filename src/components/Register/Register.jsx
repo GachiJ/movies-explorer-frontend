@@ -4,7 +4,7 @@ import Logo from '../../images/logo.svg'
 import Validation from '../../utils/Validation';
 import { useState } from 'react';
 
-export default function Register({ isLoggedIn, onRegisterUser }) {
+export default function Register({ isLoggedIn, onRegisterUser, isLoader }) {
   const { values, errors, isValid, handleChange } = Validation();
   const [disabled, setDisabled] = useState(false);
   const [errorMessage, setErrorMessage,] = useState('');
@@ -46,7 +46,7 @@ export default function Register({ isLoggedIn, onRegisterUser }) {
             <h1 className='auth__title'>Добро пожаловать!</h1>
           </div>
         </div>
-        <form className="auth__form" onSubmit={handleSubmit}>
+        <form className="auth__form" onSubmit={handleSubmit} isLoader={isLoader}>
           <div className="auth__input-container">
             <span className='auth__label'>Имя</span>
             <input className="auth__input"
