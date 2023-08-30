@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import '../SearchForm/SearchForm.css'
 
 export default function SearchForm({ movies, savedMoviesList, onSearch }) {
   const [query, setQuery] = useState('');
