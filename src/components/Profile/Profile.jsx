@@ -2,45 +2,51 @@ import { Link } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import '../Profile/Profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import Validation from '../../utils/Validation';
 
 export default function Profile({ onSignOut, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const { values, isValid, handleChange, setValues } = Validation();
+  const [disabled, setDisabled] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
+
+  useEffect(() => {
+    setIsChanged(values.name !== currentUser.name || values.email !== currentUser.email);
+  }, [values, currentUser]);
+
+  useEffect(() => {
+    setValues({name: currentUser.name, email: currentUser.email});
+  }, [currentUser]);
 
 
-  function handleChangeName(e) {
-    setName(e.target.value);
+  function handleInputsChange(evt) {
+    handleChange(evt);
   }
 
-  function handleChangeEmail(e) {
-    setEmail(e.target.value);
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
 
     onUpdateUser({
-      name,
-      email,
+      name: values.name,
+      email: values.email,
     });
-  }
 
-  useEffect(() => {
-    setName(currentUser.name);
-    setEmail(currentUser.email);
-  }, [currentUser]);
+    setTimeout(() => {
+      setDisabled(false);
+    }, 2000);
+  }
 
   return (
     <div className="profile">
-        <h2 className="profile__title">Привет, Виталий!</h2>
-        <form
-          id='submit'
-          className='profile__form'
-          name='profile'
-          onSubmit={handleSubmit}
-        >
-          <div className='profile__container'>
+      <h2 className="profile__title">Привет, Виталий!</h2>
+      <form
+        id='submit'
+        className='profile__form'
+        name='profile'
+        onSubmit={handleSubmit}
+      >
+        <div className='profile__container'>
           <div className='profile__container-input'>
             <span className='profile__label'>Имя</span>
             <input
@@ -50,8 +56,8 @@ export default function Profile({ onSignOut, onUpdateUser }) {
               required
               minLength='2'
               maxLength='30'
-              value={name || ""}
-              onChange={handleChangeName}
+              value={values.name || ""}
+              onChange={handleInputsChange}
             />
           </div>
           <span className='profile__input-error profile__input-error_name'></span>
@@ -62,28 +68,28 @@ export default function Profile({ onSignOut, onUpdateUser }) {
               name='email'
               type='text'
               required
-              value={email || ""}
-              onChange={handleChangeEmail}
+              value={values.email || ""}
+              onChange={handleInputsChange}
             />
           </div>
           <span className='profile__input-error profile__input-error_email'></span>
-          </div>
-          <div className='profile__buttons-container'>
-            <button
-              type='submit'
-              className='profile__button-edit'
-            >
-              Редактировать
-            </button>
-            <Link
-              to="/"
-              onClick={onSignOut}
-              className='profile__button-exit'
-            >
-              Выйти из аккаунта
-            </Link>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div className='profile__buttons-container'>
+          <button
+            type='submit'
+            className={`'profile__button-edit' ${!isValid && 'profile__button-edit_disabled'}`}
+          >
+            Редактировать
+          </button>
+          <Link
+            to="/"
+            onClick={onSignOut}
+            className='profile__button-exit'
+          >
+            Выйти из аккаунта
+          </Link>
+        </div>
+      </form>
+    </div>
   );
 };
