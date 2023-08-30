@@ -7,7 +7,7 @@ import { useState } from 'react';
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
 
-  // Функция для обновления отфильтрованных фильмов
+  
   const handleSearch = (filteredMovies) => {
     setFilteredMovies(filteredMovies);
   };

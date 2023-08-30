@@ -16,6 +16,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
     const moviesToFilter = pathname === '/movies' ? movies : savedMoviesList;
     const filteredMovies = moviesToFilter.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
+      console.log(query);
       const nameRULowerCase = movie.nameRU.toLowerCase();
       const nameENLowerCase = movie.nameEN.toLowerCase();
 
