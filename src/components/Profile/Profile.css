@@ -77,6 +77,7 @@
 .profile__button-edit_disabled {
   color: #EE3465;
   cursor: default;
+  padding: 0;
 }
 
 .profile__button-exit {
