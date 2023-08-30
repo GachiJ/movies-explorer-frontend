@@ -7,7 +7,7 @@ import { useState } from 'react';
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
 
-  
+
   const onSearch = (filteredMovies) => {
     setFilteredMovies(filteredMovies);
   };
@@ -22,7 +22,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       <MoviesCardList
         movies={filteredMovies.length > 0 ? filteredMovies : movies}
         /* movies={movies} */
-        savedMoviesList={savedMoviesList}
+        savedMoviesList={filteredMovies.length > 0 ? filteredMovies : savedMoviesList}
         onCardSave={onCardSave}
         onCardDelete={onCardDelete}
         isSaved={false}
