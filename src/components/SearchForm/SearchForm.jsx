@@ -14,7 +14,6 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
   function filterMovies(e) {
     e.preventDefault();
     const moviesToFilter = pathname === '/movies' ? movies : savedMoviesList;
-    console.log(moviesToFilter);
     const filteredMovies = moviesToFilter.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
@@ -26,8 +25,9 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
         (movie.duration <= 40)
       );
     });
-
+    console.log(filterMovies);
     onSearch(filteredMovies);
+
   }
 
   return (
