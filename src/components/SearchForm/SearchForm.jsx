@@ -25,7 +25,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
         (movie.duration <= 40)
       );
     });
-    console.log(filterMovies);
+    console.log(filteredMovies);
     onSearch(filteredMovies);
 
   }
