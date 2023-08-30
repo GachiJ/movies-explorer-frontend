@@ -16,6 +16,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     <main className="main">
       <SearchForm
         movies={movies}
+        savedMoviesList={savedMoviesList}
         onSearch={handleSearch}
       />
       {/*   <Preloader /> */}
