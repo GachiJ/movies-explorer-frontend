@@ -13,6 +13,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
 
   function filterMovies(e) {
     e.preventDefault();
+    console.log(savedMoviesList)
     const moviesToFilter = pathname === '/movies' ? movies : savedMoviesList;
     const filteredMovies = moviesToFilter.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
