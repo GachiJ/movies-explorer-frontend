@@ -3,15 +3,20 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../Movies/Movies.css';
 import { useState } from 'react';
+import moviesApi from '../../utils/MoviesApi';
 
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]); // Добавьте состояние для отфильтрованных фильмов
 
   // Функция для обновления отфильтрованных фильмов
-  const handleSearch = (filteredMovies) => {
-    setFilteredMovies(filteredMovies);
+  const handleSearch = () => {
+    moviesApi.getMovies()
+      .then((movies) => {
+        setFilteredMovies(movies);
+      })
+
   };
-  
+
   return (
     <main className="main">
       <SearchForm
