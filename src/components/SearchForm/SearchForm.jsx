@@ -18,7 +18,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
       const lowerCaseQuery = query.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
       const nameENLowerCase = movie.nameEN.toLowerCase();
-
+      console.log(movie, nameRULowerCase, nameENLowerCase)
       return (
         (nameRULowerCase.includes(lowerCaseQuery) ||
           nameENLowerCase.includes(lowerCaseQuery)) &&
