@@ -8,7 +8,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   const [filteredMovies, setFilteredMovies] = useState([]);
 
   
-  const handleSearch = (filteredMovies) => {
+  const onSearch = (filteredMovies) => {
     setFilteredMovies(filteredMovies);
   };
 
@@ -16,11 +16,11 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     <main className="main">
       <SearchForm
         movies={movies}
-        onSearch={handleSearch}
+        onSearch={onSearch}
       />
       <MoviesCardList
-        /* movies={filteredMovies.length > 0 ? filteredMovies : movies} */
-        movies={movies}
+        movies={filteredMovies.length > 0 ? filteredMovies : movies}
+        /* movies={movies} */
         savedMoviesList={savedMoviesList}
         onCardSave={onCardSave}
         onCardDelete={onCardDelete}
