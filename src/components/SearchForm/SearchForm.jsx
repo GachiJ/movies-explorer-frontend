@@ -6,6 +6,7 @@ import '../SearchForm/SearchForm.css'
 export default function SearchForm({ movies, savedMoviesList, onSearch }) {
   const [query, setQuery] = useState('');
   const { pathname } = useLocation();
+  const [shortMovies, setShortMovies] = useState(false); 
 
   function handleChangeSearch(e) {
     setQuery(e.target.value);
@@ -21,8 +22,8 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
       const nameENLowerCase = movie.nameEN.toLowerCase();
       console.log(movie, nameRULowerCase, nameENLowerCase)
       return (
-        (nameRULowerCase.includes(lowerCaseQuery) ||
-          nameENLowerCase.includes(lowerCaseQuery))
+        ((nameRULowerCase.includes(lowerCaseQuery) ||
+          nameENLowerCase.includes(lowerCaseQuery))) || (shortMovies && movie.duration <= 40)
       );
     });
     console.log(filteredMovies);
@@ -54,7 +55,8 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
             type='submit'
           ></button>
         </form>
-        <FilterCheckbox />
+        <FilterCheckbox handleShortFilms={() => setShortMovies(!shortMovies)} // Инвертируем состояние короткометражных фильмов
+          shortMovies={shortMovies}/>
       </div>
     </section>
   );
