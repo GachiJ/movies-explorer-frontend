@@ -3,6 +3,7 @@ import { Link, Route } from "react-router-dom";
 import Logo from '../../images/logo.svg'
 import Validation from '../../utils/Validation';
 import { useState } from 'react';
+import Preloader from '../Preloader/Preloader';
 
 export default function Register({ isLoggedIn, onRegisterUser, isLoader }) {
   const { values, errors, isValid, handleChange } = Validation();
@@ -37,6 +38,7 @@ export default function Register({ isLoggedIn, onRegisterUser, isLoader }) {
 
   return (
     <section className='auth'>
+      <Preloader isLoader={isLoader}/>
       <div className="auth__container">
         <div className='auth__header'>
           <div className="auth__header-container">
@@ -46,7 +48,7 @@ export default function Register({ isLoggedIn, onRegisterUser, isLoader }) {
             <h1 className='auth__title'>Добро пожаловать!</h1>
           </div>
         </div>
-        <form className="auth__form" onSubmit={handleSubmit} isLoader={isLoader}>
+        <form className="auth__form" onSubmit={handleSubmit}>
           <div className="auth__input-container">
             <span className='auth__label'>Имя</span>
             <input className="auth__input"
