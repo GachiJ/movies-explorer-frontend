@@ -77,6 +77,11 @@
 .profile__button-edit_disabled {
   color: #EE3465;
   cursor: default;
+  padding: 0;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .profile__button-exit {

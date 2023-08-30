@@ -15,7 +15,7 @@ export default function Profile({ onSignOut, onUpdateUser }) {
   }, [values, currentUser]);
 
   useEffect(() => {
-    setValues({name: currentUser.name, email: currentUser.email});
+    setValues({ name: currentUser.name, email: currentUser.email });
   }, [currentUser]);
 
 
@@ -77,7 +77,7 @@ export default function Profile({ onSignOut, onUpdateUser }) {
         <div className='profile__buttons-container'>
           <button
             type='submit'
-            className={`'profile__button-edit' ${!isValid && 'profile__button-edit_disabled'}`}
+            className={`profile__button-edit ${!isValid ? 'profile__button-edit_disabled' : ''}`}
           >
             Редактировать
           </button>
