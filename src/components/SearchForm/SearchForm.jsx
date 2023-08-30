@@ -21,8 +21,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
       console.log(movie, nameRULowerCase, nameENLowerCase)
       return (
         (nameRULowerCase.includes(lowerCaseQuery) ||
-          nameENLowerCase.includes(lowerCaseQuery)) &&
-        (movie.duration <= 40)
+          nameENLowerCase.includes(lowerCaseQuery))
       );
     });
     console.log(filteredMovies);
