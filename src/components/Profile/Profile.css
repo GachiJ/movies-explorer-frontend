@@ -80,6 +80,7 @@
   cursor: default;
   padding: 0;
   background-color: initial;
+  border: none;
 }
 
 .profile__button-exit {
