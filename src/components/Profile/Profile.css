@@ -72,12 +72,14 @@
   border: none;
   padding: 0;
   cursor: pointer;
+  background-color: initial;
 }
 
 .profile__button-edit_disabled {
   color: #EE3465;
   cursor: default;
   padding: 0;
+  background-color: initial;
 }
 
 .profile__button-exit {
