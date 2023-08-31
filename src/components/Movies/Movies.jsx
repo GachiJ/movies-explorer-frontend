@@ -2,14 +2,11 @@ import SearchForm from '../SearchForm/SearchForm';
 /* import Preloader from '../Preloader/Preloader'; */
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../Movies/Movies.css';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
 
-  useEffect(() => {
-    setFilteredMovies(movies); // Инициализация filteredMovies при загрузке компонента
-  }, [movies]);
 
   const onSearch = (filteredMovies) => {
     setFilteredMovies(filteredMovies); // Обновление filteredMovies при поиске
