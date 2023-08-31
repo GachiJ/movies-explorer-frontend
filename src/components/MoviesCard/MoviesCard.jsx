@@ -15,12 +15,16 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
 
 
   function onCardClick() {
-    console.log(saved)
     if (saved) {
-      onCardDelete(savedMoviesList.filter((m) => console.log(m._id)));
+     /*  onCardDelete(savedMoviesList.filter((m) => m._id === movie.movieId)[0]); */
+     onCardDelete(savedMoviesList.filter(() => console.log(movie.movieId)[0]));
     } else {
       onCardSave(movie);
     }
+  }
+
+  function onDelete() {
+    onCardDelete(movie);
   }
 
   const cardSaveButtonClassName = `${saved ? 'movie__button-save movie__button-save_active' : 'movie__button-save'
@@ -39,7 +43,7 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
           <span className='movie__duration'>{convertMinutesToHours(movie.duration)}</span>
         </div>
         {isSaved ? (
-          <button type="button" className="movie__button-delete" onClick={onCardDelete}></button>
+          <button type="button" className="movie__button-delete" onClick={onDelete}></button>
         ) : (
           <button type="button" className={cardSaveButtonClassName} onClick={onCardClick}>{saved ? null : 'Сохранить'}</button>
         )}
