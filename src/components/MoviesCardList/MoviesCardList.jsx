@@ -67,6 +67,7 @@ export default function MoviesCardList({ movies, savedMoviesList, onCardSave, on
               savedMoviesList={savedMoviesList}
               isSaved={isSaved}
               onCardSave={onCardSave}
+              onCardDelete={onCardDelete}
             />
           ))}
         </ul>) : (
