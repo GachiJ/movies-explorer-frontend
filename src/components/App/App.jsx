@@ -98,6 +98,7 @@ function App() {
     mainApi.updateUser({ name, email })
       .then(({ name, email }) => {
         setCurrentUser({ name, email })
+        setIsSuccess(true)
         setIsInfoTooltipPopupOpen(true)
       })
       .catch((err) => {
@@ -137,6 +138,7 @@ function App() {
 
   function closeAllPopups() {
     setIsMenuOpen(false)
+    setIsInfoTooltipPopupOpen(false);
   }
 
 
