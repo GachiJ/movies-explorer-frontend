@@ -11,15 +11,18 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
 
   useEffect(() => {
     filterMovies();
-  }, [filteredMovies, shortMovies]);
-  
+  }, []); // Эффект вызывается только при монтировании
+
+  useEffect(() => {
+    onSearch(filteredMovies);
+  }, [filteredMovies]); ///*  */
+
 
   function handleChangeSearch(e) {
     setQuery(e.target.value);
   }
 
   function filterMovies() {
-
     const moviesToFilter = pathname === '/movies' ? movies : savedMoviesList;
     const filteredMovies = moviesToFilter.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
@@ -31,7 +34,6 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
       );
     });
     setFilteredMovies(filteredMovies);
-    onSearch(filteredMovies); 
   }
 
   return (
