@@ -79,7 +79,8 @@ function App() {
     setIsLoader(true);
     mainApi.registerUser({ name, email, password })
       .then(() => {
-        navigate('/signin')
+        navigate('/')
+        setIsLoggedIn(true);
       })
       .catch((err) => {
         console.log(err);
