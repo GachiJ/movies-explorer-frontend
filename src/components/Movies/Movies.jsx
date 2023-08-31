@@ -9,7 +9,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
 
 
   const onSearch = (filteredMovies) => {
-    setFilteredMovies(filteredMovies); // Обновление filteredMovies при поиске
+    setFilteredMovies(filteredMovies);
   };
 
   return (

@@ -27,7 +27,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
       const nameENLowerCase = movie.nameEN.toLowerCase();
       return (
         (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-        (!shortMovies || (shortMovies && movie.duration <= 40)) // Добавляем условие для короткометражных фильмов
+        (!shortMovies || (shortMovies && movie.duration <= 40))
       );
     });
     setFilteredMovies(filteredMovies);
@@ -41,7 +41,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
           noValidate
           className='search__form'
           name='search'
-          onSubmit={(e) => e.preventDefault()} // Убираем действие по умолчанию отправки формы
+          onSubmit={(e) => e.preventDefault()}
         >
           <input
             className='search__input'
@@ -55,7 +55,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
           />
           <button className='search__button' type='submit'></button>
         </form>
-        <FilterCheckbox onShortFilmsToggle={setShortMovies} /> {/* Передаем функцию для изменения состояния короткометражных фильмов */}
+        <FilterCheckbox onShortFilmsToggle={setShortMovies} />
       </div>
     </section>
   );
