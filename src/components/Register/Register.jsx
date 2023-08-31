@@ -1,12 +1,12 @@
 import '../Register/Register.css'
 import { Link } from "react-router-dom";
 import Logo from '../../images/logo.svg'
-import Validation from '../../utils/useValidation';
 import { useState } from 'react';
 import Preloader from '../Preloader/Preloader';
+import useValidation from '../../utils/useValidation';
 
 export default function Register({ onRegisterUser, isLoader }) {
-  const { values, errors, isValid, handleChange } = Validation();
+  const { values, errors, isValid, handleChange } = useValidation();
   const [disabled, setDisabled] = useState(false);
   const [errorMessage, setErrorMessage,] = useState('');
 

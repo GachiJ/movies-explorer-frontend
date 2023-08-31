@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import '../Profile/Profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import Validation from '../../utils/useValidation';
+import useValidation from '../../utils/useValidation';
 
 export default function Profile({ onSignOut, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
-  const { values, isValid, errors, handleChange, setValues } = Validation();
+  const { values, isValid, errors, handleChange, setValues } = useValidation();
   const [disabled, setDisabled] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 
