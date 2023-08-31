@@ -9,7 +9,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
   const [shortMovies, setShortMovies] = useState(false);
   const [filteredMovies, setFilteredMovies] = useState([]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     filterMovies();
   }, [filteredMovies, shortMovies]);
   
@@ -32,7 +32,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
     });
     setFilteredMovies(filteredMovies);
     onSearch(filteredMovies); 
-  }
+  } */
 
   return (
     <section className='search'>
@@ -49,7 +49,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
             type='text'
             placeholder='Фильм'
             autoComplete='off'
-            onChange={handleChangeSearch}
+            /* onChange={handleChangeSearch} */
             value={query || ''}
             required
           />
