@@ -12,7 +12,7 @@ export default function Register({ isLoggedIn, onRegisterUser, isLoader }) {
 
 
   if (isLoggedIn) {
-    return <Route to="/" />;
+    return <Route to="/movies" />;
   }
 
   function handleInputsChange(evt) {
