@@ -39,7 +39,7 @@ export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, s
           <span className='movie__duration'>{convertMinutesToHours(movie.duration)}</span>
         </div>
         {isSaved ? (
-          <button type="button" className="movie__button-delete" onClick={onCardClick}></button>
+          <button type="button" className="movie__button-delete" onClick={onCardDelete}></button>
         ) : (
           <button type="button" className={cardSaveButtonClassName} onClick={onCardClick}>{saved ? null : 'Сохранить'}</button>
         )}
