@@ -17,7 +17,8 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
     setQuery(e.target.value);
   }
 
-  function filterMovies() {
+  function filterMovies(e) {
+    e.preventDefault()
     const moviesToFilter = pathname === '/movies' ? movies : savedMoviesList;
     const filteredMovies = moviesToFilter.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
@@ -39,7 +40,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
           noValidate
           className='search__form'
           name='search'
-          onSubmit={(e) => e.preventDefault()} // Убираем действие по умолчанию отправки формы
+          onSubmit={filterMovies}
         >
           <input
             className='search__input'
