@@ -49,7 +49,7 @@ function App() {
     mainApi.loginUser({ email, password })
       .then(() => {
         setIsLoggedIn(true);
-        navigate('/');
+        navigate('/movies');
       })
       .catch((err) => {
         console.log(err);

@@ -39,7 +39,7 @@ export default function Profile({ onSignOut, onUpdateUser }) {
 
   return (
     <div className="profile">
-      <h2 className="profile__title">{currentUser.name}</h2>
+      <h2 className="profile__title">Привет, {currentUser.name}</h2>
       <form
         id='submit'
         className='profile__form'
