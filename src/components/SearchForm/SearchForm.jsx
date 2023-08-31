@@ -14,21 +14,28 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
 
   function filterMovies(e) {
     e.preventDefault();
-    console.log(savedMoviesList)
+
     const moviesToFilter = pathname === '/movies' ? movies : savedMoviesList;
     const filteredMovies = moviesToFilter.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
       const nameENLowerCase = movie.nameEN.toLowerCase();
-      console.log(movie, nameRULowerCase, nameENLowerCase)
       return (
-        ((nameRULowerCase.includes(lowerCaseQuery) ||
-          nameENLowerCase.includes(lowerCaseQuery))) || (shortMovies && movie.duration <= 40)
+        (nameRULowerCase.includes(lowerCaseQuery) ||
+          nameENLowerCase.includes(lowerCaseQuery)) ||
+        shortFilterMovies().includes(movie)
       );
     });
-    console.log(filteredMovies);
-    onSearch(filteredMovies);
 
+    onSearch(filteredMovies);
+  }
+
+  function shortFilterMovies() {
+    const shortMoviesToFilter = pathname === '/movies' ? movies : savedMoviesList;
+    const filteredShortMovies = shortMoviesToFilter.filter((movie) => {
+      return shortMovies && movie.duration <= 40;
+    });
+    return filteredShortMovies;
   }
 
   return (
