@@ -6,7 +6,7 @@ export default function FilterCheckbox({ onShortFilmsToggle }) {
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
-    onShortFilmsToggle(!isChecked); // Инвертируем текущее состояние чекбокса
+    onShortFilmsToggle(!isChecked);
   };
 
   return (

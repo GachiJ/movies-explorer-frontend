@@ -2,7 +2,7 @@ import '../Login/Login.css'
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from '../../images/logo.svg'
-import Validation from '../../utils/Validation';
+import Validation from '../../utils/useValidation';
 
 export default function Login({ onLoginUser }) {
   const { values, errors, isValid, handleChange } = Validation();

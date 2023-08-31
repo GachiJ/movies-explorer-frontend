@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import '../Profile/Profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import Validation from '../../utils/Validation';
+import Validation from '../../utils/useValidation';
 
 export default function Profile({ onSignOut, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);

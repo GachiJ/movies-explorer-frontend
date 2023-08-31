@@ -1,7 +1,7 @@
 import '../Register/Register.css'
 import { Link } from "react-router-dom";
 import Logo from '../../images/logo.svg'
-import Validation from '../../utils/Validation';
+import Validation from '../../utils/useValidation';
 import { useState } from 'react';
 import Preloader from '../Preloader/Preloader';
 

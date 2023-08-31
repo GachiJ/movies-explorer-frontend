@@ -11,8 +11,8 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
 
   useEffect(() => {
     filterMovies();
-    onSearch(filteredMovies); // Вызываем функцию фильтрации при изменении shortMovies
   }, [filteredMovies, shortMovies]);
+  
 
   function handleChangeSearch(e) {
     setQuery(e.target.value);
@@ -31,6 +31,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
       );
     });
     setFilteredMovies(filteredMovies);
+    onSearch(filteredMovies); 
   }
 
   return (
