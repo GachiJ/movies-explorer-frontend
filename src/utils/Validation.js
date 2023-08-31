@@ -10,6 +10,14 @@ export default function Validation() {
     const target = event.target;
     const name = target.name;
     const value = target.value;
+    const emailRegex = /^\S+@\S+\.\S+$/;
+
+    if (name === 'email') {
+      const isValidEmail = emailRegex.test(value);
+      const emailErrorMessage = isValidEmail ? '' : 'Неправильный формат email адреса';
+      setErrors({ ...errors, email: emailErrorMessage });
+    }
+
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());
