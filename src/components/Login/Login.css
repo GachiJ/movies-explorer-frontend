@@ -186,10 +186,6 @@
     margin: 0 auto 16px;
   }
 
-  .login__button_disabled {
-    width: 396px;
-  }
-
   .login__link {
     font-size: 14px;
   }
