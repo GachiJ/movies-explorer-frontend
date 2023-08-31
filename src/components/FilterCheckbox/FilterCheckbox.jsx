@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import '../FilterCheckbox/FilterCheckbox.css'
+import '../FilterCheckbox/FilterCheckbox.css';
 
 export default function FilterCheckbox({ onShortFilmsToggle }) {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
-    onShortFilmsToggle(!isChecked); // Передаем инвертированное значение
+    onShortFilmsToggle(!isChecked); // Инвертируем текущее состояние чекбокса
   };
-
 
   return (
     <label className='filter'>
@@ -22,4 +21,4 @@ export default function FilterCheckbox({ onShortFilmsToggle }) {
       <span className='filter__text'>Короткометражки</span>
     </label>
   );
-};
+}

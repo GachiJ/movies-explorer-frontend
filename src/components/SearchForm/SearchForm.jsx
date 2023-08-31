@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import '../SearchForm/SearchForm.css'
+import '../SearchForm/SearchForm.css';
 
 export default function SearchForm({ movies, savedMoviesList, onSearch }) {
   const [query, setQuery] = useState('');
@@ -9,13 +9,13 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
   const [shortMovies, setShortMovies] = useState(false);
   const [filteredMovies, setFilteredMovies] = useState([]);
 
+  useEffect(() => {
+    filterMovies(); // Вызываем функцию фильтрации при изменении shortMovies
+  }, [shortMovies]);
+
   function handleChangeSearch(e) {
     setQuery(e.target.value);
   }
-
-  useEffect(() => {
-    filterMovies();
-  }, [shortMovies]);
 
   function filterMovies() {
     const moviesToFilter = pathname === '/movies' ? movies : savedMoviesList;
@@ -24,8 +24,8 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
       const nameRULowerCase = movie.nameRU.toLowerCase();
       const nameENLowerCase = movie.nameEN.toLowerCase();
       return (
-        ((nameRULowerCase.includes(lowerCaseQuery) ||
-          nameENLowerCase.includes(lowerCaseQuery))) || (shortMovies && movie.duration <= 40)
+        (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
+        (!shortMovies || (shortMovies && movie.duration <= 40)) // Добавляем условие для короткометражных фильмов
       );
     });
     setFilteredMovies(filteredMovies);
@@ -39,7 +39,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
           noValidate
           className='search__form'
           name='search'
-          onSubmit={filterMovies}
+          onSubmit={(e) => e.preventDefault()} // Убираем действие по умолчанию отправки формы
         >
           <input
             className='search__input'
@@ -51,12 +51,9 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
             value={query || ''}
             required
           />
-          <button
-            className='search__button'
-            type='submit'
-          ></button>
+          <button className='search__button' type='submit'></button>
         </form>
-        <FilterCheckbox onShortFilmsToggle={setShortMovies} />
+        <FilterCheckbox onShortFilmsToggle={setShortMovies} /> {/* Передаем функцию для изменения состояния короткометражных фильмов */}
       </div>
     </section>
   );
