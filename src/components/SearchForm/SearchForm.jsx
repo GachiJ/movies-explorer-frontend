@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../SearchForm/SearchForm.css'
@@ -7,10 +7,15 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
   const [query, setQuery] = useState('');
   const { pathname } = useLocation();
   const [shortMovies, setShortMovies] = useState(false);
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
   function handleChangeSearch(e) {
     setQuery(e.target.value);
   }
+
+  useEffect(() => {
+    filterMovies();
+  }, [shortMovies]);
 
   function filterMovies() {
     const moviesToFilter = pathname === '/movies' ? movies : savedMoviesList;
@@ -23,6 +28,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
           nameENLowerCase.includes(lowerCaseQuery))) || (shortMovies && movie.duration <= 40)
       );
     });
+    setFilteredMovies(filteredMovies);
     onSearch(filteredMovies);
   }
 
