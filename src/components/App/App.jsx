@@ -88,6 +88,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        setIsLoader(false);
         setIsSuccess(false);
       })
       .finally(() => setIsInfoTooltipPopupOpen(true));
