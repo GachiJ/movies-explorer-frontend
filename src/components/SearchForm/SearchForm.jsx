@@ -10,15 +10,16 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
 
   useEffect(() => {
-    filterMovies(); // Вызываем функцию фильтрации при изменении shortMovies
-  }, [shortMovies]);
+    filterMovies();
+    onSearch(filteredMovies); // Вызываем функцию фильтрации при изменении shortMovies
+  }, [filteredMovies, shortMovies]);
 
   function handleChangeSearch(e) {
     setQuery(e.target.value);
   }
 
   function filterMovies() {
-    
+
     const moviesToFilter = pathname === '/movies' ? movies : savedMoviesList;
     const filteredMovies = moviesToFilter.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
@@ -30,7 +31,6 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
       );
     });
     setFilteredMovies(filteredMovies);
-    onSearch(filteredMovies);
   }
 
   return (
