@@ -37,6 +37,10 @@ export default function Profile({ onSignOut, onUpdateUser }) {
     }, 2000);
   }
 
+  const isRequiredСondition =
+  !isValid ||
+  (currentUser.name === values.name && currentUser.email === values.email); 
+
   return (
     <div className="profile">
       <h2 className="profile__title">Привет, {currentUser.name}</h2>
@@ -79,7 +83,7 @@ export default function Profile({ onSignOut, onUpdateUser }) {
         <div className='profile__buttons-container'>
           <button
             type='submit'
-            className={`profile__button-edit ${!isValid && 'profile__button-edit_disabled'}`}
+            className={`profile__button-edit ${isRequiredСondition && 'profile__button-edit_disabled'}`}
           >
             Редактировать
           </button>
