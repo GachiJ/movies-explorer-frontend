@@ -6,7 +6,7 @@ import Validation from '../../utils/Validation';
 
 export default function Profile({ onSignOut, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
-  const { values, isValid, handleChange, setValues } = Validation();
+  const { values, isValid, errors, handleChange, setValues } = Validation();
   const [disabled, setDisabled] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 
@@ -65,7 +65,7 @@ export default function Profile({ onSignOut, onUpdateUser }) {
               disabled={disabled}
             />
           </div>
-          <span className='profile__input-error profile__input-error_name'></span>
+          <span className='profile__input-error profile__input-error_name'>{errors.name}</span>
           <div className='profile__container-input'>
             <span className='profile__label'>E-mail</span>
             <input
@@ -78,7 +78,7 @@ export default function Profile({ onSignOut, onUpdateUser }) {
               disabled={disabled}
             />
           </div>
-          <span className='profile__input-error profile__input-error_email'></span>
+          <span className='profile__input-error profile__input-error_email'>{errors.email}</span>
         </div>
         <div className='profile__buttons-container'>
           <button
