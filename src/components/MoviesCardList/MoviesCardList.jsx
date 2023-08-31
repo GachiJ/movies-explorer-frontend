@@ -80,6 +80,7 @@ export default function MoviesCardList({ movies, savedMoviesList, onCardSave, on
               saved={getSavedMovieCard(savedMoviesList, movie)}
               isSaved={isSaved}
               savedMoviesList={savedMoviesList}
+              onCardSave={onCardSave}
             />
           ))}
         </ul>
