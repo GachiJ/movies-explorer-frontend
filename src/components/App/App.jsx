@@ -36,7 +36,7 @@ function App() {
           setMovies(moviesData)
           setCurrentUser(userData)
           setSavedMoviesList(moviesSavedData)
-          navigate('/');
+          navigate('/movies');
         })
         .catch((err) => console.log(err))
     }
@@ -79,7 +79,7 @@ function App() {
     setIsLoader(true);
     mainApi.registerUser({ name, email, password })
       .then(() => {
-        navigate('/')
+        navigate('/movies')
         setIsLoggedIn(true);
       })
       .catch((err) => {

@@ -58,6 +58,7 @@ export default function Profile({ onSignOut, onUpdateUser }) {
               maxLength='30'
               value={values.name || ""}
               onChange={handleInputsChange}
+              disabled={disabled}
             />
           </div>
           <span className='profile__input-error profile__input-error_name'></span>
@@ -70,6 +71,7 @@ export default function Profile({ onSignOut, onUpdateUser }) {
               required
               value={values.email || ""}
               onChange={handleInputsChange}
+              disabled={disabled}
             />
           </div>
           <span className='profile__input-error profile__input-error_email'></span>
@@ -77,7 +79,7 @@ export default function Profile({ onSignOut, onUpdateUser }) {
         <div className='profile__buttons-container'>
           <button
             type='submit'
-            className={`profile__button-edit ${!isValid ? 'profile__button-edit_disabled' : ''}`}
+            className={`profile__button-edit ${!isValid && 'profile__button-edit_disabled'}`}
           >
             Редактировать
           </button>

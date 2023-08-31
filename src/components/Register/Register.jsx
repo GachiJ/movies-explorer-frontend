@@ -1,19 +1,15 @@
 import '../Register/Register.css'
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Logo from '../../images/logo.svg'
 import Validation from '../../utils/Validation';
 import { useState } from 'react';
 import Preloader from '../Preloader/Preloader';
 
-export default function Register({ isLoggedIn, onRegisterUser, isLoader }) {
+export default function Register({ onRegisterUser, isLoader }) {
   const { values, errors, isValid, handleChange } = Validation();
   const [disabled, setDisabled] = useState(false);
   const [errorMessage, setErrorMessage,] = useState('');
 
-
-  if (isLoggedIn) {
-    return <Route to="/movies" />;
-  }
 
   function handleInputsChange(evt) {
     handleChange(evt);
@@ -38,7 +34,7 @@ export default function Register({ isLoggedIn, onRegisterUser, isLoader }) {
 
   return (
     <section className='auth'>
-      <Preloader isLoader={isLoader}/>
+      <Preloader isLoader={isLoader} />
       <div className="auth__container">
         <div className='auth__header'>
           <div className="auth__header-container">
