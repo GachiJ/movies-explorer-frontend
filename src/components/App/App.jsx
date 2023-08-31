@@ -15,6 +15,7 @@ import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 import './App.css';
 
@@ -24,7 +25,9 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false)
   const [savedMoviesList, setSavedMoviesList] = useState([]);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false)
   const navigate = useNavigate();
 
 
@@ -81,11 +84,13 @@ function App() {
       .then(() => {
         navigate('/movies')
         setIsLoggedIn(true);
+        setIsSuccess(true)
       })
       .catch((err) => {
         console.log(err);
+        setIsSuccess(false);
       })
-      .finally(() => setIsLoader(false));
+      .finally(() => setIsInfoTooltipPopupOpen(true));
   }
 
   function handleUpdateUser({ name, email }) {
@@ -93,9 +98,15 @@ function App() {
     mainApi.updateUser({ name, email })
       .then(({ name, email }) => {
         setCurrentUser({ name, email })
+        setIsInfoTooltipPopupOpen(true)
       })
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoader(false));
+      .catch((err) => {
+        console.log(err)
+        setIsSuccess(false)
+        setIsInfoTooltipPopupOpen(true)
+      })
+      .finally(() =>
+        setIsLoader(false));
   }
 
   function handleCardLike(movie) {
@@ -175,7 +186,7 @@ function App() {
                 />
               }
             />
-            <Route path="/signup" element={<Register onRegisterUser={handleRegisterUser} isLoader={isLoader}/>} />
+            <Route path="/signup" element={<Register onRegisterUser={handleRegisterUser} isLoader={isLoader} />} />
             <Route path="/signin" element={<Login onLoginUser={handleLoginUser} />} />
             <Route
               path='/404'
@@ -190,6 +201,14 @@ function App() {
             <Route path='/saved-movies' element={<Footer />} />
           </Routes>
 
+          <InfoTooltip
+            name={"success"}
+            onClose={closeAllPopups}
+            isOpen={isInfoTooltipPopupOpen}
+            isSuccess={isSuccess}
+            textIsSuccessTrue={"Успешно!"}
+            textIsSuccessFalse={"Что-то пошло не так! Попробуйте ещё раз."}
+          />
         </div>
       </div>
     </CurrentUserContext.Provider>
