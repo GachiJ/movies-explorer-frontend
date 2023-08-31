@@ -1,18 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../SavedMovies/SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 
-export default function SavedMovies({ movies,savedMoviesList, onCardSave, onCardDelete }) {
+export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
 
+  useEffect(() => {
+    setFilteredMovies(savedMoviesList); // Инициализация filteredMovies при загрузке компонента
+  }, [savedMoviesList]);
+
   const onSearch = (filteredMovies) => {
-    setFilteredMovies(filteredMovies);
+    setFilteredMovies(filteredMovies); // Обновление filteredMovies при поиске
   };
 
   return (
     <main className="main">
       <SearchForm
+        movies={movies}
         savedMoviesList={savedMoviesList}
         onSearch={onSearch}
       />
