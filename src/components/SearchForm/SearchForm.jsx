@@ -30,7 +30,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
         (!shortMovies || (shortMovies && movie.duration <= 40)) 
       );
     });
-    onSearch(filteredMovies); 
+    setFilteredMovies(filteredMovies);
   }
 
   return (
