@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../SearchForm/SearchForm.css';
 
-export default function SearchForm({ movies, savedMoviesList, onSearch }) {
+export default function SearchForm({ movies, savedMoviesList }) {
   const [query, setQuery] = useState('');
   const { pathname } = useLocation();
   const [shortMovies, setShortMovies] = useState(false);
@@ -12,7 +12,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
   useEffect(() => {
     filterMovies();
   }, [filteredMovies, shortMovies]);
-  
+
 
   function handleChangeSearch(e) {
     setQuery(e.target.value);
@@ -27,11 +27,10 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
       const nameENLowerCase = movie.nameEN.toLowerCase();
       return (
         (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-        (!shortMovies || (shortMovies && movie.duration <= 40)) 
+        (!shortMovies || (shortMovies && movie.duration <= 40))
       );
     });
     setFilteredMovies(filteredMovies);
-    onSearch(filteredMovies); 
   }
 
   return (
