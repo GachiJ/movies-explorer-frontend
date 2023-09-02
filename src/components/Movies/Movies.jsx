@@ -20,7 +20,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         onSearch={onSearch}
       />
       <MoviesCardList
-        movies={filteredMovies.length > 0 ? filteredMovies : movies}
+        movies={filteredMovies}
         savedMoviesList={filteredMovies.length > 0 ? filteredMovies : savedMoviesList}
         onCardSave={onCardSave}
         onCardDelete={onCardDelete}

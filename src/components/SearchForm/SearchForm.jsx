@@ -12,7 +12,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
   useEffect(() => {
     filterMovies();
   }, [filteredMovies, shortMovies]);
-
+  
 
   function handleChangeSearch(e) {
     setQuery(e.target.value);
@@ -27,10 +27,11 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
       const nameENLowerCase = movie.nameEN.toLowerCase();
       return (
         (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-        (!shortMovies || (shortMovies && movie.duration <= 40))
+        (!shortMovies || (shortMovies && movie.duration <= 40)) 
       );
     });
-    onSearch(filteredMovies);
+    setFilteredMovies(filteredMovies);
+    onSearch(filteredMovies); 
   }
 
   return (
