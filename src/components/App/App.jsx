@@ -47,18 +47,19 @@ function App() {
   }, [isLoggedIn])
 
 
-  function handleLoginUser({ email, password }) {
+  async function handleLoginUser({ email, password }) {
     setIsLoader(true);
-    mainApi.loginUser({ email, password })
-      .then(() => {
-        setIsLoggedIn(true);
-        navigate('/movies');
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setIsLoader(false));
+    try {
+      await mainApi.loginUser({ email, password });
+      setIsLoggedIn(true);
+      navigate('/movies');
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoader(false);
+    }
   }
+
 
   function tokenCheck() {
     mainApi.checkToken()
@@ -78,19 +79,20 @@ function App() {
       .catch((err) => console.log(err))
   }
 
-  function handleRegisterUser({ name, email, password }) {
-    mainApi.registerUser({ name, email, password })
-      .then(() => {
-        setIsLoggedIn(true);
-        setIsSuccess(true)
-        navigate('/movies')
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsSuccess(false);
-      })
-      .finally(() => setIsInfoTooltipPopupOpen(true));
+  async function handleRegisterUser({ name, email, password }) {
+    try {
+      await mainApi.registerUser({ name, email, password });
+      setIsLoggedIn(true);
+      setIsSuccess(true);
+      navigate('/movies');
+    } catch (err) {
+      console.error(err);
+      setIsSuccess(false);
+    } finally {
+      setIsInfoTooltipPopupOpen(true);
+    }
   }
+
 
   function handleUpdateUser({ name, email }) {
     setIsLoader(true);
