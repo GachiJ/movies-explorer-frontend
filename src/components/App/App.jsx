@@ -60,14 +60,19 @@ function App() {
     }
   }
 
-
   function tokenCheck() {
     mainApi.checkToken()
       .then(() => {
         setIsLoggedIn(true);
-        navigate('/');
+        return mainApi.getMovies();
       })
-      .catch((err) => console.log(err))
+      .then((moviesData) => {
+        setMovies(moviesData);
+        navigate('/movies');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleSignOut() {
@@ -82,9 +87,8 @@ function App() {
   async function handleRegisterUser({ name, email, password }) {
     try {
       await mainApi.registerUser({ name, email, password });
-      setIsLoggedIn(true);
+      await tokenCheck();
       setIsSuccess(true);
-      navigate('/movies');
     } catch (err) {
       console.error(err);
       setIsSuccess(false);
