@@ -83,6 +83,7 @@ function App() {
     try {
       await mainApi.registerUser({ name, email, password });
       setIsSuccess(true);
+      navigate('/movies')
     } catch (err) {
       console.error(err);
       setIsSuccess(false);
@@ -161,7 +162,6 @@ function App() {
           <Routes>
 
             <Route path='/' element={<Main />} />
-            {/*  <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}> */}
             <Route
               path='/movies'
               element={
