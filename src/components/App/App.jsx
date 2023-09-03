@@ -81,10 +81,20 @@ function App() {
 
   async function handleRegisterUser({ name, email, password }) {
     try {
+      // Регистрируем пользователя
       await mainApi.registerUser({ name, email, password });
-      setIsLoggedIn(true);
+      setIsLoggedIn(true); // Устанавливаем флаг авторизации
       setIsSuccess(true);
-      navigate('/movies')
+      navigate('/movies'); // Переходим на страницу фильмов
+      // После успешной регистрации, получаем фильмы с сервера
+      const [userData, moviesData, moviesSavedData] = await Promise.all([
+        mainApi.getUserInfo(),
+        moviesApi.getMovies(),
+        mainApi.getSavedMovies(),
+      ]);
+      setMovies(moviesData); // Устанавливаем фильмы
+      setCurrentUser(userData); // Устанавливаем данные пользователя
+      setSavedMoviesList(moviesSavedData); // Устанавливаем сохраненные фильмы
     } catch (err) {
       console.error(err);
       setIsLoggedIn(true);
@@ -93,6 +103,7 @@ function App() {
       setIsInfoTooltipPopupOpen(true);
     }
   }
+
 
 
   function handleUpdateUser({ name, email }) {
