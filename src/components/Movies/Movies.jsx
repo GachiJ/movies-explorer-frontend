@@ -26,6 +26,10 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   }
 
   useEffect(() => {
+    filterMovies(); // Вызовите фильтрацию фильмов при изменении query и isShortMoviesChecked
+  }, [query, isShortMoviesChecked]);
+
+/*   useEffect(() => {
     // Восстановление состояния поискового запроса
     const savedSearchQuery = localStorage.getItem('searchQuery');
     const initialSearchQuery = savedSearchQuery || '';
@@ -46,7 +50,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         (!initialIsShortMoviesChecked || (initialIsShortMoviesChecked && movie.duration <= 40))
       );
     });
-
+ */
     // Установка отфильтрованных фильмов в состояние
     setFilteredMovies(filteredMovies);
   }, [movies]);
