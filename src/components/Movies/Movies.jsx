@@ -11,6 +11,8 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   const [isDurationEmpty, setIsDurationEmpty] = useState(false);
   const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
+  const [shortMovies, setShortMovies] = useState(false);
+
 
   function filterMovies() {
     const filteredMovies = movies.filter((movie) => {
@@ -52,13 +54,13 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     filterMovies();
   }, [isShortMoviesChecked]);
 
-/*   function handleSearch(filteredMovies) {
-    setFilteredMovies(filteredMovies);
-    setIsSearchEmpty(filteredMovies.length === 0);
-    setIsDurationEmpty(
-      filteredMovies.every((movie) => movie.duration > 40)
-    );
-  } */
+  /*   function handleSearch(filteredMovies) {
+      setFilteredMovies(filteredMovies);
+      setIsSearchEmpty(filteredMovies.length === 0);
+      setIsDurationEmpty(
+        filteredMovies.every((movie) => movie.duration > 40)
+      );
+    } */
 
   function handleQueryChange(newQuery) {
     setQuery(newQuery);

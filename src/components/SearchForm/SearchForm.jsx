@@ -13,6 +13,7 @@ export default function SearchForm({ onSearch, query, onQueryChange, filterMovie
     const newQuery = e.target.value;
     onQueryChange(newQuery);
     localStorage.setItem('searchQuery', newQuery);
+    filterMovies();
   }
 
 
