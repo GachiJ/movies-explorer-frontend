@@ -1,6 +1,12 @@
 import { useState, useCallback } from "react";
 
-//хук управления формой и валидации формы
+// Функция для валидации email
+function validateEmail(email) {
+  // Регулярное выражение для проверки email
+  const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return emailPattern.test(email);
+}
+
 export default function useValidation() {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
@@ -11,7 +17,15 @@ export default function useValidation() {
     const name = target.name;
     const value = target.value;
     setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: target.validationMessage });
+
+
+    if (name === "email") {
+      const isValidEmail = validateEmail(value);
+      setErrors({ ...errors, [name]: isValidEmail ? "" : "Введите корректный email" });
+    } else {
+      setErrors({ ...errors, [name]: target.validationMessage });
+    }
+
     setIsValid(target.closest("form").checkValidity());
   };
 

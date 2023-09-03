@@ -24,22 +24,17 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     });
     setFilteredMovies(filteredMovies);
   }
-  useEffect(() => {
-    filterMovies(); // Вызовите фильтрацию фильмов при изменении query и isShortMoviesChecked
-  }, [query, isShortMoviesChecked]);
 
-/*   useEffect(() => {
-    // Восстановление состояния поискового запроса
+  useEffect(() => {
+
     const savedSearchQuery = localStorage.getItem('searchQuery');
     const initialSearchQuery = savedSearchQuery || '';
     setQuery(initialSearchQuery);
 
-    // Восстановление состояния переключателя короткометражных фильмов
     const savedIsShortMoviesChecked = localStorage.getItem('isShortMoviesChecked');
     const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
     setIsShortMoviesChecked(initialIsShortMoviesChecked);
 
-    // Фильтрация фильмов в соответствии с текущими фильтрами (поисковый запрос и короткометражные фильмы)
     const filteredMovies = movies.filter((movie) => {
       const lowerCaseQuery = initialSearchQuery.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
@@ -50,9 +45,8 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       );
     });
 
-    // Установка отфильтрованных фильмов в состояние
     setFilteredMovies(filteredMovies);
-  }, [movies]); */
+  }, [movies]);
 
   useEffect(() => {
     localStorage.setItem('isShortMoviesChecked', isShortMoviesChecked);
