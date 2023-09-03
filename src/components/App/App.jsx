@@ -112,6 +112,7 @@ function App() {
   }
 
   function handleCardLike(movie) {
+    setIsLoader(true);
     mainApi.addNewMovie(movie)
       .then((data) => {
         const newMovie = data;
@@ -119,17 +120,22 @@ function App() {
       })
       .catch((err) => {
         console.log(err)
-      });
+      })
+      .finally(() =>
+        setIsLoader(false));
   }
 
   function handleCardDelete(movie) {
+    setIsLoader(true);
     mainApi.deleteMovie(movie._id)
       .then(() => {
         setSavedMoviesList((state) => state.filter((item) => item._id !== movie._id));
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() =>
+        setIsLoader(false));
   }
 
 
