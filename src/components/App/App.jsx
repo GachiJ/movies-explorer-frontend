@@ -82,9 +82,9 @@ function App() {
     setIsLoader(true);
     mainApi.registerUser({ name, email, password })
       .then(() => {
-        navigate('/movies')
         setIsLoggedIn(true);
         setIsSuccess(true)
+        navigate('/movies')
       })
       .catch((err) => {
         console.log(err);
@@ -112,7 +112,6 @@ function App() {
   }
 
   function handleCardLike(movie) {
-    setIsLoader(true);
     mainApi.addNewMovie(movie)
       .then((data) => {
         const newMovie = data;
@@ -120,22 +119,17 @@ function App() {
       })
       .catch((err) => {
         console.log(err)
-      })
-      .finally(() =>
-        setIsLoader(false));
+      });
   }
 
   function handleCardDelete(movie) {
-    setIsLoader(true);
     mainApi.deleteMovie(movie._id)
       .then(() => {
         setSavedMoviesList((state) => state.filter((item) => item._id !== movie._id));
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() =>
-        setIsLoader(false));
+      });
   }
 
 
