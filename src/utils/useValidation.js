@@ -11,6 +11,7 @@ export default function useValidation() {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+  let isValidEmail = true;
 
   const handleChange = (event) => {
     const target = event.target;
@@ -26,7 +27,8 @@ export default function useValidation() {
       setErrors({ ...errors, [name]: target.validationMessage });
     }
 
-    setIsValid(target.closest("form").checkValidity());
+    const isFormValid = target.closest("form").checkValidity();
+    setIsValid(isValidEmail && isFormValid);
   };
 
   const resetForm = useCallback(
