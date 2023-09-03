@@ -21,7 +21,7 @@ export default function useValidation() {
 
 
     if (name === "email") {
-      const isValidEmail = validateEmail(value);
+      isValidEmail = validateEmail(value);
       setErrors({ ...errors, [name]: isValidEmail ? "" : "Введите корректный email" });
     } else {
       setErrors({ ...errors, [name]: target.validationMessage });
