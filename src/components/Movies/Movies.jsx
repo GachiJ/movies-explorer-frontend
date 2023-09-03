@@ -24,7 +24,6 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     });
     setFilteredMovies(filteredMovies);
   }
-
   useEffect(() => {
     filterMovies(); // Вызовите фильтрацию фильмов при изменении query и isShortMoviesChecked
   }, [query, isShortMoviesChecked]);
@@ -50,10 +49,10 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         (!initialIsShortMoviesChecked || (initialIsShortMoviesChecked && movie.duration <= 40))
       );
     });
- */
+
     // Установка отфильтрованных фильмов в состояние
     setFilteredMovies(filteredMovies);
-  }, [movies]);
+  }, [movies]); */
 
   useEffect(() => {
     localStorage.setItem('isShortMoviesChecked', isShortMoviesChecked);
