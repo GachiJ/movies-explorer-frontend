@@ -5,7 +5,7 @@ import SearchForm from '../SearchForm/SearchForm';
 
 export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
-/*  */
+
   const onSearch = (filteredMovies) => {
     setFilteredMovies(filteredMovies); // Обновление filteredMovies при поиске
   };

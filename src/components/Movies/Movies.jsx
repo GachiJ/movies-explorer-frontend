@@ -2,13 +2,23 @@ import SearchForm from '../SearchForm/SearchForm';
 /* import Preloader from '../Preloader/Preloader'; */
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../Movies/Movies.css';
-import {  useState } from 'react';
+import { useState } from 'react';
 
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
 
+  const onSearch = (moviesToFilter) => {
+    const filteredMovies = moviesToFilter.filter((movie) => {
+      const lowerCaseQuery = query.toLowerCase();
+      const nameRULowerCase = movie.nameRU.toLowerCase();
+      const nameENLowerCase = movie.nameEN.toLowerCase();
+      return (
+        (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
+        (!shortMovies || (shortMovies && movie.duration <= 40))
+      );
+    });
 
-  const onSearch = (filteredMovies) => {
+    // Обновите состояние filteredMovies внутри Movies
     setFilteredMovies(filteredMovies);
   };
 

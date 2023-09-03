@@ -9,10 +9,13 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
   const [shortMovies, setShortMovies] = useState(false);
   const [filteredMovies, setFilteredMovies] = useState([]);
 
+  /*   useEffect(() => {
+      filterMovies();
+    }, [filteredMovies, shortMovies]);
+   */
   useEffect(() => {
     filterMovies();
-  }, [filteredMovies, shortMovies]);
-  
+  }, [query, shortMovies]);
 
   function handleChangeSearch(e) {
     setQuery(e.target.value);
@@ -27,10 +30,11 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
       const nameENLowerCase = movie.nameEN.toLowerCase();
       return (
         (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-        (!shortMovies || (shortMovies && movie.duration <= 40)) 
+        (!shortMovies || (shortMovies && movie.duration <= 40))
       );
     });
-    onSearch(filteredMovies); 
+    setFilteredMovies(filteredMovies);
+    onSearch(filteredMovies);
   }
 
   return (
