@@ -81,29 +81,18 @@ function App() {
 
   async function handleRegisterUser({ name, email, password }) {
     try {
-      // Регистрируем пользователя
       await mainApi.registerUser({ name, email, password });
-      setIsLoggedIn(true); // Устанавливаем флаг авторизации
+      setIsLoggedIn(true);
       setIsSuccess(true);
-      navigate('/movies'); // Переходим на страницу фильмов
-      // После успешной регистрации, получаем фильмы с сервера
-      const [userData, moviesData, moviesSavedData] = await Promise.all([
-        mainApi.getUserInfo(),
-        moviesApi.getMovies(),
-        mainApi.getSavedMovies(),
-      ]);
-      setMovies(moviesData); // Устанавливаем фильмы
-      setCurrentUser(userData); // Устанавливаем данные пользователя
-      setSavedMoviesList(moviesSavedData); // Устанавливаем сохраненные фильмы
+      navigate('/movies')
     } catch (err) {
       console.error(err);
-      setIsLoggedIn(true);
+      setIsLoggedIn(false);
       setIsSuccess(false);
     } finally {
       setIsInfoTooltipPopupOpen(true);
     }
   }
-
 
 
   function handleUpdateUser({ name, email }) {
