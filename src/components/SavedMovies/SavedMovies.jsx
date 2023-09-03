@@ -26,6 +26,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
 
   function handleQueryChange(newQuery) { // Функция для обновления query
     setQuery(newQuery);
+    handleSearch(filteredMovies);
   }
 
   return (
