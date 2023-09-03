@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../SearchForm/SearchForm.css';
 
-export default function SearchForm({ onSearch, moviesToFilter }) {
+export default function SearchForm({ onSearch, filteredMovies }) {
   const [query, setQuery] = useState('');
   const [shortMovies, setShortMovies] = useState(false);
 
@@ -15,7 +15,7 @@ export default function SearchForm({ onSearch, moviesToFilter }) {
   }
 
   function filterMovies() {
-    const filteredMovies = moviesToFilter.filter((movie) => {
+    filteredMovies.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
       const nameENLowerCase = movie.nameEN.toLowerCase();
