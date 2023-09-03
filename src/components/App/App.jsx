@@ -82,7 +82,6 @@ function App() {
   async function handleRegisterUser({ name, email, password }) {
     try {
       await mainApi.registerUser({ name, email, password });
-      await tokenCheck();
       setIsSuccess(true);
     } catch (err) {
       console.error(err);
