@@ -84,8 +84,6 @@ function App() {
       await mainApi.registerUser({ name, email, password });
       setIsSuccess(true);
       handleLoginUser({ email, password })
-      navigate('/movies')
-      setIsLoggedIn(true);
     } catch (err) {
       console.error(err);
       setIsLoggedIn(false);
