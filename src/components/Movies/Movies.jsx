@@ -11,8 +11,6 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   const [isDurationEmpty, setIsDurationEmpty] = useState(false);
   const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
-  const [shortMovies, setShortMovies] = useState(false);
-
 
   function filterMovies() {
     const filteredMovies = movies.filter((movie) => {
@@ -28,14 +26,17 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   }
 
   useEffect(() => {
+    // Восстановление состояния поискового запроса
     const savedSearchQuery = localStorage.getItem('searchQuery');
     const initialSearchQuery = savedSearchQuery || '';
     setQuery(initialSearchQuery);
 
+    // Восстановление состояния переключателя короткометражных фильмов
     const savedIsShortMoviesChecked = localStorage.getItem('isShortMoviesChecked');
     const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
     setIsShortMoviesChecked(initialIsShortMoviesChecked);
 
+    // Фильтрация фильмов в соответствии с текущими фильтрами (поисковый запрос и короткометражные фильмы)
     const filteredMovies = movies.filter((movie) => {
       const lowerCaseQuery = initialSearchQuery.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
@@ -46,6 +47,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       );
     });
 
+    // Установка отфильтрованных фильмов в состояние
     setFilteredMovies(filteredMovies);
   }, [movies]);
 
@@ -54,13 +56,13 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     filterMovies();
   }, [isShortMoviesChecked]);
 
-  /*   function handleSearch(filteredMovies) {
-      setFilteredMovies(filteredMovies);
-      setIsSearchEmpty(filteredMovies.length === 0);
-      setIsDurationEmpty(
-        filteredMovies.every((movie) => movie.duration > 40)
-      );
-    } */
+  function handleSearch(filteredMovies) {
+    setFilteredMovies(filteredMovies);
+    setIsSearchEmpty(filteredMovies.length === 0);
+    setIsDurationEmpty(
+      filteredMovies.every((movie) => movie.duration > 40)
+    );
+  }
 
   function handleQueryChange(newQuery) {
     setQuery(newQuery);
@@ -70,10 +72,10 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   return (
     <main className="main">
       <SearchForm
+        onSearch={handleSearch}
         moviesToFilter={location.pathname === '/movies' ? movies : savedMoviesList}
         query={query}
         onQueryChange={handleQueryChange}
-        filterMovies={filterMovies}
       />
       {(isSearchEmpty || isDurationEmpty) && (
         <p className="movies__empty">Ничего не найдено</p>
