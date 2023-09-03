@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../SearchForm/SearchForm.css';
 
-export default function SearchForm({ onSearch, moviesToFilter, query, onQueryChange }) {
+export default function SearchForm({ onSearch, query, onQueryChange, filterMovies }) {
   const [shortMovies, setShortMovies] = useState(false);
 
   useEffect(() => {
@@ -12,20 +12,7 @@ export default function SearchForm({ onSearch, moviesToFilter, query, onQueryCha
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
     onQueryChange(newQuery);
-    localStorage.setItem('searchQuery', newQuery); // Используйте newQuery, а не query
-  }
-
-  function filterMovies() {
-    const filteredMovies = moviesToFilter.filter((movie) => {
-      const lowerCaseQuery = query.toLowerCase();
-      const nameRULowerCase = movie.nameRU.toLowerCase();
-      const nameENLowerCase = movie.nameEN.toLowerCase();
-      return (
-        (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-        (!shortMovies || (shortMovies && movie.duration <= 40))
-      );
-    });
-    onSearch(filteredMovies);
+    localStorage.setItem('searchQuery', newQuery);
   }
 
 
@@ -37,7 +24,10 @@ export default function SearchForm({ onSearch, moviesToFilter, query, onQueryCha
           noValidate
           className='search__form'
           name='search'
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSearch(filterMovies)
+          }}
         >
           <input
             className='search__input'
