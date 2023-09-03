@@ -7,8 +7,8 @@ import { useState } from 'react';
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
 
-  const onSearch = (moviesToFilter) => {
-    const filteredMovies = moviesToFilter.filter((movie) => {
+  const onSearch = (filteredMoviesResult, query, shortMovies) => {
+    const filteredMovies = filteredMoviesResult.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
       const nameENLowerCase = movie.nameEN.toLowerCase();

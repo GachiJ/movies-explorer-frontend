@@ -7,7 +7,6 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
   const [query, setQuery] = useState('');
   const { pathname } = useLocation();
   const [shortMovies, setShortMovies] = useState(false);
-  const [filteredMovies, setFilteredMovies] = useState([]);
 
   /*   useEffect(() => {
       filterMovies();
@@ -22,9 +21,8 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
   }
 
   function filterMovies() {
-
     const moviesToFilter = pathname === '/movies' ? movies : savedMoviesList;
-    const filteredMovies = moviesToFilter.filter((movie) => {
+    const filteredMoviesResult = moviesToFilter.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
       const nameENLowerCase = movie.nameEN.toLowerCase();
@@ -33,8 +31,7 @@ export default function SearchForm({ movies, savedMoviesList, onSearch }) {
         (!shortMovies || (shortMovies && movie.duration <= 40))
       );
     });
-    setFilteredMovies(filteredMovies);
-    onSearch(filteredMovies);
+    onSearch(filteredMoviesResult, query, shortMovies);
   }
 
   return (
