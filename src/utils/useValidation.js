@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 // Функция для валидации email
 function validateEmail(email) {
   // Регулярное выражение для проверки email
-  const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   return emailPattern.test(email);
 }
 
