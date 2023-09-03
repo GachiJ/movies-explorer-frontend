@@ -7,6 +7,7 @@ export default function FilterCheckbox({ onShortFilmsToggle }) {
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
     onShortFilmsToggle(!isChecked);
+    localStorage.setItem('isShortMoviesChecked', isChecked);
   };
 
   return (

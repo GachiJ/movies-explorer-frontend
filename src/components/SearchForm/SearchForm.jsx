@@ -12,6 +12,7 @@ export default function SearchForm({ onSearch, moviesToFilter, query, onQueryCha
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
     onQueryChange(newQuery);
+    localStorage.setItem('searchQuery', newQuery); // Используйте newQuery, а не query
   }
 
   function filterMovies() {
@@ -26,6 +27,7 @@ export default function SearchForm({ onSearch, moviesToFilter, query, onQueryCha
     });
     onSearch(filteredMovies);
   }
+
 
 
   return (

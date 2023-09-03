@@ -1,8 +1,7 @@
-import SearchForm from '../SearchForm/SearchForm';
-/* import Preloader from '../Preloader/Preloader'; */
+import { useEffect, useState } from 'react';
+import SearchForm from '../SearchForm/SearchForm'; // Импортируем SearchForm
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../Movies/Movies.css';
-import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
@@ -11,11 +10,52 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
   const [isDurationEmpty, setIsDurationEmpty] = useState(false);
   const [query, setQuery] = useState('');
+  const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
 
+  function filterMovies() {
+    const filteredMovies = movies.filter((movie) => {
+      const lowerCaseQuery = query.toLowerCase();
+      const nameRULowerCase = movie.nameRU.toLowerCase();
+      const nameENLowerCase = movie.nameEN.toLowerCase();
+      return (
+        (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
+        (!isShortMoviesChecked || (isShortMoviesChecked && movie.duration <= 40))
+      );
+    });
+    setFilteredMovies(filteredMovies);
+  }
 
   useEffect(() => {
-    setFilteredMovies(movies);
-  }, [movies, query]);
+    // Восстановление состояния поискового запроса
+    const savedSearchQuery = localStorage.getItem('searchQuery');
+    const initialSearchQuery = savedSearchQuery || '';
+    setQuery(initialSearchQuery);
+
+    // Восстановление состояния переключателя короткометражных фильмов
+    const savedIsShortMoviesChecked = localStorage.getItem('isShortMoviesChecked');
+    const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
+    setIsShortMoviesChecked(initialIsShortMoviesChecked);
+
+    // Фильтрация фильмов в соответствии с текущими фильтрами (поисковый запрос и короткометражные фильмы)
+    const filteredMovies = movies.filter((movie) => {
+      const lowerCaseQuery = initialSearchQuery.toLowerCase();
+      const nameRULowerCase = movie.nameRU.toLowerCase();
+      const nameENLowerCase = movie.nameEN.toLowerCase();
+      return (
+        (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
+        (!initialIsShortMoviesChecked || (initialIsShortMoviesChecked && movie.duration <= 40))
+      );
+    });
+
+    // Установка отфильтрованных фильмов в состояние
+    setFilteredMovies(filteredMovies);
+  }, [movies]);
+
+  useEffect(() => {
+    // Сохранение состояния фильтра короткометражных фильмов в localStorage
+    localStorage.setItem('isShortMoviesChecked', isShortMoviesChecked);
+    filterMovies();
+  }, [isShortMoviesChecked]);
 
   function handleSearch(filteredMovies) {
     setFilteredMovies(filteredMovies);
@@ -27,6 +67,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
 
   function handleQueryChange(newQuery) {
     setQuery(newQuery);
+    localStorage.setItem('searchQuery', newQuery);
   }
 
   return (
@@ -51,4 +92,4 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       )}
     </main>
   );
-};
+}
