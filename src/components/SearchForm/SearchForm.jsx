@@ -2,18 +2,16 @@ import { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../SearchForm/SearchForm.css';
 
-export default function SearchForm({ onSearch, moviesToFilter }) {
-  const [query, setQuery] = useState('');
+export default function SearchForm({ onSearch, moviesToFilter, query, onQueryChange }) {
   const [shortMovies, setShortMovies] = useState(false);
-  const [isSearchEmpty, setIsSearchEmpty] = useState(false);
-
 
   useEffect(() => {
     filterMovies();
   }, [query, shortMovies]);
 
   function handleChangeSearch(e) {
-    setQuery(e.target.value);
+    const newQuery = e.target.value;
+    onQueryChange(newQuery);
   }
 
   function filterMovies() {
@@ -27,8 +25,6 @@ export default function SearchForm({ onSearch, moviesToFilter }) {
       );
     });
     onSearch(filteredMovies);
-
-    setIsSearchEmpty(filteredMovies.length === 0);
   }
 
 
@@ -51,7 +47,6 @@ export default function SearchForm({ onSearch, moviesToFilter }) {
             value={query || ''}
             required
           />
-          {isSearchEmpty && query && <p className="search__empty">Ничего не найдено</p>}
           <button className='search__button' type='submit'></button>
         </form>
         <FilterCheckbox onShortFilmsToggle={setShortMovies} />

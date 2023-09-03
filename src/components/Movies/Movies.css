@@ -1,0 +1,7 @@
+.movies__empty {
+  color: red;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  margin-top: 10px;
+}

@@ -32,14 +32,6 @@
   margin: 0;
 }
 
-.search__empty {
-  color: red;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 18px;
-  margin-top: 10px;
-}
-
 .search__button {
   background: #4285F4 url('../../images/Search.svg') no-repeat center / 30px 30px;
   border-radius: 8px;
