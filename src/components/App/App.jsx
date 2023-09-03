@@ -83,7 +83,7 @@ function App() {
     try {
       await mainApi.registerUser({ name, email, password });
       setIsSuccess(true);
-      navigate('/movies')
+      navigate('/signin')
       setIsLoggedIn(true);
     } catch (err) {
       console.error(err);
