@@ -8,24 +8,35 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   const [filteredMovies, setFilteredMovies] = useState([]);
   const location = useLocation();
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
-  const [isDurationEmpty, setIsDurationEmpty] = useState(false);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    setFilteredMovies(savedMoviesList); // Начальное заполнение filteredMovies всеми фильмами
+    let filteredMovies = savedMoviesList;
+
+    // Применяем фильтрацию по длительности
+    if (query) {
+      filteredMovies = filteredMovies.filter((movie) => {
+        const lowerCaseQuery = query.toLowerCase();
+        const nameRULowerCase = movie.nameRU.toLowerCase();
+        const nameENLowerCase = movie.nameEN.toLowerCase();
+        return (
+          (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
+          (!movie.duration || (movie.duration && movie.duration <= 40))
+        );
+      });
+    }
+
+    setFilteredMovies(filteredMovies);
+    setIsSearchEmpty(filteredMovies.length === 0);
   }, [savedMoviesList, query]);
 
   function handleSearch(filteredMovies) {
     setFilteredMovies(filteredMovies);
     setIsSearchEmpty(filteredMovies.length === 0);
-    setIsDurationEmpty(
-      filteredMovies.every((movie) => movie.duration > 40)
-    );
   }
 
   function handleQueryChange(newQuery) { // Функция для обновления query
     setQuery(newQuery);
-    handleSearch(filteredMovies);
   }
 
   return (
@@ -33,13 +44,13 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
       <SearchForm
         onSearch={handleSearch}
         moviesToFilter={location.pathname === '/movies' ? movies : savedMoviesList}
-        query={query} // Передаем query в SearchForm
+        query={query}
         onQueryChange={handleQueryChange}
       />
-      {(isSearchEmpty || isDurationEmpty) && (
+      {isSearchEmpty && (
         <p className="movies__empty">Ничего не найдено</p>
       )}
-      {!isSearchEmpty && !isDurationEmpty && (
+      {!isSearchEmpty && (
         <MoviesCardList
           movies={movies}
           savedMoviesList={filteredMovies}
