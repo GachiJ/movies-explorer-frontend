@@ -7,13 +7,21 @@ import { useLocation } from 'react-router-dom';
 export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const location = useLocation();
+  const [isSearchEmpty, setIsSearchEmpty] = useState(false);
+  const [query, setQuery] = useState('');
+
 
   useEffect(() => {
     setFilteredMovies(savedMoviesList); // Начальное заполнение filteredMovies всеми фильмами
-  }, [savedMoviesList]);
+  }, [savedMoviesList, query]);
 
   function handleSearch(filteredMovies) {
     setFilteredMovies(filteredMovies);
+    setIsSearchEmpty(filteredMovies.length === 0);
+  }
+
+  function handleQueryChange(newQuery) { // Функция для обновления query
+    setQuery(newQuery);
   }
 
   return (
@@ -21,14 +29,21 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
       <SearchForm
         onSearch={handleSearch}
         moviesToFilter={location.pathname === '/movies' ? movies : savedMoviesList}
+        query={query} // Передаем query в SearchForm
+        onQueryChange={handleQueryChange}
       />
-      <MoviesCardList
-        movies={movies}
-        savedMoviesList={filteredMovies}
-        onCardSave={onCardSave}
-        onCardDelete={onCardDelete}
-        isSaved={true}
-      />
+      {isSearchEmpty && query && (
+        <p className="movies__empty">Ничего не найдено</p>
+      )}
+      {!isSearchEmpty && (
+        <MoviesCardList
+          movies={movies}
+          savedMoviesList={filteredMovies}
+          onCardSave={onCardSave}
+          onCardDelete={onCardDelete}
+          isSaved={true}
+        />
+      )}
     </main>
   );
 };
