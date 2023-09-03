@@ -2,24 +2,29 @@ import { useEffect, useState } from 'react';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../SavedMovies/SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
+import { useLocation } from 'react-router-dom';
 
 export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const location = useLocation();
 
-  const onSearch = (filteredMovies) => {
-    setFilteredMovies(filteredMovies); // Обновление filteredMovies при поиске
-  };
+  useEffect(() => {
+    setFilteredMovies(savedMoviesList); // Начальное заполнение filteredMovies всеми фильмами
+  }, [savedMoviesList]);
+
+  function handleSearch(filteredMovies) {
+    setFilteredMovies(filteredMovies);
+  }
 
   return (
     <main className="main">
       <SearchForm
-        movies={movies}
-        savedMoviesList={savedMoviesList}
-        onSearch={onSearch}
+        onSearch={handleSearch}
+        moviesToFilter={location.pathname === '/movies' ? movies : savedMoviesList}
       />
       <MoviesCardList
-        movies={filteredMovies.length > 0 ? filteredMovies : movies}
-        savedMoviesList={filteredMovies.length > 0 ? filteredMovies : savedMoviesList}
+        movies={movies}
+        savedMoviesList={filteredMovies}
         onCardSave={onCardSave}
         onCardDelete={onCardDelete}
         isSaved={true}

@@ -23,7 +23,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         moviesToFilter={location.pathname === '/movies' ? movies : savedMoviesList} />
       <MoviesCardList
         movies={filteredMovies}
-        savedMoviesList={filteredMovies}
+        savedMoviesList={savedMoviesList}
         onCardSave={onCardSave}
         onCardDelete={onCardDelete}
         isSaved={false}
