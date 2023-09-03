@@ -2,33 +2,25 @@ import SearchForm from '../SearchForm/SearchForm';
 /* import Preloader from '../Preloader/Preloader'; */
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../Movies/Movies.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const location = useLocation();
 
-  const onSearch = (filteredMoviesResult, query, shortMovies) => {
-    const filteredMovies = filteredMoviesResult.filter((movie) => {
-      const lowerCaseQuery = query.toLowerCase();
-      const nameRULowerCase = movie.nameRU.toLowerCase();
-      const nameENLowerCase = movie.nameEN.toLowerCase();
-      return (
-        (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-        (!shortMovies || (shortMovies && movie.duration <= 40))
-      );
-    });
+  useEffect(() => {
+    setFilteredMovies(movies); // Начальное заполнение filteredMovies всеми фильмами
+  }, [movies]);
 
-    // Обновите состояние filteredMovies внутри Movies
+  function handleSearch(filteredMovies) {
     setFilteredMovies(filteredMovies);
-  };
-
+  }
   return (
     <main className="main">
       <SearchForm
-        movies={movies}
-        savedMoviesList={savedMoviesList}
-        onSearch={onSearch}
-      />
+        onSearch={handleSearch}
+        moviesToFilter={location.pathname === '/movies' ? movies : savedMoviesList} />
       <MoviesCardList
         movies={filteredMovies.length > 0 ? filteredMovies : movies}
         savedMoviesList={filteredMovies.length > 0 ? filteredMovies : savedMoviesList}
