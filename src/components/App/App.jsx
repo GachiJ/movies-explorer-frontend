@@ -79,9 +79,9 @@ function App() {
   }
 
   function handleRegisterUser({ name, email, password }) {
-    setIsLoader(true);
     mainApi.registerUser({ name, email, password })
       .then(() => {
+        setIsLoader(true);
         setIsLoggedIn(true);
         setIsSuccess(true)
         navigate('/movies')
