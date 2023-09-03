@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../SearchForm/SearchForm.css';
 
-export default function SearchForm({ onSearch, query, onQueryChange, filterMovies }) {
+export default function SearchForm({ onSearch, query, onQueryChange, filterMovies, isChecked }) {
   const [shortMovies, setShortMovies] = useState(false);
 
   useEffect(() => {
@@ -16,8 +16,6 @@ export default function SearchForm({ onSearch, query, onQueryChange, filterMovie
     filterMovies();
   }
 
-
-
   return (
     <section className='search'>
       <div className='search__container'>
@@ -27,7 +25,7 @@ export default function SearchForm({ onSearch, query, onQueryChange, filterMovie
           name='search'
           onSubmit={(e) => {
             e.preventDefault();
-            onSearch(filterMovies)
+            onSearch(filterMovies, query, isChecked)
           }}
         >
           <input
@@ -42,7 +40,7 @@ export default function SearchForm({ onSearch, query, onQueryChange, filterMovie
           />
           <button className='search__button' type='submit'></button>
         </form>
-        <FilterCheckbox onShortFilmsToggle={setShortMovies} />
+        <FilterCheckbox isChecked={isChecked} onShortFilmsToggle={setShortMovies} />
       </div>
     </section>
   );

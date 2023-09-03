@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import '../FilterCheckbox/FilterCheckbox.css';
 
-export default function FilterCheckbox({ onShortFilmsToggle }) {
-  const [isChecked, setIsChecked] = useState(false);
+export default function FilterCheckbox({ onShortFilmsToggle, isCheckedFromProps }) {
+  const [isChecked, setIsChecked] = useState(isCheckedFromProps);
 
   useEffect(() => {
     const storedValue = localStorage.getItem('isShortMoviesChecked');
@@ -11,7 +11,7 @@ export default function FilterCheckbox({ onShortFilmsToggle }) {
       onShortFilmsToggle(storedValue === 'true');
     }
   }, []);
-  
+
   const handleCheckboxChange = () => {
     const updatedValue = !isChecked;
     setIsChecked(updatedValue);
