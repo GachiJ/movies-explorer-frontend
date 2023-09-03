@@ -32,7 +32,6 @@ function App() {
 
 
   useEffect(() => {
-    tokenCheck();
     if (isLoggedIn) {
       Promise.all([mainApi.getUserInfo(), moviesApi.getMovies(), mainApi.getSavedMovies()])
         .then(([userData, moviesData, moviesSavedData]) => {
@@ -60,14 +59,14 @@ function App() {
       .finally(() => setIsLoader(false));
   }
 
-  function tokenCheck() {
+ /*  function tokenCheck() {
     mainApi.checkToken()
       .then(() => {
         setIsLoggedIn(true);
         navigate('/');
       })
       .catch((err) => console.log(err))
-  }
+  } */
 
   function handleSignOut() {
     mainApi.logout()

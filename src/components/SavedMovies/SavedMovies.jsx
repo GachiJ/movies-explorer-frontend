@@ -13,7 +13,6 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   useEffect(() => {
     let filteredMovies = savedMoviesList;
 
-    // Применяем фильтрацию по длительности
     if (query) {
       filteredMovies = filteredMovies.filter((movie) => {
         const lowerCaseQuery = query.toLowerCase();
@@ -35,7 +34,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
     setIsSearchEmpty(filteredMovies.length === 0);
   }
 
-  function handleQueryChange(newQuery) { // Функция для обновления query
+  function handleQueryChange(newQuery) {
     setQuery(newQuery);
   }
 

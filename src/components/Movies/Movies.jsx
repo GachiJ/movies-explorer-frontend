@@ -14,7 +14,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
 
 
   useEffect(() => {
-    setFilteredMovies(movies); // Начальное заполнение filteredMovies всеми фильмами
+    setFilteredMovies(movies);
   }, [movies, query]);
 
   function handleSearch(filteredMovies) {
@@ -25,7 +25,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     );
   }
 
-  function handleQueryChange(newQuery) { // Функция для обновления query
+  function handleQueryChange(newQuery) {
     setQuery(newQuery);
   }
 
@@ -34,7 +34,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       <SearchForm
         onSearch={handleSearch}
         moviesToFilter={location.pathname === '/movies' ? movies : savedMoviesList}
-        query={query} // Передаем query в SearchForm
+        query={query}
         onQueryChange={handleQueryChange}
       />
       {(isSearchEmpty || isDurationEmpty) && (
