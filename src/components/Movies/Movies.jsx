@@ -20,10 +20,10 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     <main className="main">
       <SearchForm
         onSearch={handleSearch}
-        filteredMovies={location.pathname === '/movies' ? movies : savedMoviesList} />
+        moviesToFilter={location.pathname === '/movies' ? movies : savedMoviesList} />
       <MoviesCardList
-        movies={filteredMovies.length > 0 ? filteredMovies : movies}
-        savedMoviesList={filteredMovies.length > 0 ? filteredMovies : savedMoviesList}
+        movies={filteredMovies}
+        savedMoviesList={savedMoviesList}
         onCardSave={onCardSave}
         onCardDelete={onCardDelete}
         isSaved={false}
