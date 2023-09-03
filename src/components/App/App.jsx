@@ -82,10 +82,12 @@ function App() {
   async function handleRegisterUser({ name, email, password }) {
     try {
       await mainApi.registerUser({ name, email, password });
+      setIsLoggedIn(true);
       setIsSuccess(true);
       navigate('/movies')
     } catch (err) {
       console.error(err);
+      setIsLoggedIn(true);
       setIsSuccess(false);
     } finally {
       setIsInfoTooltipPopupOpen(true);
@@ -170,6 +172,7 @@ function App() {
                   savedMoviesList={savedMoviesList}
                   onCardSave={handleCardLike}
                   onCardDelete={handleCardDelete}
+                  isLoggedIn={isLoggedIn}
                 />
               }
             />
