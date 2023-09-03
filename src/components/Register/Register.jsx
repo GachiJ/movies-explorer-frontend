@@ -61,7 +61,7 @@ export default function Register({ onRegisterUser, isLoader }) {
               name="email"
               value={values.email || ''}
               onChange={handleInputsChange}
-              minLength={5} maxLength={30} pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required
+              minLength={5} maxLength={30} pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required
               disabled={disabled}
             />
             <span className='auth__error'>{errors.email}</span>
