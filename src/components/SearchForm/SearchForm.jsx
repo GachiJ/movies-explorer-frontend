@@ -5,6 +5,8 @@ import '../SearchForm/SearchForm.css';
 export default function SearchForm({ onSearch, moviesToFilter }) {
   const [query, setQuery] = useState('');
   const [shortMovies, setShortMovies] = useState(false);
+  const [isSearchEmpty, setIsSearchEmpty] = useState(false);
+
 
   useEffect(() => {
     filterMovies();
@@ -25,6 +27,8 @@ export default function SearchForm({ onSearch, moviesToFilter }) {
       );
     });
     onSearch(filteredMovies);
+
+    setIsSearchEmpty(filteredMovies.length === 0);
   }
 
 
@@ -47,6 +51,7 @@ export default function SearchForm({ onSearch, moviesToFilter }) {
             value={query || ''}
             required
           />
+          {isSearchEmpty && query && <p className="search__empty">Ничего не найдено</p>}
           <button className='search__button' type='submit'></button>
         </form>
         <FilterCheckbox onShortFilmsToggle={setShortMovies} />
