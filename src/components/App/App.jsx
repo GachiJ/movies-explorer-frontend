@@ -60,19 +60,14 @@ function App() {
     }
   }
 
+
   function tokenCheck() {
     mainApi.checkToken()
       .then(() => {
         setIsLoggedIn(true);
-        return mainApi.getMovies();
-      })
-      .then((moviesData) => {
-        setMovies(moviesData);
         navigate('/movies');
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err))
   }
 
   function handleSignOut() {
