@@ -8,9 +8,10 @@ export default function FilterCheckbox({ onShortFilmsToggle }) {
     const storedValue = localStorage.getItem('isShortMoviesChecked');
     if (storedValue !== null) {
       setIsChecked(storedValue === 'true');
+      onShortFilmsToggle(storedValue === 'true');
     }
   }, []);
-
+  
   const handleCheckboxChange = () => {
     const updatedValue = !isChecked;
     setIsChecked(updatedValue);
