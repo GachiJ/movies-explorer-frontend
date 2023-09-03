@@ -11,7 +11,6 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   const [isDurationEmpty, setIsDurationEmpty] = useState(false);
   const [query, setQuery] = useState('');
 
-
   useEffect(() => {
     setFilteredMovies(savedMoviesList); // Начальное заполнение filteredMovies всеми фильмами
   }, [savedMoviesList, query]);
