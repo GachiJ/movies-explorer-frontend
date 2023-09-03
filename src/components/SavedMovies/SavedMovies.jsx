@@ -8,6 +8,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   const [filteredMovies, setFilteredMovies] = useState([]);
   const location = useLocation();
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
+  const [isDurationEmpty, setIsDurationEmpty] = useState(false);
   const [query, setQuery] = useState('');
 
 
@@ -18,6 +19,9 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   function handleSearch(filteredMovies) {
     setFilteredMovies(filteredMovies);
     setIsSearchEmpty(filteredMovies.length === 0);
+    setIsDurationEmpty(
+      filteredMovies.every((movie) => movie.duration > 40)
+    );
   }
 
   function handleQueryChange(newQuery) { // Функция для обновления query
@@ -32,10 +36,10 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
         query={query} // Передаем query в SearchForm
         onQueryChange={handleQueryChange}
       />
-      {isSearchEmpty && query && (
+      {(isSearchEmpty || isDurationEmpty) && (
         <p className="movies__empty">Ничего не найдено</p>
       )}
-      {!isSearchEmpty && (
+      {!isSearchEmpty && !isDurationEmpty && (
         <MoviesCardList
           movies={movies}
           savedMoviesList={filteredMovies}
