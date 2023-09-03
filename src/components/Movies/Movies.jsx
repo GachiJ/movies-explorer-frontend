@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-import SearchForm from '../SearchForm/SearchForm'; // Импортируем SearchForm
+import SearchForm from '../SearchForm/SearchForm';
+/* import Preloader from '../Preloader/Preloader'; */
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../Movies/Movies.css';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
@@ -73,6 +74,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         moviesToFilter={location.pathname === '/movies' ? movies : savedMoviesList}
         query={query}
         onQueryChange={handleQueryChange}
+        setShortMovies={setIsShortMoviesChecked} // Передаем функцию для установки состояния короткометражных фильмов
       />
       {(isSearchEmpty || isDurationEmpty) && (
         <p className="movies__empty">Ничего не найдено</p>
@@ -88,4 +90,4 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       )}
     </main>
   );
-}
+};
