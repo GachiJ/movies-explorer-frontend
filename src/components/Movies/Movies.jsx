@@ -38,8 +38,8 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       )}
       {!isSearchEmpty && (
         <MoviesCardList
-          movies={filteredMovies.length > 0 ? filteredMovies : movies}
-          savedMoviesList={filteredMovies.length > 0 ? filteredMovies : savedMoviesList}
+          movies={filteredMovies}
+          savedMoviesList={savedMoviesList}
           onCardSave={onCardSave}
           onCardDelete={onCardDelete}
           isSaved={false}
