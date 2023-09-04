@@ -13,7 +13,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
 
-  function filterMovies() {
+  function filterMovies(query, isShortMoviesChecked) {
     const filteredMovies = movies.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
