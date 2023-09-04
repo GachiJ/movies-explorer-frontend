@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../SearchForm/SearchForm.css';
 
-export default function SearchForm({ onSearch,  query, onQueryChange }) {
+export default function SearchForm({ onSearch, query, onQueryChange }) {
   const [shortMovies, setShortMovies] = useState(false);
 
 /*   useEffect(() => {

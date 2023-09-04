@@ -26,10 +26,10 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     setFilteredMovies(filteredMovies);
   }
 
-/*   useEffect(() => {
+  useEffect(() => {
 
     const savedSearchQuery = localStorage.getItem('searchQuery');
-    const initialSearchQuery = savedSearchQuery || '';
+    const initialSearchQuery = savedSearchQuery;
     setQuery(initialSearchQuery);
 
     const savedIsShortMoviesChecked = localStorage.getItem('isShortMoviesChecked');
@@ -47,7 +47,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     });
 
     setFilteredMovies(filteredMovies);
-  }, [movies]); */
+  }, [movies]);
 
   useEffect(() => {
     if (typeof localStorage !== 'undefined') {
