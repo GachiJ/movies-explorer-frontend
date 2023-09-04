@@ -54,6 +54,20 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     filterMovies();
   }, [isShortMoviesChecked]);
 
+  useEffect(() => {
+    // При первой загрузке страницы получаем сохраненные значения из localStorage
+    const savedIsSearchEmpty = localStorage.getItem('isSearchEmpty');
+    const savedIsDurationEmpty = localStorage.getItem('isDurationEmpty');
+
+    // Преобразуем полученные строки в булевы значения
+    const initialIsSearchEmpty = savedIsSearchEmpty === 'true';
+    const initialIsDurationEmpty = savedIsDurationEmpty === 'true';
+
+    // Устанавливаем значения в состояния
+    setIsSearchEmpty(initialIsSearchEmpty);
+    setIsDurationEmpty(initialIsDurationEmpty);
+  }, []);
+
   function handleSearch(filteredMovies) {
     setFilteredMovies(filteredMovies);
     setIsSearchEmpty(filteredMovies.length === 0);
