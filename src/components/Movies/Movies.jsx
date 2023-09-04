@@ -73,9 +73,9 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40)
     );
 
-    // Сохраняем состояния в localStorage
-    localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
-    localStorage.setItem('isDurationEmpty', filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40));
+    // Добавляем console.log для проверки
+    console.log('IsSearchEmpty:', isSearchEmpty);
+    console.log('IsDurationEmpty:', isDurationEmpty);
   }
 
   /*   function handleSearch(filteredMovies) {
@@ -98,7 +98,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         moviesToFilter={location.pathname === '/movies' ? movies : savedMoviesList}
         query={query}
         onQueryChange={handleQueryChange}
-        setShortMovies={setIsShortMoviesChecked} // Передаем функцию для установки состояния короткометражных фильмов
+        setShortMovies={setIsShortMoviesChecked}
       />
       {(isSearchEmpty || isDurationEmpty) && (
         <p className="movies__empty">Ничего не найдено</p>
