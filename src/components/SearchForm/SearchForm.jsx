@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../SearchForm/SearchForm.css';
 
-export default function SearchForm({ onSearch, moviesToFilter, query, onQueryChange }) {
+export default function SearchForm({ onSearch,  query, onQueryChange }) {
   const [shortMovies, setShortMovies] = useState(false);
 
-  useEffect(() => {
+/*   useEffect(() => {
     filterMovies();
-  }, [query, shortMovies]);
+  }, [query, shortMovies]); */
 
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
@@ -15,7 +15,9 @@ export default function SearchForm({ onSearch, moviesToFilter, query, onQueryCha
     localStorage.setItem('searchQuery', newQuery); // Используйте newQuery, а не query
   }
 
-  function filterMovies() {
+
+
+ /*  function filterMovies() {
     const filteredMovies = moviesToFilter.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
@@ -26,7 +28,7 @@ export default function SearchForm({ onSearch, moviesToFilter, query, onQueryCha
       );
     });
     onSearch(filteredMovies);
-  }
+  } */
 
 
 
@@ -39,7 +41,8 @@ export default function SearchForm({ onSearch, moviesToFilter, query, onQueryCha
           name='search'
           onSubmit={(e) => {
             e.preventDefault();
-            onSearch(filterMovies);
+            // Вместо вызова filterMovies() передаем данные из формы в onSearch
+            onSearch(query, shortMovies);
           }}
         >
           <input

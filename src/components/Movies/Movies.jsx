@@ -65,13 +65,27 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     }
   }, []);
 
-  function handleSearch(filteredMovies) {
+  function handleSearch(newQuery, newShortMovies) {
+    // Выполняем фильтрацию в зависимости от переданных данных
+    const filteredMovies = filterMovies(newQuery, newShortMovies);
     setFilteredMovies(filteredMovies);
     setIsSearchEmpty(filteredMovies.length === 0);
     setIsDurationEmpty(
       filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40)
     );
+
+    // Сохраняем состояния в localStorage
+    localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
+    localStorage.setItem('isDurationEmpty', filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40));
   }
+
+  /*   function handleSearch(filteredMovies) {
+      setFilteredMovies(filteredMovies);
+      setIsSearchEmpty(filteredMovies.length === 0);
+      setIsDurationEmpty(
+        filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40)
+      );
+    } */
 
   function handleQueryChange(newQuery) {
     setQuery(newQuery);
@@ -87,7 +101,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         onQueryChange={handleQueryChange}
         setShortMovies={setIsShortMoviesChecked} // Передаем функцию для установки состояния короткометражных фильмов
       />
-      {(isSearchEmpty && isDurationEmpty) && (
+      {(isSearchEmpty || isDurationEmpty) && (
         <p className="movies__empty">Ничего не найдено</p>
       )}
       {!isSearchEmpty && !isDurationEmpty && (
