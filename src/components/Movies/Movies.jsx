@@ -24,6 +24,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       );
     });
     setFilteredMovies(filteredMovies);
+    return filteredMovies || [];
   }
 
   useEffect(() => {
