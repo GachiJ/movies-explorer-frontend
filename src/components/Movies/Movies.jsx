@@ -13,7 +13,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
 
-  function filterMovies(query, isShortMoviesChecked) {
+  function filterMovies() {
     const filteredMovies = movies.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
@@ -65,9 +65,9 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     }
   }, []);
 
-  function handleSearch(newQuery, newShortMovies) {
+  function handleSearch(query, shortMovies) {
     // Выполняем фильтрацию в зависимости от переданных данных
-    const filteredMovies = filterMovies(newQuery, newShortMovies);
+    const filteredMovies = filterMovies(query, shortMovies);
     setFilteredMovies(filteredMovies);
     setIsSearchEmpty(filteredMovies.length === 0);
     setIsDurationEmpty(
