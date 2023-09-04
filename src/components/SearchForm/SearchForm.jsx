@@ -5,9 +5,13 @@ import '../SearchForm/SearchForm.css';
 export default function SearchForm({ onSearch, query, onQueryChange }) {
   const [shortMovies, setShortMovies] = useState(false);
 
-/*   useEffect(() => {
-    filterMovies();
-  }, [query, shortMovies]); */
+  useEffect(() => {
+    onSearch(query, shortMovies);
+  }, [query, shortMovies]);
+
+  useEffect(() => {
+    console.log('shortMovies changed:', shortMovies);
+  }, [shortMovies]);
 
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
@@ -17,18 +21,18 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
 
 
 
- /*  function filterMovies() {
-    const filteredMovies = moviesToFilter.filter((movie) => {
-      const lowerCaseQuery = query.toLowerCase();
-      const nameRULowerCase = movie.nameRU.toLowerCase();
-      const nameENLowerCase = movie.nameEN.toLowerCase();
-      return (
-        (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-        (!shortMovies || (shortMovies && movie.duration <= 40))
-      );
-    });
-    onSearch(filteredMovies);
-  } */
+  /*  function filterMovies() {
+     const filteredMovies = moviesToFilter.filter((movie) => {
+       const lowerCaseQuery = query.toLowerCase();
+       const nameRULowerCase = movie.nameRU.toLowerCase();
+       const nameENLowerCase = movie.nameEN.toLowerCase();
+       return (
+         (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
+         (!shortMovies || (shortMovies && movie.duration <= 40))
+       );
+     });
+     onSearch(filteredMovies);
+   } */
 
 
 
