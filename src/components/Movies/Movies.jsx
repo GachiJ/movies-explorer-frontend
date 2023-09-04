@@ -87,7 +87,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         onQueryChange={handleQueryChange}
         setShortMovies={setIsShortMoviesChecked} // Передаем функцию для установки состояния короткометражных фильмов
       />
-      {(isSearchEmpty || isDurationEmpty) && (
+      {(isSearchEmpty && isDurationEmpty) && (
         <p className="movies__empty">Ничего не найдено</p>
       )}
       {!isSearchEmpty && !isDurationEmpty && (
