@@ -5,15 +5,17 @@ import '../SearchForm/SearchForm.css';
 export default function SearchForm({ onSearch, query, onQueryChange }) {
   const [shortMovies, setShortMovies] = useState(false);
 
-  useEffect(() => {
-    onSearch(shortMovies);
-  }, [shortMovies]);
-
-
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
     onQueryChange(newQuery);
     localStorage.setItem('searchQuery', newQuery); // Используйте newQuery, а не query
+  }
+
+  function handleCheckboxChange() {
+    setShortMovies(!shortMovies);
+    // Передаем и query, и shortMovies в onSearch при изменении чекбокса
+    onSearch(query, !shortMovies);
+    localStorage.setItem('isShortMoviesChecked', !shortMovies);
   }
 
 
@@ -42,8 +44,6 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
           name='search'
           onSubmit={(e) => {
             e.preventDefault();
-            // Вместо вызова filterMovies() передаем данные из формы в onSearch
-            onSearch(query, shortMovies);
           }}
         >
           <input
@@ -58,7 +58,8 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
           />
           <button className='search__button' type='submit'></button>
         </form>
-        <FilterCheckbox onShortFilmsToggle={setShortMovies} />
+        <FilterCheckbox onChange={handleCheckboxChange}
+          checked={shortMovies} />
       </div>
     </section>
   );
