@@ -6,12 +6,9 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
   const [shortMovies, setShortMovies] = useState(false);
 
   useEffect(() => {
-    onSearch(query, shortMovies);
-  }, [query, shortMovies]);
-
-  useEffect(() => {
-    console.log('shortMovies changed:', shortMovies);
+    onSearch(shortMovies);
   }, [shortMovies]);
+
 
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
