@@ -8,8 +8,8 @@ import { useLocation } from 'react-router-dom';
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const location = useLocation();
-  const [isSearchEmpty, setIsSearchEmpty] = useState(false);
-  const [isDurationEmpty, setIsDurationEmpty] = useState(false);
+  const [isSearchEmpty, setIsSearchEmpty] = useState(true);
+  const [isDurationEmpty, setIsDurationEmpty] = useState(true);
   const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
 
@@ -71,24 +71,11 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     console.log(query, shortMovies)
     const filteredMovies = filterMovies(query, shortMovies);
     console.log('filterMovie', filteredMovies)
-    if (filteredMovies.length === 0) {
-      setIsSearchEmpty(true);
-    } else {
-      setIsSearchEmpty(false);
-    }
-
-    if (filteredMovies.length > 0 && filteredMovies.some((movie) => movie.duration > 40)) {
-      setIsDurationEmpty(true)
-    } else {
-      setIsDurationEmpty(false)
-    }
-
+    setIsSearchEmpty(filteredMovies.length === 0);
+    setIsDurationEmpty(
+      filteredMovies.length > 0 && filteredMovies.some((movie) => movie.duration > 40)
+    );
     console.log('Duration', isDurationEmpty)
-
-    /*  setIsDurationEmpty(
-       filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40)
-     );
-     console.log('Duration', isDurationEmpty) */
 
     // Сохраняем состояния в localStorage
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
@@ -115,7 +102,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         query={query}
         onQueryChange={handleQueryChange}
       />
-      {isSearchEmpty && isDurationEmpty && (
+      {(isSearchEmpty || isDurationEmpty) && (
         <p className="movies__empty">Ничего не найдено</p>
       )}
       {!isSearchEmpty && !isDurationEmpty && (
