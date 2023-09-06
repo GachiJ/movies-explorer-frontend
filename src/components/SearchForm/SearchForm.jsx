@@ -10,7 +10,7 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
     handleCheckboxChange()
     // Обновляем значение в локальном хранилище
     localStorage.setItem('isShortMoviesChecked', shortMovies);
-  }, [shortMovies, query, onSearch]);
+  }, [shortMovies, query]);
 
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
