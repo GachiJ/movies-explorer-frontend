@@ -77,7 +77,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       setIsSearchEmpty(false);
     }
 
-    if (filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40)) {
+    if (filteredMovies.length > 0 && filteredMovies.some((movie) => movie.duration > 40)) {
       setIsDurationEmpty(true)
     } else {
       setIsDurationEmpty(false)
@@ -115,7 +115,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         query={query}
         onQueryChange={handleQueryChange}
       />
-      {(isSearchEmpty && isDurationEmpty) && (
+      {(isSearchEmpty || isDurationEmpty) && (
         <p className="movies__empty">Ничего не найдено</p>
       )}
       {!isSearchEmpty && !isDurationEmpty && (
