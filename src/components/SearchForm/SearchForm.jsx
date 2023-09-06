@@ -5,9 +5,7 @@ import '../SearchForm/SearchForm.css';
 export default function SearchForm({ onSearch, query, onQueryChange }) {
   const [shortMovies, setShortMovies] = useState(false);
 
-  useEffect(() => {
-    handleCheckboxChange();
-  }, [shortMovies]);
+
 
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
