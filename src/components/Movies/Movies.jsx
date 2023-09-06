@@ -79,7 +79,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
 
     // Сохраняем состояния в localStorage
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
-    localStorage.setItem('isDurationEmpty', filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40));
+    localStorage.setItem('isDurationEmpty', filteredMovies.length > 0 && filteredMovies.some((movie) => movie.duration > 40));
   }
 
   /*   function handleSearch(filteredMovies) {
