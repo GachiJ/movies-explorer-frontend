@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const location = useLocation();
-  const [isSearchEmpty, setIsSearchEmpty] = useState(true);
+  const [isSearchEmpty, setIsSearchEmpty] = useState(false);
   const [isDurationEmpty, setIsDurationEmpty] = useState(true);
   const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
