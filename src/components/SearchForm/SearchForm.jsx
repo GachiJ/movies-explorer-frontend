@@ -54,7 +54,7 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
           name='search'
           onSubmit={(e) => {
             e.preventDefault();
-            onSearch(query, shortMovies)
+            onSearch(query)
           }}
         >
           <input
