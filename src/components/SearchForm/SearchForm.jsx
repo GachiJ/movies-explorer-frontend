@@ -5,6 +5,13 @@ import '../SearchForm/SearchForm.css';
 export default function SearchForm({ onSearch, query, onQueryChange }) {
   const [shortMovies, setShortMovies] = useState(false);
 
+  useEffect(() => {
+    // Вызываем onSearch при изменении shortMovies
+    onSearch(query, shortMovies);
+    // Обновляем значение в локальном хранилище
+    localStorage.setItem('isShortMoviesChecked', shortMovies);
+  }, [shortMovies, query, onSearch]);
+
 
   function handleChangeSearch(e) {
     const newQuery = e.target.value;

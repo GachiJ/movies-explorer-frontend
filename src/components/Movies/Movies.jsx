@@ -27,7 +27,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     return filteredMovies || [];
   }
 
-  useEffect(() => {
+  /* useEffect(() => {
 
     const savedSearchQuery = localStorage.getItem('searchQuery');
     const initialSearchQuery = savedSearchQuery;
@@ -64,7 +64,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       setIsSearchEmpty(initialIsSearchEmpty);
       setIsDurationEmpty(initialIsDurationEmpty);
     }
-  }, []);
+  }, []); */
 
   function handleSearch(query, shortMovies) {
     // Выполняем фильтрацию в зависимости от переданных данных
