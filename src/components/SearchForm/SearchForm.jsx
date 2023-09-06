@@ -17,7 +17,7 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
     setShortMovies(!shortMovies);
     // Передаем и query, и shortMovies в onSearch при изменении чекбокса
     console.log(query, !shortMovies);
-    onSearch(!shortMovies);
+    onSearch(query, !shortMovies);
     localStorage.setItem('isShortMoviesChecked', !shortMovies);
   }
 
@@ -47,7 +47,7 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
           name='search'
           onSubmit={(e) => {
             e.preventDefault();
-            onSearch(query)
+            onSearch(query, shortMovies)
           }}
         >
           <input
