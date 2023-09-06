@@ -5,13 +5,13 @@ import '../SearchForm/SearchForm.css';
 export default function SearchForm({ onSearch, query, onQueryChange }) {
   const [shortMovies, setShortMovies] = useState(false);
 
-/*   useEffect(() => {
+ /*  useEffect(() => {
     // Вызываем onSearch при изменении shortMovies
     onSearch(query, shortMovies);
     // Обновляем значение в локальном хранилище
     localStorage.setItem('isShortMoviesChecked', shortMovies);
-  }, [shortMovies, query, onSearch]);
- */
+  }, [shortMovies, query, onSearch]); */
+
 
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
@@ -21,11 +21,11 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
 
   function handleCheckboxChange() {
     console.log("Checkbox changed");
-    setShortMovies(shortMovies);
+    setShortMovies(!shortMovies);
     // Передаем и query, и shortMovies в onSearch при изменении чекбокса
-    console.log(query, shortMovies);
-    onSearch(query, shortMovies);
-    localStorage.setItem('isShortMoviesChecked', shortMovies);
+    console.log(query, !shortMovies);
+    onSearch(query, !shortMovies);
+    localStorage.setItem('isShortMoviesChecked', !shortMovies);
   }
 
 
