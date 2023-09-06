@@ -21,11 +21,11 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
 
   function handleCheckboxChange() {
     console.log("Checkbox changed");
-    setShortMovies(!shortMovies);
+    setShortMovies(shortMovies);
     // Передаем и query, и shortMovies в onSearch при изменении чекбокса
-    console.log(query, !shortMovies);
-    onSearch(query, !shortMovies);
-    localStorage.setItem('isShortMoviesChecked', !shortMovies);
+    console.log(query, shortMovies);
+    onSearch(query, shortMovies);
+    localStorage.setItem('isShortMoviesChecked', shortMovies);
   }
 
 
@@ -54,7 +54,7 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
           name='search'
           onSubmit={(e) => {
             e.preventDefault();
-            onSearch(query, !shortMovies)
+            onSearch(query, shortMovies)
           }}
         >
           <input
