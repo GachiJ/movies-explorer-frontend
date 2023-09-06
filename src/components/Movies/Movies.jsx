@@ -89,6 +89,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
        filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40)
      );
      console.log('Duration', isDurationEmpty) */
+     setFilteredMovies(filteredMovies)
 
     // Сохраняем состояния в localStorage
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
