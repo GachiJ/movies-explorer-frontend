@@ -70,6 +70,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     // Выполняем фильтрацию в зависимости от переданных данных
     console.log(query, shortMovies)
     const filteredMovies = filterMovies(query, shortMovies);
+    console.log(filteredMovies)
     setIsSearchEmpty(filteredMovies.length === 0);
     setIsDurationEmpty(
       filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40)
