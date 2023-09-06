@@ -82,6 +82,8 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     } else {
       setIsDurationEmpty(false)
     }
+
+    console.log('Duration', isDurationEmpty)
    
    /*  setIsDurationEmpty(
       filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40)
