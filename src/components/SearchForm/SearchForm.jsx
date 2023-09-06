@@ -12,14 +12,14 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
     localStorage.setItem('searchQuery', newQuery); // Используйте newQuery, а не query
   }
 
-  /* function handleCheckboxChange() {
+  function handleCheckboxChange() {
     console.log("Checkbox changed");
     setShortMovies(!shortMovies);
     // Передаем и query, и shortMovies в onSearch при изменении чекбокса
     console.log(query, !shortMovies);
     onSearch(query, !shortMovies);
     localStorage.setItem('isShortMoviesChecked', !shortMovies);
-  } */
+  }
 
 
 
@@ -62,7 +62,8 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
           />
           <button className='search__button' type='submit'></button>
         </form>
-        <FilterCheckbox onShortFilmsToggle={setShortMovies} />
+        <FilterCheckbox onChange={handleCheckboxChange}
+          checked={shortMovies} />
       </div>
     </section>
   );
