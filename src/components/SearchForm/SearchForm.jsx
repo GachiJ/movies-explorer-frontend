@@ -6,7 +6,6 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
   const [shortMovies, setShortMovies] = useState(false);
 
 
-
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
     onQueryChange(newQuery);
@@ -17,6 +16,7 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
     console.log("Checkbox changed");
     setShortMovies(!shortMovies);
     // Передаем и query, и shortMovies в onSearch при изменении чекбокса
+    console.log(query, !shortMovies);
     onSearch(query, !shortMovies);
     localStorage.setItem('isShortMoviesChecked', !shortMovies);
   }
