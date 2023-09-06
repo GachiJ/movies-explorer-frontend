@@ -71,11 +71,22 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     console.log(query, shortMovies)
     const filteredMovies = filterMovies(query, shortMovies);
     console.log('filterMovie', filteredMovies)
-    setIsSearchEmpty(filteredMovies.length === 0);
-    setIsDurationEmpty(
+    if (filteredMovies.length === 0) {
+       setIsSearchEmpty(true);
+    } else {
+      setIsSearchEmpty(false);
+    }
+
+    if (filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40)) {
+      setIsDurationEmpty(true)
+    } else {
+      setIsDurationEmpty(true)
+    }
+   
+   /*  setIsDurationEmpty(
       filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40)
     );
-    console.log('Duration', isDurationEmpty)
+    console.log('Duration', isDurationEmpty) */
 
     // Сохраняем состояния в localStorage
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
