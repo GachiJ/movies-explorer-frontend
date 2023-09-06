@@ -68,7 +68,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
 
   function handleSearch() {
     // Выполняем фильтрацию в зависимости от переданных данных
-    const filteredMovies = filterMovies();
+    const filteredMovies = filterMovies(query, isShortMoviesChecked);
     setIsSearchEmpty(filteredMovies.length === 0);
     setIsDurationEmpty(
       filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40)
@@ -96,10 +96,8 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     <main className="main">
       <SearchForm
         onSearch={handleSearch}
-        moviesToFilter={location.pathname === '/movies' ? movies : savedMoviesList}
         query={query}
         onQueryChange={handleQueryChange}
-        setShortMovies={setIsShortMoviesChecked}
       />
       {(isSearchEmpty || isDurationEmpty) && (
         <p className="movies__empty">Ничего не найдено</p>
