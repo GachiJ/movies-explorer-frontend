@@ -6,11 +6,8 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
   const [shortMovies, setShortMovies] = useState(false);
 
   useEffect(() => {
-    // Вызываем onSearch при изменении shortMovies
-    handleCheckboxChange()
-    // Обновляем значение в локальном хранилище
-    localStorage.setItem('isShortMoviesChecked', shortMovies);
-  }, [shortMovies, query]);
+    handleCheckboxChange();
+  }, [shortMovies]);
 
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
