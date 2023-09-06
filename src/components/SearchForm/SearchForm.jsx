@@ -19,6 +19,7 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
   }
 
   function handleCheckboxChange() {
+    console.log("Checkbox changed");
     setShortMovies(!shortMovies);
     // Передаем и query, и shortMovies в onSearch при изменении чекбокса
     onSearch(query, !shortMovies);
