@@ -1,5 +1,5 @@
-/* import SearchForm from '../SearchForm/SearchForm';
- import Preloader from '../Preloader/Preloader'; 
+import SearchForm from '../SearchForm/SearchForm';
+/* import Preloader from '../Preloader/Preloader'; */
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../Movies/Movies.css';
 import { useEffect, useState } from 'react';
@@ -24,9 +24,10 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       );
     });
     setFilteredMovies(filteredMovies);
+    return filteredMovies || [];
   }
 
-   useEffect(() => {
+ /*  useEffect(() => {
 
     const savedSearchQuery = localStorage.getItem('searchQuery');
     const initialSearchQuery = savedSearchQuery;
@@ -47,9 +48,9 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     });
 
     setFilteredMovies(filteredMovies);
-  }, [movies]); 
+  }, [movies]); */
 
-/  useEffect(() => {
+/*   useEffect(() => {
     if (typeof localStorage !== 'undefined') {
       // При первой загрузке страницы получаем сохраненные значения из localStorage
       const savedIsSearchEmpty = localStorage.getItem('isSearchEmpty');
@@ -63,7 +64,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       setIsSearchEmpty(initialIsSearchEmpty);
       setIsDurationEmpty(initialIsDurationEmpty);
     }
-  }, []); 
+  }, []); */
 
   function handleSearch(query, shortMovies) {
     // Выполняем фильтрацию в зависимости от переданных данных
@@ -78,13 +79,13 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     localStorage.setItem('isDurationEmpty', filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40));
   }
 
-  function handleSearch(filteredMovies) {
+  /*   function handleSearch(filteredMovies) {
       setFilteredMovies(filteredMovies);
       setIsSearchEmpty(filteredMovies.length === 0);
       setIsDurationEmpty(
         filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40)
       );
-    }
+    } */
 
   function handleQueryChange(newQuery) {
     setQuery(newQuery);
@@ -114,78 +115,4 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       )}
     </main>
   );
-}; */
-
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import '../Movies/Movies.css';
-
-export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
-  const location = useLocation();
-  const [filteredMovies, setFilteredMovies] = useState([]);
-  const [isSearchEmpty, setIsSearchEmpty] = useState(false);
-  const [isDurationEmpty, setIsDurationEmpty] = useState(false);
-  const [query, setQuery] = useState('');
-  const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
-
-  useEffect(() => {
-    if (localStorage.getItem('searchQuery')) {
-      setQuery(localStorage.getItem('searchQuery'));
-    }
-  }, []);
-
-  useEffect(() => {
-    filterMovies(query, isShortMoviesChecked, movies);
-  }, [query, isShortMoviesChecked, movies]);
-
-  const handleSearch = (newQuery, shortMovies) => {
-    setQuery(newQuery);
-    setIsShortMoviesChecked(shortMovies);
-    localStorage.setItem('searchQuery', newQuery);
-  };
-
-  const filterMovies = (query, shortMovies, movies) => {
-    const filteredMovies = movies.filter((movie) => {
-      const lowerCaseQuery = query.toLowerCase();
-      const nameRULowerCase = movie.nameRU.toLowerCase();
-      const nameENLowerCase = movie.nameEN.toLowerCase();
-      return (
-        (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-        (!shortMovies || (shortMovies && movie.duration <= 40))
-      );
-    });
-    setFilteredMovies(filteredMovies);
-    setIsSearchEmpty(filteredMovies.length === 0);
-    setIsDurationEmpty(filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40));
-  };
-
-  function handleQueryChange(newQuery) {
-    setQuery(newQuery);
-    localStorage.setItem('searchQuery', newQuery);
-  }
-
-  return (
-    <main className="main">
-      <SearchForm
-        onSearch={handleSearch}
-        query={query}
-        setShortMovies={setIsShortMoviesChecked}
-        onQueryChange={handleQueryChange}
-      />
-      {(isSearchEmpty || isDurationEmpty) && (
-        <p className="movies__empty">Ничего не найдено</p>
-      )}
-      {!isSearchEmpty && !isDurationEmpty && (
-        <MoviesCardList
-          movies={filteredMovies}
-          savedMoviesList={savedMoviesList}
-          onCardSave={onCardSave}
-          onCardDelete={onCardDelete}
-          isSaved={false}
-        />
-      )}
-    </main>
-  );
-}
+};
