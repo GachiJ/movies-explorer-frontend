@@ -115,7 +115,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         query={query}
         onQueryChange={handleQueryChange}
       />
-      {(isSearchEmpty || isDurationEmpty) && (
+      {isSearchEmpty && isDurationEmpty && (
         <p className="movies__empty">Ничего не найдено</p>
       )}
       {!isSearchEmpty && !isDurationEmpty && (
