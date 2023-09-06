@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const location = useLocation();
-  const [isSearchEmpty, setIsSearchEmpty] = useState(true);
+  const [isSearchEmpty, setIsSearchEmpty] = useState(false);
   const [isDurationEmpty, setIsDurationEmpty] = useState(false);
   const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
@@ -89,7 +89,6 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
        filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40)
      );
      console.log('Duration', isDurationEmpty) */
-     setFilteredMovies(filteredMovies)
 
     // Сохраняем состояния в localStorage
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
