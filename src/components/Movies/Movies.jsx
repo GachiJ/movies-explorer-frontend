@@ -161,12 +161,18 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     setIsDurationEmpty(filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40));
   };
 
+  function handleQueryChange(newQuery) {
+    setQuery(newQuery);
+    localStorage.setItem('searchQuery', newQuery);
+  }
+
   return (
     <main className="main">
       <SearchForm
         onSearch={handleSearch}
         query={query}
         setShortMovies={setIsShortMoviesChecked}
+        onQueryChange={handleQueryChange}
       />
       {(isSearchEmpty || isDurationEmpty) && (
         <p className="movies__empty">Ничего не найдено</p>
