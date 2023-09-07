@@ -6,10 +6,9 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
-  const [filteredMovies, setFilteredMovies] = useState(movies);
+  const [filteredMovies, setFilteredMovies] = useState(() => filterMovies('', false));
   const location = useLocation();
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
-  const [isDurationEmpty, setIsDurationEmpty] = useState(true);
   const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
 
@@ -72,14 +71,9 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     const filteredMovies = filterMovies(query, shortMovies);
     console.log('filterMovie', filteredMovies)
     setIsSearchEmpty(filteredMovies.length === 0);
-  /*   setIsDurationEmpty(
-      filteredMovies.length > 0 && filteredMovies.some((movie) => movie.duration > 40)
-    ); */
-    console.log('Duration', isDurationEmpty)
 
     // Сохраняем состояния в localStorage
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
-    localStorage.setItem('isDurationEmpty', filteredMovies.length > 0 && filteredMovies.some((movie) => movie.duration > 40));
   }
 
   /*   function handleSearch(filteredMovies) {
@@ -102,10 +96,10 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         query={query}
         onQueryChange={handleQueryChange}
       />
-      {(isSearchEmpty /* || isDurationEmpty */) && (
+      {isSearchEmpty && (
         <p className="movies__empty">Ничего не найдено</p>
       )}
-      {!isSearchEmpty /* && !isDurationEmpty */ && (
+      {!isSearchEmpty && (
         <MoviesCardList
           movies={filteredMovies}
           savedMoviesList={savedMoviesList}
