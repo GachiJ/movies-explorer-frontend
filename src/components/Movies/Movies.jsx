@@ -12,10 +12,6 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
 
-  useEffect(() => {
-    setFilteredMovies(filterMovies('', false));
-  }, [movies]);
-
   function filterMovies(query, shortMovies) {
     const filteredMovies = movies.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
