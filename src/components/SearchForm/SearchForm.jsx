@@ -5,6 +5,11 @@ import '../SearchForm/SearchForm.css';
 export default function SearchForm({ onSearch, query, onQueryChange, isShortMoviesChecked }) {
   const [shortMovies, setShortMovies] = useState(isShortMoviesChecked);
 
+  useEffect(() => {
+    // Здесь обновляем состояние чекбокса при изменении пропса isShortMoviesChecked
+    setShortMovies(isShortMoviesChecked);
+  }, [isShortMoviesChecked]);
+
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
     onQueryChange(newQuery);
