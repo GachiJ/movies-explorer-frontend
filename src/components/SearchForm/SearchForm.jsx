@@ -43,7 +43,7 @@ export default function SearchForm({ onSearch, query, onQueryChange, isShortMovi
           <button className='search__button' type='submit'></button>
         </form>
         <FilterCheckbox onChange={handleCheckboxChange}
-          checked={shortMovies} />
+          checked={isShortMoviesChecked} />
       </div>
     </section>
   );
