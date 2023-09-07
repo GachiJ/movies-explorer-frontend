@@ -8,14 +8,14 @@ export default function SearchForm({ onSearch, query, onQueryChange, isShortMovi
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
     onQueryChange(newQuery);
-    localStorage.setItem('searchQuery', newQuery); // Используйте newQuery, а не query
+    localStorage.setItem('searchQuery', newQuery);
   }
 
   function handleCheckboxChange() {
     const newShortMovies = !shortMovies;
     setShortMovies(newShortMovies);
     onSearch(query, newShortMovies);
-    localStorage.setItem('isShortMoviesChecked', !shortMovies);
+    localStorage.setItem('isShortMoviesChecked', newShortMovies);
   }
 
   return (
@@ -27,7 +27,7 @@ export default function SearchForm({ onSearch, query, onQueryChange, isShortMovi
           name='search'
           onSubmit={(e) => {
             e.preventDefault();
-            onSearch(query, shortMovies)
+            onSearch(query, shortMovies);
           }}
         >
           <input
@@ -42,8 +42,7 @@ export default function SearchForm({ onSearch, query, onQueryChange, isShortMovi
           />
           <button className='search__button' type='submit'></button>
         </form>
-        <FilterCheckbox onChange={handleCheckboxChange}
-          checked={isShortMoviesChecked} />
+        <FilterCheckbox onChange={handleCheckboxChange} checked={shortMovies} />
       </div>
     </section>
   );
