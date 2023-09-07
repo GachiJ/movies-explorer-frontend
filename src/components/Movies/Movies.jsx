@@ -13,7 +13,6 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
 
   useEffect(() => {
-    // Фильтруем фильмы, используя пустой запрос и isShortMoviesChecked в качестве начальных значений
     const initialFilteredMovies = filterMovies('', false);
     setFilteredMovies(initialFilteredMovies);
   }, [movies]);
