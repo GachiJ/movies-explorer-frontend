@@ -5,14 +5,6 @@ import '../SearchForm/SearchForm.css';
 export default function SearchForm({ onSearch, query, onQueryChange }) {
   const [shortMovies, setShortMovies] = useState(false);
 
- /*  useEffect(() => {
-    // Вызываем onSearch при изменении shortMovies
-    onSearch(query, shortMovies);
-    // Обновляем значение в локальном хранилище
-    localStorage.setItem('isShortMoviesChecked', shortMovies);
-  }, [shortMovies, query, onSearch]); */
-
-
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
     onQueryChange(newQuery);
@@ -27,23 +19,6 @@ export default function SearchForm({ onSearch, query, onQueryChange }) {
     onSearch(query, !shortMovies);
     localStorage.setItem('isShortMoviesChecked', !shortMovies);
   }
-
-
-
-  /*  function filterMovies() {
-     const filteredMovies = moviesToFilter.filter((movie) => {
-       const lowerCaseQuery = query.toLowerCase();
-       const nameRULowerCase = movie.nameRU.toLowerCase();
-       const nameENLowerCase = movie.nameEN.toLowerCase();
-       return (
-         (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-         (!shortMovies || (shortMovies && movie.duration <= 40))
-       );
-     });
-     onSearch(filteredMovies);
-   } */
-
-
 
   return (
     <section className='search'>
