@@ -12,11 +12,9 @@ export default function SearchForm({ onSearch, query, onQueryChange, isShortMovi
   }
 
   function handleCheckboxChange() {
-    console.log("Checkbox changed");
-    setShortMovies(!shortMovies);
-    // Передаем и query, и shortMovies в onSearch при изменении чекбокса
-    console.log(query, !shortMovies);
-    onSearch(query, !shortMovies);
+    const newShortMovies = !shortMovies;
+    setShortMovies(newShortMovies);
+    onSearch(query, newShortMovies);
     localStorage.setItem('isShortMoviesChecked', !shortMovies);
   }
 
