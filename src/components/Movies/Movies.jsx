@@ -6,11 +6,15 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
-  const [filteredMovies, setFilteredMovies] = useState(() => filterMovies('', false));
+  const [filteredMovies, setFilteredMovies] = useState(false);
   const location = useLocation();
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
   const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
+
+  useEffect(() => {
+    setFilteredMovies(filterMovies('', false));
+  }, [movies]);
 
   function filterMovies(query, shortMovies) {
     const filteredMovies = movies.filter((movie) => {
