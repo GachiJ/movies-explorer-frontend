@@ -9,9 +9,14 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   const [filteredMovies, setFilteredMovies] = useState([]);
   const location = useLocation();
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
-  const [isDurationEmpty, setIsDurationEmpty] = useState(true);
   const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
+
+  useEffect(() => {
+    // Фильтруем фильмы, используя пустой запрос и isShortMoviesChecked в качестве начальных значений
+    const initialFilteredMovies = filterMovies('', false);
+    setFilteredMovies(initialFilteredMovies);
+  }, [movies]);
 
   function filterMovies(query, shortMovies) {
     const filteredMovies = movies.filter((movie) => {
@@ -54,32 +59,21 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     if (typeof localStorage !== 'undefined') {
       // При первой загрузке страницы получаем сохраненные значения из localStorage
       const savedIsSearchEmpty = localStorage.getItem('isSearchEmpty');
-      const savedIsDurationEmpty = localStorage.getItem('isDurationEmpty');
 
       // Преобразуем полученные строки в булевы значения
       const initialIsSearchEmpty = savedIsSearchEmpty === 'true';
-      const initialIsDurationEmpty = savedIsDurationEmpty === 'true';
 
       // Устанавливаем значения в состояния
       setIsSearchEmpty(initialIsSearchEmpty);
-      setIsDurationEmpty(initialIsDurationEmpty);
     }
   }, []); */
 
   function handleSearch(query, shortMovies) {
-    // Выполняем фильтрацию в зависимости от переданных данных
     console.log(query, shortMovies)
     const filteredMovies = filterMovies(query, shortMovies);
     console.log('filterMovie', filteredMovies)
     setIsSearchEmpty(filteredMovies.length === 0);
-  /*   setIsDurationEmpty(
-      filteredMovies.length > 0 && filteredMovies.some((movie) => movie.duration > 40)
-    ); */
-    console.log('Duration', isDurationEmpty)
-
-    // Сохраняем состояния в localStorage
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
-    localStorage.setItem('isDurationEmpty', filteredMovies.length > 0 && filteredMovies.some((movie) => movie.duration > 40));
   }
 
   /*   function handleSearch(filteredMovies) {
@@ -102,10 +96,10 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         query={query}
         onQueryChange={handleQueryChange}
       />
-      {(isSearchEmpty /* || isDurationEmpty */) && (
+      {isSearchEmpty && (
         <p className="movies__empty">Ничего не найдено</p>
       )}
-      {!isSearchEmpty /* && !isDurationEmpty */ && (
+      {!isSearchEmpty && (
         <MoviesCardList
           movies={filteredMovies}
           savedMoviesList={savedMoviesList}
