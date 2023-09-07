@@ -17,7 +17,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   }, [savedMoviesList]);
 
   function filterMovies(query, shortMovies) {
-    const filteredMovies = movies.filter((movie) => {
+    const filteredMovies = savedMoviesList.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
       const nameENLowerCase = movie.nameEN.toLowerCase();
