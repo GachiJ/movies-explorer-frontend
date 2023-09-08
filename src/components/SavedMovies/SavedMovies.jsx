@@ -30,7 +30,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
     return filteredMovies || [];
   }
 
-  /* useEffect(() => {
+   useEffect(() => {
 
     const savedSearchQuery = localStorage.getItem('searchQuery');
     const initialSearchQuery = savedSearchQuery;
@@ -51,7 +51,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
     });
 
     setFilteredMovies(filteredMovies);
-  }, [movies]);
+  }, [savedMoviesList]);
 
   useEffect(() => {
     if (typeof localStorage !== 'undefined') {
@@ -64,7 +64,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
       // Устанавливаем значения в состояния
       setIsSearchEmpty(initialIsSearchEmpty);
     }
-  }, []); */
+  }, [])
 
   function handleSearch(query, shortMovies) {
     console.log(query, shortMovies)
@@ -73,14 +73,6 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
     setIsSearchEmpty(filteredMovies.length === 0);
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
   }
-
-  /*   function handleSearch(filteredMovies) {
-      setFilteredMovies(filteredMovies);
-      setIsSearchEmpty(filteredMovies.length === 0);
-      setIsDurationEmpty(
-        filteredMovies.length > 0 && filteredMovies.every((movie) => movie.duration > 40)
-      );
-    } */
 
   function handleQueryChange(newQuery) {
     setQuery(newQuery);
