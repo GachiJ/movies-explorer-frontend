@@ -68,7 +68,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   }, []) */
 
   useEffect(() => {
-    const savedSearchQuery = localStorage.getItem('savedMoviesSearchQuery');
+    const savedSearchQuery = localStorage.getItem('searchSavedQuery');
     setSavedMoviesSearchQuery(savedSearchQuery || '');
   }, []);
 
