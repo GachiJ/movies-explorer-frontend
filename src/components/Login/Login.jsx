@@ -65,7 +65,7 @@ export default function Login({ onLoginUser }) {
             <p className={`auth__error-message ${errorMessage && 'auth__error-message_visible'}`}>{errorMessage}</p>
           </div>
           <div className="login__button-container">
-            <button type="submit" className={`login__button ${!isValid && 'login__button_disabled'}`}>Войти</button>
+            <button type="submit" disabled={!isValid} className={`login__button ${!isValid && 'login__button_disabled'}`}>Войти</button>
             <div className="login__signin">
               <Link to="/signup" className="login__link">
                 Ещё не зарегистрированы? <span className='login__link-signin'>Регистрация</span>
