@@ -176,6 +176,7 @@ function App() {
                   onCardSave={handleCardLike}
                   onCardDelete={handleCardDelete}
                   isLoggedIn={isLoggedIn}
+                  isLoader={isLoader}
                 />
               }
             />

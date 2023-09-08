@@ -1,11 +1,11 @@
 import SearchForm from '../SearchForm/SearchForm';
-/* import Preloader from '../Preloader/Preloader'; */
+import Preloader from '../Preloader / Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../Movies/Movies.css';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
+export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete, isLoader }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const location = useLocation();
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
@@ -82,6 +82,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
 
   return (
     <main className="main">
+      <Preloader isLoader={isLoader} />
       <SearchForm
         onSearch={handleSearch}
         query={query}
