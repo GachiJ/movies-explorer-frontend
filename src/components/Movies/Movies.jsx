@@ -34,7 +34,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   useEffect(() => {
 
     const savedSearchQuery = localStorage.getItem('searchQuery');
-    const initialSearchQuery = savedSearchQuery;
+    const initialSearchQuery = savedSearchQuery || '';
     setQuery(initialSearchQuery);
 
     const savedIsShortMoviesChecked = localStorage.getItem('isShortMoviesChecked');
