@@ -14,6 +14,7 @@ export default function SearchForm({ onSearch, query, onQueryChange, isShortMovi
     const newQuery = e.target.value;
     onQueryChange(newQuery);
     localStorage.setItem('searchQuery', newQuery);
+    localStorage.setItem('searchSavedQuery', newQuery);
   }
 
   function handleCheckboxChange() {

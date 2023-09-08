@@ -8,7 +8,8 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   const [filteredMovies, setFilteredMovies] = useState([]);
   const location = useLocation();
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
-  const [query, setQuery] = useState('');
+  const [savedMoviesSearchQuery, setSavedMoviesSearchQuery] = useState('');
+  /* const [query, setQuery] = useState(''); */
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
 
   useEffect(() => {
@@ -16,9 +17,9 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
     setFilteredMovies(initialFilteredMovies);
   }, [savedMoviesList]);
 
-  function filterMovies(query, shortMovies) {
+  function filterMovies(savedMoviesSearchQuery, shortMovies) {
     const filteredMovies = savedMoviesList.filter((movie) => {
-      const lowerCaseQuery = query.toLowerCase();
+      const lowerCaseQuery = savedMoviesSearchQuery.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
       const nameENLowerCase = movie.nameEN.toLowerCase();
       return (
@@ -30,11 +31,11 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
     return filteredMovies || [];
   }
 
-   useEffect(() => {
+  useEffect(() => {
 
-    const savedSearchQuery = localStorage.getItem('searchQuery');
+    const savedSearchQuery = localStorage.getItem('searchSavedQuery');
     const initialSearchQuery = savedSearchQuery;
-    setQuery(initialSearchQuery);
+    setSavedMoviesSearchQuery(initialSearchQuery);
 
     const savedIsShortMoviesChecked = localStorage.getItem('isShortMoviesChecked');
     const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
@@ -53,7 +54,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
     setFilteredMovies(filteredMovies);
   }, [savedMoviesList]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (typeof localStorage !== 'undefined') {
       // При первой загрузке страницы получаем сохраненные значения из localStorage
       const savedIsSearchEmpty = localStorage.getItem('isSearchEmpty');
@@ -64,19 +65,24 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
       // Устанавливаем значения в состояния
       setIsSearchEmpty(initialIsSearchEmpty);
     }
-  }, [])
+  }, []) */
 
-  function handleSearch(query, shortMovies) {
-    console.log(query, shortMovies)
-    const filteredMovies = filterMovies(query, shortMovies);
+  useEffect(() => {
+    const savedSearchQuery = localStorage.getItem('savedMoviesSearchQuery');
+    setSavedMoviesSearchQuery(savedSearchQuery || '');
+  }, []);
+
+  function handleSearch(savedMoviesSearchQuery, shortMovies) {
+    console.log(savedMoviesSearchQuery, shortMovies)
+    const filteredMovies = filterMovies(savedMoviesSearchQuery, shortMovies);
     console.log('filterMovie', filteredMovies)
     setIsSearchEmpty(filteredMovies.length === 0);
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
   }
 
   function handleQueryChange(newQuery) {
-    setQuery(newQuery);
-    localStorage.setItem('searchQuery', newQuery);
+    setSavedMoviesSearchQuery(newQuery);
+    localStorage.setItem('searchSavedQuery', newQuery);
   }
 
 
@@ -84,8 +90,9 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
     <main className="main">
       <SearchForm
         onSearch={handleSearch}
-        query={query}
+        query={savedMoviesSearchQuery}
         onQueryChange={handleQueryChange}
+        isShortMoviesChecked={isShortMoviesChecked}
       />
       {isSearchEmpty && (
         <p className="movies__empty">Ничего не найдено</p>
