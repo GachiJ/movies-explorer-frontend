@@ -75,6 +75,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   }
 
   function handleQueryChange(newQuery) {
+    console.log('поиск сохраненные фильмы', newQuery)
     setSavedMoviesSearchQuery(newQuery);
     localStorage.setItem('searchSavedQuery', newQuery);
   }

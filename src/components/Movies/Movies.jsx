@@ -77,6 +77,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   }
 
   function handleQueryChange(newQuery) {
+    console.log('поиск фильмы', newQuery)
     setQuery(newQuery);
     localStorage.setItem('searchQuery', newQuery);
   }
