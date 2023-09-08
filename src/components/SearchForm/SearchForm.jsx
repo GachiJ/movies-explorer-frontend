@@ -9,6 +9,8 @@ export default function SearchForm({ onSearch }) {
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
     setQuery(newQuery);
+    localStorage.setItem('searchQuery', newQuery);
+    localStorage.setItem('searchSavedQuery', newQuery);
   }
 
   function handleCheckboxChange() {
