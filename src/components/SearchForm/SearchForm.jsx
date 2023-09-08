@@ -22,9 +22,9 @@ export default function SearchForm({ onSearch, isSaved, isShortMoviesChecked, on
     const newShortMovies = !shortMovies;
     setShortMovies(newShortMovies);
     if (isSaved) {
-      localStorage.setItem('isSavedShortMoviesChecked', newShortMovies.toString());
+      localStorage.setItem('isSavedShortMoviesChecked', newShortMovies);
     } else {
-      localStorage.setItem('isShortMoviesChecked', newShortMovies.toString());
+      localStorage.setItem('isShortMoviesChecked', newShortMovies);
     }
 
     if (onShortMoviesChange) {
