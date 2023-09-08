@@ -2,26 +2,23 @@ import { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../SearchForm/SearchForm.css';
 
-export default function SearchForm({ onSearch, query, onQueryChange, isShortMoviesChecked }) {
-  const [shortMovies, setShortMovies] = useState(isShortMoviesChecked);
-
-  useEffect(() => {
-    // Здесь обновляем состояние чекбокса при изменении пропса isShortMoviesChecked
-    setShortMovies(isShortMoviesChecked);
-  }, [isShortMoviesChecked]);
+export default function SearchForm({ onSearch }) {
+  const [query, setQuery] = useState('');
+  const [shortMovies, setShortMovies] = useState(false);
 
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
-    onQueryChange(newQuery);
-    localStorage.setItem('searchQuery', newQuery);
-    localStorage.setItem('searchSavedQuery', newQuery);
+    setQuery(newQuery);
   }
 
   function handleCheckboxChange() {
     const newShortMovies = !shortMovies;
     setShortMovies(newShortMovies);
-    onSearch(query, newShortMovies);
-    localStorage.setItem('isShortMoviesChecked', newShortMovies);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onSearch(query, shortMovies);
   }
 
   return (
@@ -31,10 +28,7 @@ export default function SearchForm({ onSearch, query, onQueryChange, isShortMovi
           noValidate
           className='search__form'
           name='search'
-          onSubmit={(e) => {
-            e.preventDefault();
-            onSearch(query, shortMovies);
-          }}
+          onSubmit={handleSubmit}
         >
           <input
             className='search__input'

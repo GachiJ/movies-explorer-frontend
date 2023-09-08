@@ -9,8 +9,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   const [filteredMovies, setFilteredMovies] = useState([]);
   const location = useLocation();
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
-  const [moviesSearchQuery, setMoviesSearchQuery] = useState('');
- /*  const [query, setQuery] = useState(''); */
+  const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
 
   useEffect(() => {
@@ -18,9 +17,9 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     setFilteredMovies(initialFilteredMovies);
   }, [movies]);
 
-  function filterMovies(moviesSearchQuery, shortMovies) {
+  function filterMovies(query, shortMovies) {
     const filteredMovies = movies.filter((movie) => {
-      const lowerCaseQuery = moviesSearchQuery.toLowerCase();
+      const lowerCaseQuery = query.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
       const nameENLowerCase = movie.nameEN.toLowerCase();
       return (
@@ -36,7 +35,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
 
     const savedSearchQuery = localStorage.getItem('searchQuery');
     const initialSearchQuery = savedSearchQuery || '';
-    setMoviesSearchQuery(initialSearchQuery);
+    setQuery(initialSearchQuery);
 
     const savedIsShortMoviesChecked = localStorage.getItem('isShortMoviesChecked');
     const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
@@ -68,16 +67,16 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     }
   }, []);
 
-  function handleSearch(moviesSearchQuery, shortMovies) {
-    console.log(moviesSearchQuery, shortMovies)
-    const filteredMovies = filterMovies(moviesSearchQuery, shortMovies);
+  function handleSearch(query, shortMovies) {
+    console.log(query, shortMovies)
+    const filteredMovies = filterMovies(query, shortMovies);
     console.log('filterMovie', filteredMovies)
     setIsSearchEmpty(filteredMovies.length === 0);
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
   }
 
   function handleQueryChange(newQuery) {
-    setMoviesSearchQuery(newQuery);
+    setQuery(newQuery);
     localStorage.setItem('searchQuery', newQuery);
   }
 
@@ -86,7 +85,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       <Preloader isLoader={isLoader} />
       <SearchForm
         onSearch={handleSearch}
-        query={moviesSearchQuery}
+        query={query}
         onQueryChange={handleQueryChange}
         isShortMoviesChecked={isShortMoviesChecked}
       />
