@@ -6,6 +6,10 @@ export default function SearchForm({ onSearch, isSaved, isShortMoviesChecked, on
   const [query, setQuery] = useState('');
   const [shortMovies, setShortMovies] = useState(isShortMoviesChecked);
 
+  useEffect(() => {
+    setShortMovies(isShortMoviesChecked);
+  }, [isShortMoviesChecked]);
+
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
     setQuery(newQuery);
