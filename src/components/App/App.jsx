@@ -73,8 +73,8 @@ function App() {
   function handleSignOut() {
     mainApi.logout()
       .then(() => {
-        localStorage.clear();
         setIsLoggedIn(false);
+        /* localStorage.clear(); */
         navigate('/');
       })
       .catch((err) => console.log(err))
