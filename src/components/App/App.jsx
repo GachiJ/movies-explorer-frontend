@@ -34,6 +34,7 @@ function App() {
   useEffect(() => {
     tokenCheck();
     if (isLoggedIn) {
+      setIsLoader(true);
       Promise.all([mainApi.getUserInfo(), moviesApi.getMovies(), mainApi.getSavedMovies()])
         .then(([userData, moviesData, moviesSavedData]) => {
           setMovies(moviesData)
@@ -41,7 +42,10 @@ function App() {
           setSavedMoviesList(moviesSavedData)
           navigate('/movies');
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          setIsLoader(false);
+          console.log(err);
+        });
     }
 
   }, [isLoggedIn])

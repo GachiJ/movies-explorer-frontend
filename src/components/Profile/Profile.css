@@ -75,7 +75,7 @@
 }
 
 .profile__button-edit_disabled {
-  color: #EE3465;
+  color: gray;
   cursor: default;
   padding: 0;
   font-size: 12px;
