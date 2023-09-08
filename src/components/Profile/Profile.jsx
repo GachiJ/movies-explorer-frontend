@@ -84,7 +84,7 @@ export default function Profile({ onSignOut, onUpdateUser }) {
           <button
             type='submit'
             disabled={isRequiredСondition}
-            className='profile__button-edit'
+            className={`profile__button-edit ${isRequiredСondition ? 'profile__button-edit_disabled' : ''}`}
           >
             Редактировать
           </button>
