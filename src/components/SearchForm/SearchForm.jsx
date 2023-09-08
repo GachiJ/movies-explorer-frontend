@@ -2,16 +2,23 @@ import { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../SearchForm/SearchForm.css';
 
-export default function SearchForm({ onSearch }) {
+export default function SearchForm({ onSearch, isSaved }) {
   const [query, setQuery] = useState('');
   const [shortMovies, setShortMovies] = useState(false);
 
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
     setQuery(newQuery);
-    localStorage.setItem('searchQuery', newQuery);
-    localStorage.setItem('searchSavedQuery', newQuery);
+  
+    if (isSaved) {
+      // Если компонент находится в разделе "Сохраненные фильмы"
+      localStorage.setItem('searchSavedQuery', newQuery);
+    } else {
+      // Если компонент находится в разделе "Фильмы"
+      localStorage.setItem('searchQuery', newQuery);
+    }
   }
+  
 
   function handleCheckboxChange() {
     const newShortMovies = !shortMovies;
