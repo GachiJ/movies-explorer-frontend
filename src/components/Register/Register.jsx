@@ -77,7 +77,9 @@ export default function Register({ onRegisterUser, isLoader }) {
             <p className={`auth__error-message ${errorMessage && 'auth__error-message_visible'}`}>{errorMessage}</p>
           </div>
           <div className="auth__button-container">
-            <button type="submit" disabled={!isValid} className={`auth__button ${!isValid && 'auth__button_disabled'}`}>Зарегистрироваться</button>
+            <button type="submit"
+              disabled={!isValid}
+              className={`auth__button ${!isValid ? 'auth__button_disabled' : ''}`}>Зарегистрироваться</button>
             <div className="auth__signin">
               <Link to="/signin" className="auth__link">
                 Уже зарегистрированы? <span className='auth__link-signin'>Войти</span>
