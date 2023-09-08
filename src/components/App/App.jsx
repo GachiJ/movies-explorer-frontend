@@ -43,9 +43,10 @@ function App() {
           navigate('/movies');
         })
         .catch((err) => {
-          setIsLoader(false);
           console.log(err);
-        });
+        })
+        .finally(() =>
+          setIsLoader(false));
     }
 
   }, [isLoggedIn])
