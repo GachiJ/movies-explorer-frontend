@@ -40,7 +40,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
     const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
     setIsShortMoviesChecked(initialIsShortMoviesChecked);
 
-    const filteredMovies = movies.filter((movie) => {
+    const filteredMovies = savedMoviesList.filter((movie) => {
       const lowerCaseQuery = initialSearchQuery.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
       const nameENLowerCase = movie.nameEN.toLowerCase();
