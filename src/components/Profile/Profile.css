@@ -84,10 +84,6 @@
   line-height: normal;
 }
 
-.profile__button-edit_disabled:hover {
-  pointer-events: none;
-}
-
 .profile__button-exit {
   color: #EE3465;
   text-align: center;
