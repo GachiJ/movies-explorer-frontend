@@ -11,10 +11,8 @@ export default function SearchForm({ onSearch, isSaved }) {
     setQuery(newQuery);
   
     if (isSaved) {
-      // Если компонент находится в разделе "Сохраненные фильмы"
       localStorage.setItem('searchSavedQuery', newQuery);
     } else {
-      // Если компонент находится в разделе "Фильмы"
       localStorage.setItem('searchQuery', newQuery);
     }
   }
@@ -23,6 +21,11 @@ export default function SearchForm({ onSearch, isSaved }) {
   function handleCheckboxChange() {
     const newShortMovies = !shortMovies;
     setShortMovies(newShortMovies);
+    if (isSaved) {
+      localStorage.setItem('isSavedShortMoviesChecked', newShortMovies.toString());
+    } else {
+      localStorage.setItem('isShortMoviesChecked', newShortMovies.toString());
+    }
   }
 
   function handleSubmit(e) {
