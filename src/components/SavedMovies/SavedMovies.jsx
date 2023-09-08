@@ -88,6 +88,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
         onQueryChange={handleQueryChange}
         isShortMoviesChecked={isSavedShortMoviesChecked}
         isSaved={true}
+        onShortMoviesChange={filterMovies}
       />
       {isSearchEmpty && (
         <p className="movies__empty">Ничего не найдено</p>

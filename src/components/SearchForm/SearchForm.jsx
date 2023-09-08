@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../SearchForm/SearchForm.css';
 
-export default function SearchForm({ onSearch, isSaved }) {
+export default function SearchForm({ onSearch, isSaved, isShortMoviesChecked, onShortMoviesChange }) {
   const [query, setQuery] = useState('');
-  const [shortMovies, setShortMovies] = useState(false);
+  const [shortMovies, setShortMovies] = useState(isShortMoviesChecked);
 
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
@@ -25,6 +25,10 @@ export default function SearchForm({ onSearch, isSaved }) {
       localStorage.setItem('isSavedShortMoviesChecked', newShortMovies.toString());
     } else {
       localStorage.setItem('isShortMoviesChecked', newShortMovies.toString());
+    }
+
+    if (onShortMoviesChange) {
+      onShortMoviesChange(newShortMovies);
     }
   }
 
