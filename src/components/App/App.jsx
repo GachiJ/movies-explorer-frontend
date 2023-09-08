@@ -74,7 +74,7 @@ function App() {
     mainApi.logout()
       .then(() => {
         setIsLoggedIn(false);
-        /* localStorage.clear(); */
+        localStorage.clear();
         navigate('/');
       })
       .catch((err) => console.log(err))
