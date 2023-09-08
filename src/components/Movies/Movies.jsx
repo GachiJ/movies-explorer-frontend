@@ -1,5 +1,4 @@
 import SearchForm from '../SearchForm/SearchForm';
-import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../Movies/Movies.css';
 import { useEffect, useState } from 'react';
@@ -82,7 +81,6 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
 
   return (
     <main className="main">
-      <Preloader isLoader={isLoader} />
       <SearchForm
         onSearch={handleSearch}
         query={query}

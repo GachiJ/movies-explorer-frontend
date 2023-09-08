@@ -16,6 +16,7 @@ import NotFound from '../NotFound/NotFound';
 import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import Preloader from '../Preloader/Preloader';
 
 import './App.css';
 
@@ -216,6 +217,8 @@ function App() {
             <Route path='/saved-movies' element={<Footer />} />
           </Routes>
 
+
+          <Preloader isLoader={isLoader} />
           <InfoTooltip
             name={"success"}
             onClose={closeAllPopups}
