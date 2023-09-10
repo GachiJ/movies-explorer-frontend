@@ -77,6 +77,9 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   }
 
   function handleShortMoviesChange(query, newShortMovies) {
+    if (query === undefined) {
+      query = ''; // Присваиваем пустую строку, если query undefined
+    }
     console.log(query, newShortMovies)
     const filteredMovies = filterMovies(query, newShortMovies);
     console.log('filterMovie', filteredMovies)
