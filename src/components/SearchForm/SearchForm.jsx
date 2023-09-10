@@ -32,7 +32,8 @@ export default function SearchForm({ onSearch, isSaved, isShortMoviesChecked, on
     }
 
     if (onShortMoviesChange) {
-      onShortMoviesChange(newShortMovies);
+      const currentQuery = '';
+      onShortMoviesChange(currentQuery, newShortMovies);
     }
   }
 

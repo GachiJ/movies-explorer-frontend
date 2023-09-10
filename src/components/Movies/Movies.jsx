@@ -76,12 +76,10 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
   }
 
-  function handleShortMoviesChange(query, newShortMovies) {
-    if (query === undefined) {
-      query = ''; // Присваиваем пустую строку, если query undefined
-    }
-    console.log(query, newShortMovies)
-    const filteredMovies = filterMovies(query, newShortMovies);
+  function handleShortMoviesChange(currentQuery, newShortMovies) {
+   
+    console.log(currentQuery, newShortMovies)
+    const filteredMovies = filterMovies(currentQuery, newShortMovies);
     console.log('filterMovie', filteredMovies)
     setIsSearchEmpty(filteredMovies.length === 0);
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
