@@ -77,7 +77,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   }
 
   function handleShortMoviesChange(query, newShortMovies) {
-    console.log(newShortMovies)
+    console.log(query, newShortMovies)
     const filteredMovies = filterMovies(query, newShortMovies);
     console.log('filterMovie', filteredMovies)
     setIsSearchEmpty(filteredMovies.length === 0);
