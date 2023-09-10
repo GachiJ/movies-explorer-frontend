@@ -76,10 +76,10 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
   }
 
-  function handleShortMoviesChange(currentQuery, newShortMovies) {
-   
-    console.log(currentQuery, newShortMovies)
-    const filteredMovies = filterMovies(currentQuery, newShortMovies);
+  function handleShortMoviesChange(query, newShortMovies) {
+ 
+    console.log(query, newShortMovies)
+    const filteredMovies = filterMovies(query, newShortMovies);
     console.log('filterMovie', filteredMovies)
     setIsSearchEmpty(filteredMovies.length === 0);
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
