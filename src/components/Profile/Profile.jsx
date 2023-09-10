@@ -9,6 +9,7 @@ export default function Profile({ onSignOut, onUpdateUser }) {
   const { values, isValid, errors, handleChange, setValues } = useValidation();
   const [disabled, setDisabled] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     setIsChanged(values.name !== currentUser.name || values.email !== currentUser.email);
@@ -27,13 +28,19 @@ export default function Profile({ onSignOut, onUpdateUser }) {
   function handleSubmit(e) {
     e.preventDefault();
 
+    if (isSubmitting) {
+      return; // Если уже отправляется, ничего не делаем
+    }
+
+    setIsSubmitting(true); // Устанавливаем флаг блокировки
+
     onUpdateUser({
       name: values.name,
       email: values.email,
     });
 
     setTimeout(() => {
-      setDisabled(false);
+      setIsSubmitting(false); // По завершении запроса, снимаем блокировку
     }, 2000);
   }
 
