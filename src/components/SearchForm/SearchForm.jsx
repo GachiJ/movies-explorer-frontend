@@ -7,20 +7,20 @@ export default function SearchForm({ onSearch, isSaved, isShortMoviesChecked, on
   const [shortMovies, setShortMovies] = useState(isShortMoviesChecked);
 
   useEffect(() => {
-    setShortMovies(onShortMoviesChange);
-  }, [onShortMoviesChange]);
+    setShortMovies(isShortMoviesChecked);
+  }, [isShortMoviesChecked]);
 
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
     setQuery(newQuery);
-
+  
     if (isSaved) {
       localStorage.setItem('searchSavedQuery', newQuery);
     } else {
       localStorage.setItem('searchQuery', newQuery);
     }
   }
-
+  
 
   function handleCheckboxChange() {
     const newShortMovies = !shortMovies;

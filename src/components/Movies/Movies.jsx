@@ -76,6 +76,14 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
   }
 
+  function handleShortMoviesChange(newShortMovies) {
+    console.log(newShortMovies)
+    const filteredMovies = filterMovies('', newShortMovies);
+    console.log('filterMovie', filteredMovies)
+    setIsSearchEmpty(filteredMovies.length === 0);
+    localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
+  }
+
   function handleQueryChange(newQuery) {
     console.log('поиск фильмы', newQuery)
     setQuery(newQuery);
@@ -91,7 +99,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         onQueryChange={handleQueryChange}
         isShortMoviesChecked={isShortMoviesChecked}
         isSaved={false}
-        onShortMoviesChange={filterMovies}
+        onShortMoviesChange={handleShortMoviesChange}
       />
       {isSearchEmpty && (
         <p className="movies__empty">Ничего не найдено</p>
