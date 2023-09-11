@@ -43,7 +43,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     console.log('фильмы чекбокс', initialIsShortMoviesChecked)
     setIsShortMoviesChecked(initialIsShortMoviesChecked);
 
-    const filteredMovies = movies.filter((movie) => {
+    function filteredMovies() { movies.filter((movie) => {
       const lowerCaseQuery = initialSearchQuery.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
       const nameENLowerCase = movie.nameEN.toLowerCase();
@@ -52,8 +52,9 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         (!initialIsShortMoviesChecked || (initialIsShortMoviesChecked && movie.duration <= 40))
       );
     });
+  }
 
-    setFilteredMovies(filteredMovies);
+    setFilteredMovies(filteredMovies());
   }
   }, [location]);
 

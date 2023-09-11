@@ -42,15 +42,17 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
       console.log('фильмы чекбокс', initialIsShortMoviesChecked)
       setIsSavedShortMoviesChecked(initialIsShortMoviesChecked);
 
-      const filteredMovies = savedMoviesList.filter((movie) => {
-        const lowerCaseQuery = initialSearchQuery.toLowerCase();
-        const nameRULowerCase = movie.nameRU.toLowerCase();
-        const nameENLowerCase = movie.nameEN.toLowerCase();
-        return (
-          (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-          (!initialIsShortMoviesChecked || (initialIsShortMoviesChecked && movie.duration <= 40))
-        );
-      });
+      function filteredMovies() {
+        savedMoviesList.filter((movie) => {
+          const lowerCaseQuery = initialSearchQuery.toLowerCase();
+          const nameRULowerCase = movie.nameRU.toLowerCase();
+          const nameENLowerCase = movie.nameEN.toLowerCase();
+          return (
+            (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
+            (!initialIsShortMoviesChecked || (initialIsShortMoviesChecked && movie.duration <= 40))
+          );
+        });
+      }
 
       setFilteredMovies(filteredMovies);
     }
