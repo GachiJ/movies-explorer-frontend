@@ -3,9 +3,11 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../SavedMovies/SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import { useLocation } from 'react-router-dom';
-import { MAX_MOVIE_DURATION, DEFAULT_SEARCH_QUERY, 
-  LOCATION_SAVED_MOVIES_PATH, LOCAL_STORAGE_SAVED_MOVIES_SEARCH_QUERY, 
-  LOCAL_STORAGE_IS_SAVED_SHORT_MOVIES_CHECKED } from '../../utils/constants'
+import {
+  MAX_MOVIE_DURATION, DEFAULT_SEARCH_QUERY,
+  LOCATION_SAVED_MOVIES_PATH, LOCAL_STORAGE_SAVED_MOVIES_SEARCH_QUERY,
+  LOCAL_STORAGE_IS_SAVED_SHORT_MOVIES_CHECKED
+} from '../../utils/constants'
 
 export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
