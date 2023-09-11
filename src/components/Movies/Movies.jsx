@@ -35,30 +35,32 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     if (location.pathname === '/movies') {
       const savedSearchQuery = localStorage.getItem('searchQuery');
       const savedIsShortMoviesChecked = localStorage.getItem('isShortMoviesChecked');
-      
+
       const initialSearchQuery = savedSearchQuery || '';
       setQuery(initialSearchQuery);
-      
+
       const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
       setIsShortMoviesChecked(initialIsShortMoviesChecked);
-      
+
       // Вызываем функцию filterMovies с аргументами из хранилища
-      filterMovies(initialSearchQuery, initialIsShortMoviesChecked);
+      const filteredMovies = filterMovies(initialSearchQuery, initialIsShortMoviesChecked);
+      setIsSearchEmpty(filteredMovies.length === 0);
+      localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
     }
   }, [location, movies]);
 
-/*   useEffect(() => {
-    if (typeof localStorage !== 'undefined') {
-      // При первой загрузке страницы получаем сохраненные значения из localStorage
-      const savedIsSearchEmpty = localStorage.getItem('isSearchEmpty');
-
-      // Преобразуем полученные строки в булевы значения
-      const initialIsSearchEmpty = savedIsSearchEmpty === 'true';
-
-      // Устанавливаем значения в состояния
-      setIsSearchEmpty(initialIsSearchEmpty);
-    }
-  }, []); */
+  /*   useEffect(() => {
+      if (typeof localStorage !== 'undefined') {
+        // При первой загрузке страницы получаем сохраненные значения из localStorage
+        const savedIsSearchEmpty = localStorage.getItem('isSearchEmpty');
+  
+        // Преобразуем полученные строки в булевы значения
+        const initialIsSearchEmpty = savedIsSearchEmpty === 'true';
+  
+        // Устанавливаем значения в состояния
+        setIsSearchEmpty(initialIsSearchEmpty);
+      }
+    }, []); */
 
   function handleSearch(query, shortMovies) {
     console.log(query, shortMovies)

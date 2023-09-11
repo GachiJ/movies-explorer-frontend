@@ -67,7 +67,9 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
       setIsSavedShortMoviesChecked(initialIsShortMoviesChecked);
 
       // Вызываем функцию filterMovies с аргументами из хранилища
-      filterMovies(initialSearchQuery, initialIsShortMoviesChecked);
+      const filteredMovies = filterMovies(initialSearchQuery, initialIsShortMoviesChecked);
+      setIsSearchEmpty(filteredMovies.length === 0);
+    localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
     }
   }, [location, savedMoviesList]);
 
