@@ -56,7 +56,7 @@ export default function SearchForm({ onSearch, isSaved, isShortMoviesChecked, is
     if (isSaved) {
       localStorage.setItem('isSavedShortMoviesChecked', newShortMovies);
       if (onShortMoviesSavedChange) {
-        onShortMoviesChange(query, newShortMovies);
+        onShortMoviesSavedChange(query, newShortMovies);
       }
     } else {
       localStorage.setItem('isShortMoviesChecked', newShortMovies);
