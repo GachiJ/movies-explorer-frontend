@@ -51,16 +51,14 @@ export default function SearchForm({ onSearch, isSaved, isShortMoviesChecked, is
 
 
   function handleCheckboxChange() {
+    const newShortMovies = !shortMovies;
+    setShortMovies(newShortMovies);
     if (isSaved) {
-      const newShortMovies = !shortMovies;
-      setShortMovies(newShortMovies);
       localStorage.setItem('isSavedShortMoviesChecked', newShortMovies);
       if (onShortMoviesSavedChange) {
         onShortMoviesSavedChange(query, newShortMovies);
       }
     } else {
-      const newShortMovies = !shortMovies;
-      setShortMovies(newShortMovies);
       localStorage.setItem('isShortMoviesChecked', newShortMovies);
       if (onShortMoviesChange) {
         onShortMoviesChange(query, newShortMovies);

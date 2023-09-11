@@ -71,7 +71,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
     }
   }, [location, savedMoviesList]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (typeof localStorage !== 'undefined') {
       // При первой загрузке страницы получаем сохраненные значения из localStorage
       const savedIsSearchEmpty = localStorage.getItem('isSearchEmpty');
@@ -82,7 +82,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
       // Устанавливаем значения в состояния
       setIsSearchEmpty(initialIsSearchEmpty);
     }
-  }, [])
+  }, []) */
 
   function handleSearch(savedMoviesSearchQuery, shortMovies) {
     console.log(savedMoviesSearchQuery, shortMovies)
