@@ -30,7 +30,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
     return filteredMovies || [];
   }
 
-/*   useEffect(() => {
+  useEffect(() => {
     const savedSearchQuery = localStorage.getItem('searchSavedQuery');
     console.log('сохранненые фильмы', savedSearchQuery)
     const initialSearchQuery = savedSearchQuery || '';
@@ -38,6 +38,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
 
     const savedIsShortMoviesChecked = localStorage.getItem('isSavedShortMoviesChecked');
     const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
+    console.log('фильмы чекбокс', initialIsShortMoviesChecked)
     setIsSavedShortMoviesChecked(initialIsShortMoviesChecked);
 
     const filteredMovies = savedMoviesList.filter((movie) => {
@@ -51,7 +52,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
     });
 
     setFilteredMovies(filteredMovies);
-  }, [savedMoviesList]); */
+  }, [savedMoviesList]);
 
   useEffect(() => {
     if (typeof localStorage !== 'undefined') {
