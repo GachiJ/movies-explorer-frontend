@@ -4,8 +4,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../Movies/Movies.css';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import {
-  MAX_MOVIE_DURATION, DEFAULT_SEARCH_QUERY,
+import { MAX_MOVIE_DURATION, DEFAULT_SEARCH_QUERY,
   LOCATION_MOVIES_PATH, LOCAL_STORAGE_MOVIES_SEARCH_QUERY,
   LOCAL_STORAGE_IS_SHORT_MOVIES_CHECKED
 } from '../../utils/constants'
