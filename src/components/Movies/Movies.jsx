@@ -12,10 +12,10 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
 
- /*  useEffect(() => {
-    const initialFilteredMovies = filterMovies('', false);
-    setFilteredMovies(initialFilteredMovies);
-  }, [movies]); */
+  /*  useEffect(() => {
+     const initialFilteredMovies = filterMovies('', false);
+     setFilteredMovies(initialFilteredMovies);
+   }, [movies]); */
 
   function filterMovies(query, shortMovies) {
     const filteredMovies = movies.filter((movie) => {
@@ -32,88 +32,89 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   }
 
   useEffect(() => {
-    const savedSearchQuery = localStorage.getItem('searchQuery');
-    console.log('фильмы', savedSearchQuery)
-    const initialSearchQuery = savedSearchQuery || '';
-    setQuery(initialSearchQuery);
+    if (location.pathname === '/movies') {
+      const savedSearchQuery = localStorage.getItem('searchQuery');
+      console.log('фильмы', savedSearchQuery)
+      const initialSearchQuery = savedSearchQuery || '';
+      setQuery(initialSearchQuery);
 
-    const savedIsShortMoviesChecked = localStorage.getItem('isShortMoviesChecked');
-    const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
-    console.log('фильмы чекбокс', initialIsShortMoviesChecked)
-    setIsShortMoviesChecked(initialIsShortMoviesChecked);
+      const savedIsShortMoviesChecked = localStorage.getItem('isShortMoviesChecked');
+      const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
+      console.log('фильмы чекбокс', initialIsShortMoviesChecked)
+      setIsShortMoviesChecked(initialIsShortMoviesChecked);
 
-    const filteredMovies = movies.filter((movie) => {
-      const lowerCaseQuery = initialSearchQuery.toLowerCase();
-      const nameRULowerCase = movie.nameRU.toLowerCase();
-      const nameENLowerCase = movie.nameEN.toLowerCase();
-      return (
-        (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-        (!initialIsShortMoviesChecked || (initialIsShortMoviesChecked && movie.duration <= 40))
-      );
-    });
+      const filteredMovies = movies.filter((movie) => {
+        const lowerCaseQuery = initialSearchQuery.toLowerCase();
+        const nameRULowerCase = movie.nameRU.toLowerCase();
+        const nameENLowerCase = movie.nameEN.toLowerCase();
+        return (
+          (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
+          (!initialIsShortMoviesChecked || (initialIsShortMoviesChecked && movie.duration <= 40))
+        );
+      });
+      setFilteredMovies(filteredMovies);
+    }
+  }, [location, movies]);
 
-    setFilteredMovies(filteredMovies);
-  }, [movies]);
+  useEffect(() => {
+    if (typeof localStorage !== 'undefined') {
+      // При первой загрузке страницы получаем сохраненные значения из localStorage
+      const savedIsSearchEmpty = localStorage.getItem('isSearchEmpty');
 
-useEffect(() => {
-  if (typeof localStorage !== 'undefined') {
-    // При первой загрузке страницы получаем сохраненные значения из localStorage
-    const savedIsSearchEmpty = localStorage.getItem('isSearchEmpty');
+      // Преобразуем полученные строки в булевы значения
+      const initialIsSearchEmpty = savedIsSearchEmpty === 'true';
 
-    // Преобразуем полученные строки в булевы значения
-    const initialIsSearchEmpty = savedIsSearchEmpty === 'true';
+      // Устанавливаем значения в состояния
+      setIsSearchEmpty(initialIsSearchEmpty);
+    }
+  }, []);
 
-    // Устанавливаем значения в состояния
-    setIsSearchEmpty(initialIsSearchEmpty);
+  function handleSearch(query, shortMovies) {
+    console.log(query, shortMovies)
+    const filteredMovies = filterMovies(query, shortMovies);
+    console.log('filterMovie', filteredMovies)
+    setIsSearchEmpty(filteredMovies.length === 0);
+    localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
   }
-}, []);
 
-function handleSearch(query, shortMovies) {
-  console.log(query, shortMovies)
-  const filteredMovies = filterMovies(query, shortMovies);
-  console.log('filterMovie', filteredMovies)
-  setIsSearchEmpty(filteredMovies.length === 0);
-  localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
-}
+  function handleShortMoviesChange(query, newShortMovies) {
 
-function handleShortMoviesChange(query, newShortMovies) {
+    console.log(query, newShortMovies)
+    const filteredMovies = filterMovies(query, newShortMovies);
+    console.log('filterMovie', filteredMovies)
+    setIsSearchEmpty(filteredMovies.length === 0);
+    localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
+  }
 
-  console.log(query, newShortMovies)
-  const filteredMovies = filterMovies(query, newShortMovies);
-  console.log('filterMovie', filteredMovies)
-  setIsSearchEmpty(filteredMovies.length === 0);
-  localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
-}
+  function handleQueryChange(newQuery) {
+    console.log('поиск фильмы', newQuery)
+    setQuery(newQuery);
+    localStorage.setItem('searchQuery', newQuery);
+  }
 
-function handleQueryChange(newQuery) {
-  console.log('поиск фильмы', newQuery)
-  setQuery(newQuery);
-  localStorage.setItem('searchQuery', newQuery);
-}
-
-return (
-  <main className="main">
-    <Preloader isLoader={isLoader} />
-    <SearchForm
-      onSearch={handleSearch}
-      query={query}
-      onQueryChange={handleQueryChange}
-      isShortMoviesChecked={isShortMoviesChecked}
-      isSaved={false}
-      onShortMoviesChange={handleShortMoviesChange}
-    />
-    {isSearchEmpty && (
-      <p className="movies__empty">Ничего не найдено</p>
-    )}
-    {!isSearchEmpty && (
-      <MoviesCardList
-        movies={filteredMovies}
-        savedMoviesList={savedMoviesList}
-        onCardSave={onCardSave}
-        onCardDelete={onCardDelete}
+  return (
+    <main className="main">
+      <Preloader isLoader={isLoader} />
+      <SearchForm
+        onSearch={handleSearch}
+        query={query}
+        onQueryChange={handleQueryChange}
+        isShortMoviesChecked={isShortMoviesChecked}
         isSaved={false}
+        onShortMoviesChange={handleShortMoviesChange}
       />
-    )}
-  </main>
-);
+      {isSearchEmpty && (
+        <p className="movies__empty">Ничего не найдено</p>
+      )}
+      {!isSearchEmpty && (
+        <MoviesCardList
+          movies={filteredMovies}
+          savedMoviesList={savedMoviesList}
+          onCardSave={onCardSave}
+          onCardDelete={onCardDelete}
+          isSaved={false}
+        />
+      )}
+    </main>
+  );
 };

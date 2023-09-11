@@ -31,6 +31,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   }
 
   useEffect(() => {
+    if (location.pathname === '/saved-movies') {
       const savedSearchQuery = localStorage.getItem('searchSavedQuery');
       console.log('сохранненые фильмы', savedSearchQuery)
       const initialSearchQuery = savedSearchQuery || '';
@@ -51,7 +52,8 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
         );
       });
       setFilteredMovies(filteredMovies);
-  }, [savedMoviesList]);
+    }
+  }, [location, savedMoviesList]);
 
   useEffect(() => {
     if (typeof localStorage !== 'undefined') {
