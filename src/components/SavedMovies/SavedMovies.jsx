@@ -4,17 +4,18 @@ import '../SavedMovies/SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import { useLocation } from 'react-router-dom';
 
+const MAX_MOVIE_DURATION = 40;
+const DEFAULT_SEARCH_QUERY = '';
+const LOCATION_SAVED_MOVIES_PATH = '/saved-movies';
+const LOCAL_STORAGE_SEARCH_QUERY = 'searchSavedQuery';
+const LOCAL_STORAGE_IS_SAVED_SHORT_MOVIES_CHECKED = 'isSavedShortMoviesChecked';
+
 export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const location = useLocation();
   const [isSearchEmpty, setIsSearchEmpty] = useState(false);
   const [savedMoviesSearchQuery, setSavedMoviesSearchQuery] = useState('');
   const [isSavedShortMoviesChecked, setIsSavedShortMoviesChecked] = useState(false);
-
-  /*   useEffect(() => {
-      const initialFilteredMovies = filterMovies('', false);
-      setFilteredMovies(initialFilteredMovies);
-    }, [savedMoviesList]); */
 
   function filterMovies(savedMoviesSearchQuery, shortMovies) {
     const filteredMovies = savedMoviesList.filter((movie) => {
@@ -23,90 +24,50 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
       const nameENLowerCase = movie.nameEN.toLowerCase();
       return (
         (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-        (!shortMovies || (shortMovies && movie.duration <= 40))
+        (!shortMovies || (shortMovies && movie.duration <= MAX_MOVIE_DURATION))
       );
     });
     setFilteredMovies(filteredMovies);
     return filteredMovies || [];
   }
 
-  /*   useEffect(() => {
-      if (location.pathname === '/saved-movies') {
-        const savedSearchQuery = localStorage.getItem('searchSavedQuery');
-        console.log('сохранненые фильмы', savedSearchQuery)
-        const initialSearchQuery = savedSearchQuery || '';
-        setSavedMoviesSearchQuery(initialSearchQuery);
-  
-        const savedIsShortMoviesChecked = localStorage.getItem('isSavedShortMoviesChecked');
-        const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
-        console.log('фильмы чекбокс', initialIsShortMoviesChecked)
-        setIsSavedShortMoviesChecked(initialIsShortMoviesChecked);
-  
-        const filteredMovies = savedMoviesList.filter((movie) => {
-          const lowerCaseQuery = initialSearchQuery.toLowerCase();
-          const nameRULowerCase = movie.nameRU.toLowerCase();
-          const nameENLowerCase = movie.nameEN.toLowerCase();
-          return (
-            (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-            (!initialIsShortMoviesChecked || (initialIsShortMoviesChecked && movie.duration <= 40))
-          );
-        });
-        setFilteredMovies(filteredMovies);
-      }
-    }, [location, savedMoviesList]); */
-
   useEffect(() => {
-    if (location.pathname === '/saved-movies') {
-      const savedSearchQuery = localStorage.getItem('searchSavedQuery');
-      const savedIsShortMoviesChecked = localStorage.getItem('isSavedShortMoviesChecked');
+    if (location.pathname === LOCATION_SAVED_MOVIES_PATH) {
+      const savedSearchQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
+      const savedIsShortMoviesChecked = localStorage.getItem(LOCAL_STORAGE_IS_SAVED_SHORT_MOVIES_CHECKED);
 
-      const initialSearchQuery = savedSearchQuery || '';
+      const initialSearchQuery = savedSearchQuery || DEFAULT_SEARCH_QUERY;
       setSavedMoviesSearchQuery(initialSearchQuery);
 
       const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
       setIsSavedShortMoviesChecked(initialIsShortMoviesChecked);
 
-      // Вызываем функцию filterMovies с аргументами из хранилища
       const filteredMovies = filterMovies(initialSearchQuery, initialIsShortMoviesChecked);
       setIsSearchEmpty(filteredMovies.length === 0);
-    localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
+      localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
     }
   }, [location, savedMoviesList]);
 
-/*   useEffect(() => {
-    if (typeof localStorage !== 'undefined') {
-      // При первой загрузке страницы получаем сохраненные значения из localStorage
-      const savedIsSearchEmpty = localStorage.getItem('isSearchEmpty');
-
-      // Преобразуем полученные строки в булевы значения
-      const initialIsSearchEmpty = savedIsSearchEmpty === 'true';
-
-      // Устанавливаем значения в состояния
-      setIsSearchEmpty(initialIsSearchEmpty);
-    }
-  }, []) */
-
   function handleSearch(savedMoviesSearchQuery, shortMovies) {
-    console.log(savedMoviesSearchQuery, shortMovies)
+    console.log(savedMoviesSearchQuery, shortMovies);
     const filteredMovies = filterMovies(savedMoviesSearchQuery, shortMovies);
-    console.log('filterMovie', filteredMovies)
+    console.log('filterMovie', filteredMovies);
     setIsSearchEmpty(filteredMovies.length === 0);
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
   }
 
   function handleShortMoviesChange(query, newShortMovies) {
-
-    console.log(query, newShortMovies)
+    console.log(query, newShortMovies);
     const filteredMovies = filterMovies(query, newShortMovies);
-    console.log('filterMovie', filteredMovies)
+    console.log('filterMovie', filteredMovies);
     setIsSearchEmpty(filteredMovies.length === 0);
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
   }
 
   function handleQueryChange(newQuery) {
-    console.log('поиск сохраненные фильмы', newQuery)
+    console.log('поиск сохраненные фильмы', newQuery);
     setSavedMoviesSearchQuery(newQuery);
-    localStorage.setItem('searchSavedQuery', newQuery);
+    localStorage.setItem(LOCAL_STORAGE_SEARCH_QUERY, newQuery);
   }
 
   return (
@@ -119,9 +80,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
         isSaved={true}
         onShortMoviesSavedChange={handleShortMoviesChange}
       />
-      {isSearchEmpty && (
-        <p className="movies__empty">Ничего не найдено</p>
-      )}
+      {isSearchEmpty && <p className="movies__empty">Ничего не найдено</p>}
       {!isSearchEmpty && (
         <MoviesCardList
           movies={movies}

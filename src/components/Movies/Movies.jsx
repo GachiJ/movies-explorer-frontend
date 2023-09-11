@@ -4,6 +4,11 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../Movies/Movies.css';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+const DEFAULT_SEARCH_QUERY = '';
+const MAX_MOVIE_DURATION = 40;
+const LOCAL_STORAGE_SEARCH_QUERY = 'searchQuery';
+const LOCAL_STORAGE_IS_SHORT_MOVIES_CHECKED = 'isShortMoviesChecked';
+const LOCATION_MOVIES_PATH = '/movies';
 
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete, isLoader }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -12,11 +17,6 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
 
-  /*  useEffect(() => {
-     const initialFilteredMovies = filterMovies('', false);
-     setFilteredMovies(initialFilteredMovies);
-   }, [movies]); */
-
   function filterMovies(query, shortMovies) {
     const filteredMovies = movies.filter((movie) => {
       const lowerCaseQuery = query.toLowerCase();
@@ -24,7 +24,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       const nameENLowerCase = movie.nameEN.toLowerCase();
       return (
         (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-        (!shortMovies || (shortMovies && movie.duration <= 40))
+        (!shortMovies || (shortMovies && movie.duration <= MAX_MOVIE_DURATION))
       );
     });
     setFilteredMovies(filteredMovies);
@@ -32,57 +32,36 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   }
 
   useEffect(() => {
-    if (location.pathname === '/movies') {
-      const savedSearchQuery = localStorage.getItem('searchQuery');
-      const savedIsShortMoviesChecked = localStorage.getItem('isShortMoviesChecked');
+    if (location.pathname === LOCATION_MOVIES_PATH) {
+      const savedSearchQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
+      const savedIsShortMoviesChecked = localStorage.getItem(LOCAL_STORAGE_IS_SHORT_MOVIES_CHECKED);
 
-      const initialSearchQuery = savedSearchQuery || '';
+      const initialSearchQuery = savedSearchQuery || DEFAULT_SEARCH_QUERY;
       setQuery(initialSearchQuery);
 
       const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
       setIsShortMoviesChecked(initialIsShortMoviesChecked);
 
       // Вызываем функцию filterMovies с аргументами из хранилища
-      const filteredMovies = filterMovies(initialSearchQuery, initialIsShortMoviesChecked);
-      setIsSearchEmpty(filteredMovies.length === 0);
-      localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
+      filterMovies(initialSearchQuery, initialIsShortMoviesChecked);
     }
   }, [location, movies]);
 
-  /*   useEffect(() => {
-      if (typeof localStorage !== 'undefined') {
-        // При первой загрузке страницы получаем сохраненные значения из localStorage
-        const savedIsSearchEmpty = localStorage.getItem('isSearchEmpty');
-  
-        // Преобразуем полученные строки в булевы значения
-        const initialIsSearchEmpty = savedIsSearchEmpty === 'true';
-  
-        // Устанавливаем значения в состояния
-        setIsSearchEmpty(initialIsSearchEmpty);
-      }
-    }, []); */
-
   function handleSearch(query, shortMovies) {
-    console.log(query, shortMovies)
     const filteredMovies = filterMovies(query, shortMovies);
-    console.log('filterMovie', filteredMovies)
     setIsSearchEmpty(filteredMovies.length === 0);
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
   }
 
   function handleShortMoviesChange(query, newShortMovies) {
-
-    console.log(query, newShortMovies)
     const filteredMovies = filterMovies(query, newShortMovies);
-    console.log('filterMovie', filteredMovies)
     setIsSearchEmpty(filteredMovies.length === 0);
     localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
   }
 
   function handleQueryChange(newQuery) {
-    console.log('поиск фильмы', newQuery)
     setQuery(newQuery);
-    localStorage.setItem('searchQuery', newQuery);
+    localStorage.setItem(LOCAL_STORAGE_SEARCH_QUERY, newQuery);
   }
 
   return (
