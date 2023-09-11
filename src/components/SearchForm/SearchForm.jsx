@@ -16,15 +16,22 @@ export default function SearchForm({ onSearch, isSaved, isShortMoviesChecked, is
 
   useEffect(() => {
     // Проверяем, есть ли сохраненное значение запроса в localStorage
-    const savedQuery = localStorage.getItem('searchQuery');
-    if (savedQuery) {
-      setQuery(savedQuery);
+    const savedQueryMovies = localStorage.getItem('searchQuery');
+    const savedQuerySavedMovies = localStorage.getItem('searchSavedQuery');
+    if (savedQueryMovies) {
+      setQuery(savedQueryMovies);
+    } else if (savedQuerySavedMovies) {
+      setQuery(savedQuerySavedMovies);
     }
 
     // Проверяем, есть ли сохраненное значение чекбокса в localStorage
     const savedShortMovies = localStorage.getItem('isShortMoviesChecked');
+    const savedShortSavedMovies = localStorage.getItem('isSavedShortMoviesChecked');
+
     if (savedShortMovies) {
       setShortMovies(savedShortMovies === 'true');
+    } else if (savedShortSavedMovies) {
+      setShortMovies(savedShortSavedMovies === 'true');
     }
   }, []);
 
