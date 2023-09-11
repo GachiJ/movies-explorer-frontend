@@ -11,7 +11,6 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   const [savedMoviesSearchQuery, setSavedMoviesSearchQuery] = useState('');
   const [isSavedShortMoviesChecked, setIsSavedShortMoviesChecked] = useState(false);
 
-
   useEffect(() => {
     const initialFilteredMovies = filterMovies('', false);
     setFilteredMovies(initialFilteredMovies);
@@ -65,17 +64,6 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
       // Устанавливаем значения в состояния
       setIsSearchEmpty(initialIsSearchEmpty);
     }
-
-    const savedQuery = localStorage.getItem('searchQuery');
-    if (savedQuery) {
-      setSavedMoviesSearchQuery(savedQuery);
-    }
-
-    // Проверяем, есть ли сохраненное значение чекбокса в localStorage
-    const savedShortMovies = localStorage.getItem('isShortMoviesChecked');
-    if (savedShortMovies) {
-      setIsSavedShortMoviesChecked(savedShortMovies === 'true');
-    }
   }, [])
 
   function handleSearch(savedMoviesSearchQuery, shortMovies) {
@@ -87,7 +75,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   }
 
   function handleShortMoviesChange(query, newShortMovies) {
-
+ 
     console.log(query, newShortMovies)
     const filteredMovies = filterMovies(query, newShortMovies);
     console.log('filterMovie', filteredMovies)

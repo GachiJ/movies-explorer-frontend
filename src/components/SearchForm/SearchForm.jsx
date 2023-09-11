@@ -10,17 +10,31 @@ export default function SearchForm({ onSearch, isSaved, isShortMoviesChecked, on
     setShortMovies(isShortMoviesChecked);
   }, [isShortMoviesChecked]);
 
+  useEffect(() => {
+    // Проверяем, есть ли сохраненное значение запроса в localStorage
+    const savedQuery = localStorage.getItem('searchQuery');
+    if (savedQuery) {
+      setQuery(savedQuery);
+    }
+
+    // Проверяем, есть ли сохраненное значение чекбокса в localStorage
+    const savedShortMovies = localStorage.getItem('isShortMoviesChecked');
+    if (savedShortMovies) {
+      setShortMovies(savedShortMovies === 'true');
+    }
+  }, []);
+
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
     setQuery(newQuery);
-  
+
     if (isSaved) {
       localStorage.setItem('searchSavedQuery', newQuery);
     } else {
       localStorage.setItem('searchQuery', newQuery);
     }
   }
-  
+
 
   function handleCheckboxChange() {
     const newShortMovies = !shortMovies;
