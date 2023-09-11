@@ -34,25 +34,16 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   useEffect(() => {
     if (location.pathname === '/movies') {
       const savedSearchQuery = localStorage.getItem('searchQuery');
-      console.log('фильмы', savedSearchQuery)
+      const savedIsShortMoviesChecked = localStorage.getItem('isShortMoviesChecked');
+      
       const initialSearchQuery = savedSearchQuery || '';
       setQuery(initialSearchQuery);
-
-      const savedIsShortMoviesChecked = localStorage.getItem('isShortMoviesChecked');
+      
       const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
-      console.log('фильмы чекбокс', initialIsShortMoviesChecked)
       setIsShortMoviesChecked(initialIsShortMoviesChecked);
-
-      const filteredMovies = movies.filter((movie) => {
-        const lowerCaseQuery = initialSearchQuery.toLowerCase();
-        const nameRULowerCase = movie.nameRU.toLowerCase();
-        const nameENLowerCase = movie.nameEN.toLowerCase();
-        return (
-          (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-          (!initialIsShortMoviesChecked || (initialIsShortMoviesChecked && movie.duration <= 40))
-        );
-      });
-      setFilteredMovies(filteredMovies);
+      
+      // Вызываем функцию filterMovies с аргументами из хранилища
+      filterMovies(initialSearchQuery, initialIsShortMoviesChecked);
     }
   }, [location, movies]);
 
