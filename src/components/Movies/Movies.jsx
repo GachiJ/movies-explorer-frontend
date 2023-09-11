@@ -66,6 +66,16 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
       // Устанавливаем значения в состояния
       setIsSearchEmpty(initialIsSearchEmpty);
     }
+    const savedQuery = localStorage.getItem('searchQuery');
+    if (savedQuery) {
+      setQuery(savedQuery);
+    }
+
+    // Проверяем, есть ли сохраненное значение чекбокса в localStorage
+    const savedShortMovies = localStorage.getItem('isShortMoviesChecked');
+    if (savedShortMovies) {
+      setIsShortMoviesChecked(savedShortMovies === 'true');
+    }
   }, []);
 
   function handleSearch(query, shortMovies) {
