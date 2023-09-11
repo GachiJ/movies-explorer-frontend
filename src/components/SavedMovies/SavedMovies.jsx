@@ -31,28 +31,30 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   }
 
   useEffect(() => {
-    const savedSearchQuery = localStorage.getItem('searchSavedQuery');
-    console.log('сохранненые фильмы', savedSearchQuery)
-    const initialSearchQuery = savedSearchQuery || '';
-    setSavedMoviesSearchQuery(initialSearchQuery);
+    if (location.pathname === '/saved-movies') {
+      const savedSearchQuery = localStorage.getItem('searchSavedQuery');
+      console.log('сохранненые фильмы', savedSearchQuery)
+      const initialSearchQuery = savedSearchQuery || '';
+      setSavedMoviesSearchQuery(initialSearchQuery);
 
-    const savedIsShortMoviesChecked = localStorage.getItem('isSavedShortMoviesChecked');
-    const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
-    console.log('фильмы чекбокс', initialIsShortMoviesChecked)
-    setIsSavedShortMoviesChecked(initialIsShortMoviesChecked);
+      const savedIsShortMoviesChecked = localStorage.getItem('isSavedShortMoviesChecked');
+      const initialIsShortMoviesChecked = savedIsShortMoviesChecked === 'true';
+      console.log('фильмы чекбокс', initialIsShortMoviesChecked)
+      setIsSavedShortMoviesChecked(initialIsShortMoviesChecked);
 
-    const filteredMovies = savedMoviesList.filter((movie) => {
-      const lowerCaseQuery = initialSearchQuery.toLowerCase();
-      const nameRULowerCase = movie.nameRU.toLowerCase();
-      const nameENLowerCase = movie.nameEN.toLowerCase();
-      return (
-        (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
-        (!initialIsShortMoviesChecked || (initialIsShortMoviesChecked && movie.duration <= 40))
-      );
-    });
+      const filteredMovies = savedMoviesList.filter((movie) => {
+        const lowerCaseQuery = initialSearchQuery.toLowerCase();
+        const nameRULowerCase = movie.nameRU.toLowerCase();
+        const nameENLowerCase = movie.nameEN.toLowerCase();
+        return (
+          (nameRULowerCase.includes(lowerCaseQuery) || nameENLowerCase.includes(lowerCaseQuery)) &&
+          (!initialIsShortMoviesChecked || (initialIsShortMoviesChecked && movie.duration <= 40))
+        );
+      });
 
-    setFilteredMovies(filteredMovies);
-  }, [savedMoviesList]);
+      setFilteredMovies(filteredMovies);
+    }
+  }, [location]);
 
   useEffect(() => {
     if (typeof localStorage !== 'undefined') {
@@ -76,7 +78,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   }
 
   function handleShortMoviesChange(query, newShortMovies) {
- 
+
     console.log(query, newShortMovies)
     const filteredMovies = filterMovies(query, newShortMovies);
     console.log('filterMovie', filteredMovies)

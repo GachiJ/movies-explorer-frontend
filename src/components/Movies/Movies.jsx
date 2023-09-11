@@ -32,7 +32,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   }
 
   useEffect(() => {
-
+    if (location.pathname === '/movies') {
     const savedSearchQuery = localStorage.getItem('searchQuery');
     console.log('фильмы', savedSearchQuery)
     const initialSearchQuery = savedSearchQuery || '';
@@ -54,67 +54,68 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     });
 
     setFilteredMovies(filteredMovies);
-  }, [movies]);
-
-  useEffect(() => {
-    if (typeof localStorage !== 'undefined') {
-      // При первой загрузке страницы получаем сохраненные значения из localStorage
-      const savedIsSearchEmpty = localStorage.getItem('isSearchEmpty');
-
-      // Преобразуем полученные строки в булевы значения
-      const initialIsSearchEmpty = savedIsSearchEmpty === 'true';
-
-      // Устанавливаем значения в состояния
-      setIsSearchEmpty(initialIsSearchEmpty);
-    }
-  }, []);
-
-  function handleSearch(query, shortMovies) {
-    console.log(query, shortMovies)
-    const filteredMovies = filterMovies(query, shortMovies);
-    console.log('filterMovie', filteredMovies)
-    setIsSearchEmpty(filteredMovies.length === 0);
-    localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
   }
+  }, [location]);
 
-  function handleShortMoviesChange(query, newShortMovies) {
- 
-    console.log(query, newShortMovies)
-    const filteredMovies = filterMovies(query, newShortMovies);
-    console.log('filterMovie', filteredMovies)
-    setIsSearchEmpty(filteredMovies.length === 0);
-    localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
+useEffect(() => {
+  if (typeof localStorage !== 'undefined') {
+    // При первой загрузке страницы получаем сохраненные значения из localStorage
+    const savedIsSearchEmpty = localStorage.getItem('isSearchEmpty');
+
+    // Преобразуем полученные строки в булевы значения
+    const initialIsSearchEmpty = savedIsSearchEmpty === 'true';
+
+    // Устанавливаем значения в состояния
+    setIsSearchEmpty(initialIsSearchEmpty);
   }
+}, []);
 
-  function handleQueryChange(newQuery) {
-    console.log('поиск фильмы', newQuery)
-    setQuery(newQuery);
-    localStorage.setItem('searchQuery', newQuery);
-  }
+function handleSearch(query, shortMovies) {
+  console.log(query, shortMovies)
+  const filteredMovies = filterMovies(query, shortMovies);
+  console.log('filterMovie', filteredMovies)
+  setIsSearchEmpty(filteredMovies.length === 0);
+  localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
+}
 
-  return (
-    <main className="main">
-      <Preloader isLoader={isLoader} />
-      <SearchForm
-        onSearch={handleSearch}
-        query={query}
-        onQueryChange={handleQueryChange}
-        isShortMoviesChecked={isShortMoviesChecked}
+function handleShortMoviesChange(query, newShortMovies) {
+
+  console.log(query, newShortMovies)
+  const filteredMovies = filterMovies(query, newShortMovies);
+  console.log('filterMovie', filteredMovies)
+  setIsSearchEmpty(filteredMovies.length === 0);
+  localStorage.setItem('isSearchEmpty', filteredMovies.length === 0);
+}
+
+function handleQueryChange(newQuery) {
+  console.log('поиск фильмы', newQuery)
+  setQuery(newQuery);
+  localStorage.setItem('searchQuery', newQuery);
+}
+
+return (
+  <main className="main">
+    <Preloader isLoader={isLoader} />
+    <SearchForm
+      onSearch={handleSearch}
+      query={query}
+      onQueryChange={handleQueryChange}
+      isShortMoviesChecked={isShortMoviesChecked}
+      isSaved={false}
+      onShortMoviesChange={handleShortMoviesChange}
+    />
+    {isSearchEmpty && (
+      <p className="movies__empty">Ничего не найдено</p>
+    )}
+    {!isSearchEmpty && (
+      <MoviesCardList
+        movies={filteredMovies}
+        savedMoviesList={savedMoviesList}
+        onCardSave={onCardSave}
+        onCardDelete={onCardDelete}
         isSaved={false}
-        onShortMoviesChange={handleShortMoviesChange}
       />
-      {isSearchEmpty && (
-        <p className="movies__empty">Ничего не найдено</p>
-      )}
-      {!isSearchEmpty && (
-        <MoviesCardList
-          movies={filteredMovies}
-          savedMoviesList={savedMoviesList}
-          onCardSave={onCardSave}
-          onCardDelete={onCardDelete}
-          isSaved={false}
-        />
-      )}
-    </main>
-  );
+    )}
+  </main>
+);
 };
