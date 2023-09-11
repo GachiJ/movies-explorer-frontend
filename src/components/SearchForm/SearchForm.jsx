@@ -7,6 +7,30 @@ export default function SearchForm({ onSearch, isSaved, isShortMoviesChecked, is
   const [shortMovies, setShortMovies] = useState(isShortMoviesChecked);
 
   useEffect(() => {
+    if (isSaved) {
+      const savedQuerySavedMovies = localStorage.getItem('searchSavedQuery');
+      if (savedQuerySavedMovies) {
+        setQuery(savedQuerySavedMovies);
+      }
+
+      const savedShorSavedMovies = localStorage.getItem('isSavedShortMoviesChecked');
+      if (savedShorSavedMovies) {
+        setShortMovies(savedShorSavedMovies === 'true');
+      }
+    } else {
+      const savedQuery = localStorage.getItem('searchQuery');
+      if (savedQuery) {
+        setQuery(savedQuery);
+      }
+
+      const savedShortMovies = localStorage.getItem('isShortMoviesChecked');
+      if (savedShortMovies) {
+        setShortMovies(savedShortMovies === 'true');
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     setShortMovies(isShortMoviesChecked);
   }, [isShortMoviesChecked]);
 
