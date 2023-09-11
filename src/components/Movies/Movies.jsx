@@ -12,10 +12,10 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   const [query, setQuery] = useState('');
   const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
 
-  useEffect(() => {
+ /*  useEffect(() => {
     const initialFilteredMovies = filterMovies('', false);
     setFilteredMovies(initialFilteredMovies);
-  }, [movies]);
+  }, [movies]); */
 
   function filterMovies(query, shortMovies) {
     const filteredMovies = movies.filter((movie) => {
@@ -32,7 +32,6 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
   }
 
   useEffect(() => {
-    if (location.pathname === '/movies') {
     const savedSearchQuery = localStorage.getItem('searchQuery');
     console.log('фильмы', savedSearchQuery)
     const initialSearchQuery = savedSearchQuery || '';
@@ -43,7 +42,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
     console.log('фильмы чекбокс', initialIsShortMoviesChecked)
     setIsShortMoviesChecked(initialIsShortMoviesChecked);
 
-    function filteredMovies() { movies.filter((movie) => {
+    const filteredMovies = movies.filter((movie) => {
       const lowerCaseQuery = initialSearchQuery.toLowerCase();
       const nameRULowerCase = movie.nameRU.toLowerCase();
       const nameENLowerCase = movie.nameEN.toLowerCase();
@@ -52,11 +51,9 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
         (!initialIsShortMoviesChecked || (initialIsShortMoviesChecked && movie.duration <= 40))
       );
     });
-  }
 
-    setFilteredMovies(filteredMovies());
-  }
-  }, [location]);
+    setFilteredMovies(filteredMovies);
+  }, [movies]);
 
 useEffect(() => {
   if (typeof localStorage !== 'undefined') {
