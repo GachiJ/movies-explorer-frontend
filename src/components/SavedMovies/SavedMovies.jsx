@@ -30,7 +30,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
     return filteredMovies || [];
   }
 
-/*   useEffect(() => {
+  useEffect(() => {
     const savedSearchQuery = localStorage.getItem('searchSavedQuery');
     console.log('сохранненые фильмы', savedSearchQuery)
     const initialSearchQuery = savedSearchQuery || '';
@@ -51,7 +51,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
     });
 
     setFilteredMovies(filteredMovies);
-  }, [savedMoviesList]); */
+  }, [savedMoviesList]);
 
   useEffect(() => {
     if (typeof localStorage !== 'undefined') {
@@ -97,7 +97,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
         onQueryChange={handleQueryChange}
         isSavedShortMoviesChecked={isSavedShortMoviesChecked}
         isSaved={true}
-        onShortSavedMoviesChange={handleShortMoviesChange}
+        onShortMoviesSavedChange={handleShortMoviesChange}
       />
       {isSearchEmpty && (
         <p className="movies__empty">Ничего не найдено</p>

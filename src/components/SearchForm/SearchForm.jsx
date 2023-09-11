@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../SearchForm/SearchForm.css';
 
-export default function SearchForm({ onSearch, isSaved, isShortMoviesChecked, isSavedShortMoviesChecked, onShortMoviesChange, onShortSavedMoviesChange }) {
+export default function SearchForm({ onSearch, isSaved, isShortMoviesChecked, isSavedShortMoviesChecked, onShortMoviesChange, onShortMoviesSavedChange }) {
   const [query, setQuery] = useState('');
   const [shortMovies, setShortMovies] = useState(isShortMoviesChecked);
 
@@ -13,27 +13,6 @@ export default function SearchForm({ onSearch, isSaved, isShortMoviesChecked, is
   useEffect(() => {
     setShortMovies(isSavedShortMoviesChecked);
   }, [isSavedShortMoviesChecked]);
-
-  useEffect(() => {
-    // Проверяем, есть ли сохраненное значение запроса в localStorage
-    const savedQueryMovies = localStorage.getItem('searchQuery');
-    const savedQuerySavedMovies = localStorage.getItem('searchSavedQuery');
-    if (savedQueryMovies) {
-      setQuery(savedQueryMovies);
-    } else if (savedQuerySavedMovies) {
-      setQuery(savedQuerySavedMovies);
-    }
-
-    // Проверяем, есть ли сохраненное значение чекбокса в localStorage
-    const savedShortMovies = localStorage.getItem('isShortMoviesChecked');
-    const savedShortSavedMovies = localStorage.getItem('isSavedShortMoviesChecked');
-
-    if (savedShortMovies) {
-      setShortMovies(savedShortMovies === 'true');
-    } else if (savedShortSavedMovies) {
-      setShortMovies(savedShortSavedMovies === 'true');
-    }
-  }, []);
 
   function handleChangeSearch(e) {
     const newQuery = e.target.value;
@@ -52,15 +31,17 @@ export default function SearchForm({ onSearch, isSaved, isShortMoviesChecked, is
     setShortMovies(newShortMovies);
     if (isSaved) {
       localStorage.setItem('isSavedShortMoviesChecked', newShortMovies);
+      if (onShortMoviesSavedChange) {
+        onShortMoviesChange(query, newShortMovies);
+      }
     } else {
       localStorage.setItem('isShortMoviesChecked', newShortMovies);
+      if (onShortMoviesChange) {
+        onShortMoviesChange(query, newShortMovies);
+      }
     }
 
-    if (onShortMoviesChange) {
-      onShortMoviesChange(query, newShortMovies);
-    } else {
-      onShortSavedMoviesChange(query, newShortMovies)
-    }
+
   }
 
   function handleSubmit(e) {
