@@ -4,11 +4,11 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../Movies/Movies.css';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-const DEFAULT_SEARCH_QUERY = '';
-const MAX_MOVIE_DURATION = 40;
-const LOCAL_STORAGE_SEARCH_QUERY = 'searchQuery';
-const LOCAL_STORAGE_IS_SHORT_MOVIES_CHECKED = 'isShortMoviesChecked';
-const LOCATION_MOVIES_PATH = '/movies';
+import {
+  MAX_MOVIE_DURATION, DEFAULT_SEARCH_QUERY,
+  LOCATION_MOVIES_PATH, LOCAL_STORAGE_MOVIES_SEARCH_QUERY,
+  LOCAL_STORAGE_IS_SHORT_MOVIES_CHECKED
+} from '../../utils/constants'
 
 export default function Movies({ movies, savedMoviesList, onCardSave, onCardDelete, isLoader }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -33,7 +33,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
 
   useEffect(() => {
     if (location.pathname === LOCATION_MOVIES_PATH) {
-      const savedSearchQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
+      const savedSearchQuery = localStorage.getItem(LOCAL_STORAGE_MOVIES_SEARCH_QUERY);
       const savedIsShortMoviesChecked = localStorage.getItem(LOCAL_STORAGE_IS_SHORT_MOVIES_CHECKED);
 
       const initialSearchQuery = savedSearchQuery || DEFAULT_SEARCH_QUERY;
@@ -61,7 +61,7 @@ export default function Movies({ movies, savedMoviesList, onCardSave, onCardDele
 
   function handleQueryChange(newQuery) {
     setQuery(newQuery);
-    localStorage.setItem(LOCAL_STORAGE_SEARCH_QUERY, newQuery);
+    localStorage.setItem(LOCAL_STORAGE_MOVIES_SEARCH_QUERY, newQuery);
   }
 
   return (

@@ -3,12 +3,9 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import '../SavedMovies/SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import { useLocation } from 'react-router-dom';
-
-const MAX_MOVIE_DURATION = 40;
-const DEFAULT_SEARCH_QUERY = '';
-const LOCATION_SAVED_MOVIES_PATH = '/saved-movies';
-const LOCAL_STORAGE_SEARCH_QUERY = 'searchSavedQuery';
-const LOCAL_STORAGE_IS_SAVED_SHORT_MOVIES_CHECKED = 'isSavedShortMoviesChecked';
+import { MAX_MOVIE_DURATION, DEFAULT_SEARCH_QUERY, 
+  LOCATION_SAVED_MOVIES_PATH, LOCAL_STORAGE_SAVED_MOVIES_SEARCH_QUERY, 
+  LOCAL_STORAGE_IS_SAVED_SHORT_MOVIES_CHECKED } from '../../utils/constants'
 
 export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCardDelete }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -33,7 +30,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
 
   useEffect(() => {
     if (location.pathname === LOCATION_SAVED_MOVIES_PATH) {
-      const savedSearchQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
+      const savedSearchQuery = localStorage.getItem(LOCAL_STORAGE_SAVED_MOVIES_SEARCH_QUERY);
       const savedIsShortMoviesChecked = localStorage.getItem(LOCAL_STORAGE_IS_SAVED_SHORT_MOVIES_CHECKED);
 
       const initialSearchQuery = savedSearchQuery || DEFAULT_SEARCH_QUERY;
@@ -67,7 +64,7 @@ export default function SavedMovies({ movies, savedMoviesList, onCardSave, onCar
   function handleQueryChange(newQuery) {
     console.log('поиск сохраненные фильмы', newQuery);
     setSavedMoviesSearchQuery(newQuery);
-    localStorage.setItem(LOCAL_STORAGE_SEARCH_QUERY, newQuery);
+    localStorage.setItem(LOCAL_STORAGE_SAVED_MOVIES_SEARCH_QUERY, newQuery);
   }
 
   return (
