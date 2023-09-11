@@ -1,12 +1,6 @@
-import { useLocation } from 'react-router-dom';
-import '../MoviesCard/MoviesCard.css'
+import '../MoviesCard/MoviesCard.css';
 
-
-export default function MoviesCard({ movie, pageLocation, isSaved }) {
- /*  const currentLocation = useLocation();
-
-  const handleBookmarkClick = () => onBookmark(movie);
-  const handleDeleteClick = () => onDelete(movie); */
+export default function MoviesCard({ movie, isSaved, onCardSave, onCardDelete, saved, savedMoviesList }) {
 
   const convertMinutesToHours = (minutes) => {
     if (isNaN(minutes) || minutes < 0) {
@@ -17,38 +11,31 @@ export default function MoviesCard({ movie, pageLocation, isSaved }) {
     const remainingMinutes = minutes % 60;
 
     return `${hours}ч ${remainingMinutes}м`;
-  }
-  const buttonType = () => {
-    if (pageLocation && !isSaved) {
-      return (
-        <button
-          type='button'
-          className='movie__button-save button-hover'
-       >Сохранить</button>
-      );
-    }
-    if (pageLocation && isSaved) {
-      return (
-        <button
-          type='button'
-          className='movie__button-saved button-hover'
-        />
-      );
-    }
-    if (!pageLocation && isSaved) {
-      return (
-        <button
-          type='button'
-          className='movie__button-delete button-hover'
-        />
-      )
-    }
   };
+
+
+  function onCardClick() {
+    if (saved) {
+      const movieToDelete = savedMoviesList.find((m) => m.movieId === movie.id);
+      if (movieToDelete) {
+        onCardDelete(movieToDelete);
+      }
+    } else {
+      onCardSave(movie);
+    }
+  }
+
+  function onDelete() {
+    onCardDelete(movie);
+  }
+
+  const cardSaveButtonClassName = `${saved ? 'movie__button-save movie__button-save_active' : 'movie__button-save'
+    }`;
 
   return (
     <article className='movie'>
       <img
-        src={movie.image}
+        src={isSaved ? movie.image : `https://api.nomoreparties.co/${movie.image.url}`}
         alt={movie.name}
         className='movie__image'
       />
@@ -57,8 +44,12 @@ export default function MoviesCard({ movie, pageLocation, isSaved }) {
           <h2 className='movie__name'>{movie.nameRU}</h2>
           <span className='movie__duration'>{convertMinutesToHours(movie.duration)}</span>
         </div>
-        {buttonType()}
+        {isSaved ? (
+          <button type="button" className="movie__button-delete" onClick={onDelete}></button>
+        ) : (
+          <button type="button" className={cardSaveButtonClassName} onClick={onCardClick}>{saved ? null : 'Сохранить'}</button>
+        )}
       </div>
     </article>
-  )
+  );
 }

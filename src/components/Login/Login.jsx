@@ -1,68 +1,76 @@
 import '../Login/Login.css'
-import React, { useState } from "react";
-import { Link, Route } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import Logo from '../../images/logo.svg'
+import useValidation from '../../utils/useValidation';
 
-export default function Login({ isLoggedIn, onRegisterUser }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+export default function Login({ onLoginUser }) {
+  const { values, errors, isValid, handleChange } = useValidation();
+  const [disabled, setDisabled] = useState(false);
+  const [errorMessage, setErrorMessage,] = useState('');
 
-  if (isLoggedIn) {
-    return <Route to="/" />;
+
+  function handleInputsChange(evt) {
+    handleChange(evt);
+    cleanErrorMessage();
   }
 
-  function handleNameChange(e) {
-    setName(e.target.value)
-  }
-
-  function handleEmailChange(e) {
-    setEmail(e.target.value)
-  }
-
-  function handlePasswordChange(e) {
-    setPassword(e.target.value)
+  function cleanErrorMessage() {
+    setErrorMessage('');
   }
 
   function handleSubmit(e) {
     e.preventDefault()
-    onRegisterUser({ name, email, password })
+    onLoginUser({
+      email: values.email,
+      password: values.password,
+    })
+    setTimeout(() => {
+      setDisabled(false);
+    }, 2000);
   }
 
   return (
-    <section className='auth'>
-      <div className="auth__container">
-        <div className='auth__header'>
-          <div className="auth__header-container">
-            <Link to='/' className='auth__logo-link'>
-              <img src={Logo} alt='Лого' className='auth__logo' />
+    <section className='login'>
+      <div className="login__container">
+        <div className='login__header'>
+          <div className="login__header-container">
+            <Link to='/' className='login__logo-link'>
+              <img src={Logo} alt='Лого' className='login__logo' />
             </Link>
-            <h1 className='auth__title'>Рады видеть!</h1>
+            <h1 className='login__title'>Рады видеть!</h1>
           </div>
         </div>
-        <form className="auth__form" onSubmit={handleSubmit}>
-          <div className="auth__input-container">
-            <span className='auth__label'>Email</span>
-            <input className="auth__input"
+        <form className="login__form" onSubmit={handleSubmit}>
+          <div className="login__input-container">
+            <span className='login__label'>Email</span>
+            <input className="login__input"
               placeholder="Email" type="email"
               name="email"
-              value={email || ''}
-              onChange={handleEmailChange}
+              value={values.email || ''}
+              onChange={handleInputsChange}
+              minLength={5} maxLength={30} pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required
+              disabled={disabled}
             />
-            <span className='auth__label'>Пароль</span>
-            <input className="auth__input"
+            <span className='auth__error'>{errors.email}</span>
+            <span className='login__label'>Пароль</span>
+            <input className="login__input"
               placeholder="Пароль" type="password"
               name="password"
-              value={password || ''}
-              onChange={handlePasswordChange}
+              minLength={8} maxLength={30} required disabled={disabled}
+              value={values.password || ''}
+              onChange={handleInputsChange}
             />
-            <span className='auth__error'></span>
+            <span className='auth__error'>{errors.password}</span>
+            <p className={`auth__error-message ${errorMessage && 'auth__error-message_visible'}`}>{errorMessage}</p>
           </div>
-          <div className="auth__button-container">
-            <button type="submit" className="auth__button">Войти</button>
-            <div className="auth__signin">
-              <Link to="/signup" className="auth__link">
-                Ещё не зарегистрированы? <span className='auth__link-signin'>Регистрация</span>
+          <div className="login__button-container">
+            <button type="submit"
+              disabled={!isValid}
+              className={`login__button ${!isValid ? 'login__button_disabled' : ''}`}>Войти</button>
+            <div className="login__signin">
+              <Link to="/signup" className="login__link">
+                Ещё не зарегистрированы? <span className='login__link-signin'>Регистрация</span>
               </Link>
             </div>
           </div>

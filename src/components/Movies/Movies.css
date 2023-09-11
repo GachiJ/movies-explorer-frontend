@@ -1,0 +1,11 @@
+.movies__empty {
+  color: red;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  margin: 15px auto 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+}

@@ -11,6 +11,7 @@
   height: 168px;
   flex-shrink: 0;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .movie__name {
@@ -18,6 +19,10 @@
   font-size: 12px;
   font-weight: 500;
   margin: 0;
+}
+
+.movie:hover .movie__button-save {
+    visibility: visible
 }
 
 .movie__duration {
@@ -50,9 +55,10 @@
   width: 72px;
   height: 21px;
   padding: 0;
+  cursor: pointer;
 }
 
-.movie__button-saved {
+.movie__button-save_active {
   background-image: url('../../images/Ok.svg');
   width: 21px;
   height: 21px;
@@ -63,6 +69,7 @@
   top: 10px;
   right: 10px;
   padding: 0;
+  z-index: 10;
 }
 
 .movie__button-delete {
